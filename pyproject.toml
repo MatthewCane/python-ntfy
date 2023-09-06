@@ -1,0 +1,20 @@
+[tool.poetry]
+name = "python-ntfy"
+version = "0.1.0"
+description = ""
+authors = ["Matthew Cane <matthew.cane0@gmail.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+requests = "^2.31.0"
+
+[tool.poetry.group.test.dependencies]
+pytest = "^7.4.1"
+python-dotenv = "^1.0.0"
+pytest-asyncio = "^0.21.1"
+pytest-codecov = "^0.5.1"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
