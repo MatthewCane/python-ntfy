@@ -16,7 +16,7 @@ class NtfyClient:
         """
         self._server = os.environ.get("NTFY_SERVER") or server
         self._topic = topic
-        self.__set_url(server, topic)
+        self.__set_url(self._server, topic)
 
         if (user := os.environ.get("NTFY_USER")) and (
             password := os.environ.get("NTFY_PASSWORD")
