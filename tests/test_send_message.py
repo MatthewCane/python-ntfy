@@ -46,3 +46,23 @@ def test_send_with_title():
     assert response["event"] == "message"
     assert response["topic"] == topic
     assert response["title"] == "Test Title"
+
+def test_send_with_tags():
+    topic = get_topic()
+    dotenv.load_dotenv()
+    ntfy = NtfyClient(topic=topic)
+    response = ntfy.send(message="test_send_with_tags", tags=["fire", "warning"])
+    print(response)
+    assert response["event"] == "message"
+    assert response["topic"] == topic
+    assert response["tags"] == ["fire", "warning"]
+
+def test_send_with_priority():
+    topic = get_topic()
+    dotenv.load_dotenv()
+    ntfy = NtfyClient(topic=topic)
+    response = ntfy.send(message="test_send_with_priority", priority=ntfy.MessagePriority.HIGH)
+    print(response)
+    assert response["event"] == "message"
+    assert response["topic"] == topic
+    assert response["priority"] == 3
