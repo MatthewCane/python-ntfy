@@ -2,7 +2,7 @@ import os
 
 
 class NtfyClient:
-    from ._send_functions import send, send_file
+    from ._send_functions import send, send_file, MessagePriority
     from ._get_functions import get_cached_messages
 
     def __init__(
