@@ -1,7 +1,7 @@
 import os, random, string
 
 
-def clear_env():
+def clear_env(server=True, user=True):
     os.environ.pop("NTFY_USER", None)
     os.environ.pop("NTFY_PASSWORD", None)
 
