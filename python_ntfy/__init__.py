@@ -8,7 +8,7 @@ class NtfyClient:
     def __init__(
         self,
         topic: str,
-        server: str = "https://ntfy.sh",
+        server: str = os.environ.get("NTFY_SERVER") or "https://ntfy.sh",
     ):
         """
         :param topic: The topic to use for this client
