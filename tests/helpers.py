@@ -2,8 +2,11 @@ import os, random, string
 
 
 def clear_env(server=True, user=True):
-    os.environ.pop("NTFY_USER", None)
-    os.environ.pop("NTFY_PASSWORD", None)
+    if user:
+        os.environ.pop("NTFY_USER", None)
+        os.environ.pop("NTFY_PASSWORD", None)
+    if server:
+        os.environ.pop("NTFY_SERVER", None)
 
 
 def get_topic():
