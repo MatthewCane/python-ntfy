@@ -6,11 +6,11 @@ class MessagePriority(Enum):
     """
     Ntfy message priority levels.
     """
-    MIN = 1
-    LOW = 2
-    DEFAULT = 3
-    HIGH = 4
-    MAX = 5
+    MIN = "1"
+    LOW = "2"
+    DEFAULT = "3"
+    HIGH = "4"
+    MAX = "5"
     URGENT = MAX
     
 
