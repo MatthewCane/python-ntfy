@@ -77,3 +77,53 @@ def test_send_with_priority():
     assert response["event"] == "message"
     assert response["topic"] == topic
     assert response["priority"] == 4
+
+def test_send_with_view_action():
+    topic = get_topic()
+    dotenv.load_dotenv()
+    ntfy = NtfyClient(topic=topic)
+    response = ntfy.send(
+        message="test_send_with_actions", 
+        actions=[
+            ntfy.ViewAction(label="View", url="https://ntfy.sh"), 
+            ]
+        )
+    print(response)
+    assert response["event"] == "message"
+    assert response["topic"] == topic
+    assert response["actions"] is not None
+
+def test_send_with_broadcast_action():
+    topic = get_topic()
+    dotenv.load_dotenv()
+    ntfy = NtfyClient(topic=topic)
+    response = ntfy.send(
+        message="test_send_with_actions", 
+        actions=[
+            ntfy.BroadcastAction(label="Broadcast", extras={"test": "test"}),
+            ]
+        )
+    print(response)
+    assert response["event"] == "message"
+    assert response["topic"] == topic
+    assert response["actions"] is not None
+
+def test_send_with_http_action():
+    topic = get_topic()
+    dotenv.load_dotenv()
+    ntfy = NtfyClient(topic=topic)
+    response = ntfy.send(
+        message="test_send_with_actions", 
+        actions=[
+            ntfy.HttpAction(
+                label="HTTP", 
+                url="https://posttestserver.dev/p/pythonntfy/post", 
+                headers={"Content-Type": "application/json"}, 
+                body='{"test": "test"}'
+                )
+            ]
+        )
+    print(response)
+    assert response["event"] == "message"
+    assert response["topic"] == topic
+    assert response["actions"] is not None
