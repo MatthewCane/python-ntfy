@@ -1,17 +1,22 @@
 import os
-from types import MethodType
-from ._send_functions import (
-    send,
-    send_file,
-    MessagePriority,
-    ViewAction,
-    BroadcastAction,
-    HttpAction,
-)
-from ._get_functions import get_cached_messages
 
 
 class NtfyClient:
+    # The functions need to be imported here to:
+    # 1. Keep the functions in a separate file
+    # 2. Keep the docstrings working in the IDE
+    # 3. Allow the functions to be called with self
+    # MyPy does not like this, but it works
+    from ._send_functions import (  # type: ignore
+        send,
+        send_file,
+        MessagePriority,
+        ViewAction,
+        BroadcastAction,
+        HttpAction,
+    )
+    from ._get_functions import get_cached_messages  # type: ignore
+
     def __init__(
         self,
         topic: str,
@@ -22,16 +27,6 @@ class NtfyClient:
         :param server: The server to connect to. Must include the protocol (http/https)
         :return None:
         """
-        # Bind the imported functions to the class
-        self.send = MethodType(send, self)
-        self.send_file = MethodType(send_file, self)
-        self.MessagePriority = MethodType(MessagePriority, self)
-        self.get_cached_messages = MethodType(get_cached_messages, self)
-
-        # These are Enums that don't need to be bound
-        self.ViewAction = ViewAction
-        self.BroadcastAction = BroadcastAction
-        self.HttpAction = HttpAction
 
         self._server = os.environ.get("NTFY_SERVER") or server
         self._topic = topic
