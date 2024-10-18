@@ -1,7 +1,7 @@
 import json
 import requests
 from enum import Enum
-from typing import Optional, Union, Any
+from typing import Optional, Union
 
 
 class MessagePriority(Enum):
