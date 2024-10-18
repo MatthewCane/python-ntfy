@@ -1,6 +1,6 @@
 from python_ntfy import NtfyClient
 import dotenv
-from .helpers import *
+from .helpers import clear_env, get_topic
 
 
 def test_send_without_auth_ntfysh():
@@ -13,17 +13,21 @@ def test_send_without_auth_ntfysh():
     print(response)
     assert response["error"] == "unauthorized"
 
+
 def test_send_without_auth_selfhosted_no_auth():
     dotenv.load_dotenv()
     clear_env(server=False)
     topic = get_topic()
-    ntfy = NtfyClient(
-        topic=topic
-    )
+    ntfy = NtfyClient(topic=topic)
+    # Skip this test if testing against ntfy.sh
+    # as it requires auth
+    if ntfy._server == "https://ntfy.sh":
+        return
     response = ntfy.send(message="test_send_without_auth")
     print(response)
     assert response["event"] == "message"
     assert response["topic"] == topic
+
 
 def test_send_with_auth_env():
     topic = get_topic()
@@ -58,6 +62,7 @@ def test_send_with_title():
     assert response["topic"] == topic
     assert response["title"] == "Test Title"
 
+
 def test_send_with_tags():
     topic = get_topic()
     dotenv.load_dotenv()
@@ -68,61 +73,67 @@ def test_send_with_tags():
     assert response["topic"] == topic
     assert response["tags"] == ["fire", "warning"]
 
+
 def test_send_with_priority():
     topic = get_topic()
     dotenv.load_dotenv()
     ntfy = NtfyClient(topic=topic)
-    response = ntfy.send(message="test_send_with_priority", priority=ntfy.MessagePriority.HIGH)
+    response = ntfy.send(
+        message="test_send_with_priority", priority=ntfy.MessagePriority.HIGH
+    )
     print(response)
     assert response["event"] == "message"
     assert response["topic"] == topic
     assert response["priority"] == 4
+
 
 def test_send_with_view_action():
     topic = get_topic()
     dotenv.load_dotenv()
     ntfy = NtfyClient(topic=topic)
     response = ntfy.send(
-        message="test_send_with_actions", 
+        message="test_send_with_actions",
         actions=[
-            ntfy.ViewAction(label="View", url="https://ntfy.sh"), 
-            ]
-        )
+            ntfy.ViewAction(label="View", url="https://ntfy.sh"),
+        ],
+    )
     print(response)
     assert response["event"] == "message"
     assert response["topic"] == topic
     assert response["actions"] is not None
+
 
 def test_send_with_broadcast_action():
     topic = get_topic()
     dotenv.load_dotenv()
     ntfy = NtfyClient(topic=topic)
     response = ntfy.send(
-        message="test_send_with_actions", 
+        message="test_send_with_actions",
         actions=[
             ntfy.BroadcastAction(label="Broadcast", extras={"test": "test"}),
-            ]
-        )
+        ],
+    )
     print(response)
     assert response["event"] == "message"
     assert response["topic"] == topic
     assert response["actions"] is not None
+
 
 def test_send_with_http_action():
     topic = get_topic()
     dotenv.load_dotenv()
     ntfy = NtfyClient(topic=topic)
     response = ntfy.send(
-        message="test_send_with_actions", 
+        message="test_send_with_actions",
         actions=[
             ntfy.HttpAction(
-                label="HTTP", 
-                url="https://posttestserver.dev/p/pythonntfy/post", 
-                headers={"Content-Type": "application/json"}, 
-                body='{"test": "test"}'
-                )
-            ]
-        )
+                label="HTTP",
+                url="https://posttestserver.dev/p/pythonntfy/post",
+                headers={"Content-Type": "application/json"},
+                body='{"test": "test"}',
+            )
+        ],
+    )
     print(response)
     assert response["event"] == "message"
     assert response["topic"] == topic

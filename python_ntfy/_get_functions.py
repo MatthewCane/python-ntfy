@@ -1,4 +1,5 @@
-import json, requests
+import json
+import requests
 
 
 def get_cached_messages(self, since: str = "all", scheduled: bool = False):

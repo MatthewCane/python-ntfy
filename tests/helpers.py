@@ -1,4 +1,6 @@
-import os, random, string
+import os
+import random
+import string
 
 
 def clear_env(server=True, user=True):
