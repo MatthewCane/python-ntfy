@@ -1,7 +1,7 @@
 import json
 import requests
 from enum import Enum
-from typing import Optional, Union
+from typing import Optional, Union, Any
 
 
 class MessagePriority(Enum):
@@ -63,7 +63,7 @@ class BroadcastAction(Action):
         self.action = ActionType.BROADCAST
         self.intent = intent
         self.extras = extras
-        super().__init__(label, ActionType.BROADCAST, clear)
+        super().__init__(label, ActionType.BROADCAST.value, clear)
 
     def to_dict(self) -> dict:
         return {
@@ -87,7 +87,7 @@ class HttpAction(Action):
         label: str,
         url: str,
         method: str = "POST",
-        headers: Optional[dict] = None,
+        headers: Optional[dict[str, str]] = None,
         body: Optional[str] = None,
         clear: bool = False,
     ):
@@ -97,8 +97,8 @@ class HttpAction(Action):
         self.body = body
         super().__init__(label, url, clear)
 
-    def to_dict(self) -> dict:
-        action_dict = {
+    def to_dict(self) -> dict[str, Union[str, bool, dict[str, str]]]:
+        action_dict: dict[str, Union[str, bool, dict[str, str]]] = {
             "action": self.action.value,
             "label": self.label,
             "url": self.url,
@@ -127,10 +127,10 @@ class HttpAction(Action):
 def send(
     self,
     message: str,
-    title: str = None,
-    priority: Optional[MessagePriority] = MessagePriority.DEFAULT,
+    title: Optional[str] = None,
+    priority: MessagePriority = MessagePriority.DEFAULT,
     tags: list = [],
-    actions: list[Union[ViewAction, BroadcastAction, HttpAction, None]] = [],
+    actions: list[Union[ViewAction, BroadcastAction, HttpAction]] = [],
     format_as_markdown: bool = False,
 ) -> dict:
     """
@@ -167,10 +167,10 @@ def send(
 def send_file(
     self,
     file: str,
-    title: str = None,
-    priority: Optional[MessagePriority] = MessagePriority.DEFAULT,
+    title: Optional[str] = None,
+    priority: MessagePriority = MessagePriority.DEFAULT,
     tags: list = [],
-    actions: list[Union[ViewAction, BroadcastAction, HttpAction, None]] = [],
+    actions: list[Union[ViewAction, BroadcastAction, HttpAction]] = [],
 ) -> dict:
     """
     Send a file to the server
@@ -186,17 +186,15 @@ def send_file(
     response = client.send_file(file_path="example.txt")
     """
     headers = {
-        "Title": title,
+        "Title": str(title),
         "Filename": file.split("/")[-1],
         "Priority": priority.value,
         "Tags": ",".join(tags),
         "Actions": " ; ".join([action.to_header() for action in actions]),
     }
 
-    with open(file, "rb") as file:
+    with open(file, "rb") as f:
         response = json.loads(
-            requests.post(
-                url=self.url, data=file, headers=headers, auth=self._auth
-            ).text
+            requests.post(url=self.url, data=f, headers=headers, auth=self._auth).text
         )
     return response

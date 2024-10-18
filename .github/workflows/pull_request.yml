@@ -61,3 +61,6 @@ jobs:
       - name: Run ruff check
         run: poetry run ruff check
 
+      - name: Run MyPy
+        run: poetry run mypy .
+

@@ -21,7 +21,7 @@ def get_cached_messages(
 
     params = {"poll": "1"}
     if scheduled:
-        params.update({"scheduled": scheduled})
+        params.update({"scheduled": str(scheduled)})
     if since:
         params.update({"since": since})
 
