@@ -2,9 +2,13 @@ name: Pull Request
 
 on: pull_request
 
+concurrency:
+  group: ${{ github.event.pull_request.number }}-${{ github.workflow }}
+  cancel-in-progress: true
+
 jobs:
   test:
-    name: Run Pytest
+    name: Pytest
     runs-on: ubuntu-latest
     # This does not work because you can't pass
     # commands into the container to start the
@@ -45,7 +49,7 @@ jobs:
         run: poetry run pytest -v --cov --cov-fail-under=95
 
   ruff:
-    name: Ruff check and format
+    name: Ruff and MyPy
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
@@ -60,4 +64,7 @@ jobs:
 
       - name: Run ruff check
         run: poetry run ruff check
+
+      - name: Run MyPy
+        run: poetry run mypy .
 
