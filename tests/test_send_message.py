@@ -61,7 +61,7 @@ def test_send_with_auth_token():
 def test_send_with_markdown():
     topic = get_topic()
     dotenv.load_dotenv()
-    with open("tests/assets/test_markdown.md", "r") as f:
+    with open("tests/assets/test_markdown.md") as f:
         message = f.read()
     ntfy = NtfyClient(topic=topic)
     response = ntfy.send(format_as_markdown=True, message=message)

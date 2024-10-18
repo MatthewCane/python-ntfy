@@ -6,9 +6,7 @@ import requests
 
 
 class MessagePriority(Enum):
-    """
-    Ntfy message priority levels.
-    """
+    """Ntfy message priority levels."""
 
     MIN = "1"
     LOW = "2"
@@ -19,9 +17,7 @@ class MessagePriority(Enum):
 
 
 class ActionType(Enum):
-    """
-    Action button types
-    """
+    """Action button types."""
 
     VIEW = "view"
     BROADCAST = "broadcast"

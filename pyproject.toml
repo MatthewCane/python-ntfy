@@ -33,3 +33,10 @@ types-setuptools = "^75.2.0.20241018"
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "W", "C", "D", "UP"]
+ignore = ["E501", "D103","D417","D104","D100"]
+
+[tool.ruff.lint.pydocstyle]
+convention = "google"

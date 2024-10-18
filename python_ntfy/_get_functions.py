@@ -21,7 +21,6 @@ def get_cached_messages(
         response = client.get(since="2019-01-01")
         response = client.get(since="2019-01-01", scheduled=True)
     """
-
     params = {"poll": "1"}
     if scheduled:
         params.update({"scheduled": str(scheduled)})
