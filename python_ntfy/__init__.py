@@ -1,8 +1,7 @@
 import os
 
-
 class NtfyClient:
-    from ._send_functions import send, send_file
+    from ._send_functions import send, send_file, MessagePriority, ViewAction, BroadcastAction, HttpAction
     from ._get_functions import get_cached_messages
 
     def __init__(
@@ -15,9 +14,9 @@ class NtfyClient:
         :param server: The server to connect to. Must include the protocol (http/https)
         :return:
         """
-        self._server = server
+        self._server = os.environ.get("NTFY_SERVER") or server
         self._topic = topic
-        self.__set_url(server, topic)
+        self.__set_url(self._server, topic)
 
         if (user := os.environ.get("NTFY_USER")) and (
             password := os.environ.get("NTFY_PASSWORD")
