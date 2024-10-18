@@ -1,0 +1,63 @@
+name: Pull Request
+
+on: pull_request
+
+jobs:
+  test:
+    name: Run Pytest
+    runs-on: ubuntu-latest
+    # This does not work because you can't pass
+    # commands into the container to start the
+    # server! Massive limitation in Actions.
+    # services:
+    #   ntfy:
+    #     image: binwiederhier/ntfy
+    #     ports:
+    #       - 80:80
+    #     env:
+    #       NTFY_ATTACHMENT_CACHE_DIR: /cache
+    #       NTFY_BASE_URL: http://localhost
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: citizensadvice/python-poetry-setup-action@v1
+
+      - name: Install dependencies
+        run: poetry install --with dev
+      
+      - name: Start ntfy container
+        run: |
+          docker run -d \
+          -p 80:80 \
+          -e NTFY_ATTACHMENT_CACHE_DIR=/cache \
+          -e NTFY_BASE_URL=http://localhost \
+          binwiederhier/ntfy serve
+      
+      - name: Write .env
+        run: |
+          cat <<EOF >> .env
+          NTFY_USER=test-user
+          NTFY_PASSWORD=test-password
+          NTFY_SERVER=http://localhost
+          EOF
+
+      - name: Run pytest
+        run: poetry run pytest -v --cov --cov-fail-under=95
+
+  ruff:
+    name: Ruff check and format
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: citizensadvice/python-poetry-setup-action@v1
+
+      - name: Install dependencies
+        run: poetry install --with dev
+
+      - name: Run ruff format check
+        run: poetry run ruff format --check
+
+      - name: Run ruff check
+        run: poetry run ruff check
+
