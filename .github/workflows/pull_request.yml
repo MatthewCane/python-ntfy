@@ -42,7 +42,7 @@ jobs:
           EOF
 
       - name: Run pytest
-        run: poetry run pytest --cov --cov-fail-under=95
+        run: poetry run pytest -v --cov --cov-fail-under=95
 
   ruff:
     name: Ruff check and format
