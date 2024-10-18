@@ -27,6 +27,7 @@ See the full documentation site at [https://matthewcane.github.io/python-ntfy/](
 ## Supported Features
 
 - Username + password auth
+- Access token auth
 - Custom servers
 - Sending plaintext messages
 - Sending Markdown formatted text messages
@@ -37,7 +38,6 @@ See the full documentation site at [https://matthewcane.github.io/python-ntfy/](
 
 ## Future Features
 
-- Access token auth
 - Email notifications
 - Send to multiple topics at once
 

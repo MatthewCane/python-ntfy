@@ -1,6 +1,7 @@
 from python_ntfy import NtfyClient
 import dotenv
 from .helpers import clear_env, get_topic
+from pytest import MonkeyPatch
 
 
 def test_send_without_auth_ntfysh():
@@ -37,6 +38,22 @@ def test_send_with_auth_env():
     print(response)
     assert response["event"] == "message"
     assert response["topic"] == topic
+
+
+def test_send_with_auth_token():
+    topic = get_topic()
+    dotenv.load_dotenv()
+    with MonkeyPatch().context() as m:
+        m.delenv("NTFY_USER", raising=False)
+        m.delenv("NTFY_PASSWORD", raising=False)
+        # This is a dummy token, not valid
+        m.setenv("NTFY_TOKEN", "tk_AgQdq7mVBoFD37zQVN29RhuMzNIz2")
+        ntfy = NtfyClient(topic=topic)
+        response = ntfy.send(message="test_send_with_auth_token")
+        print(response)
+        assert ntfy._auth == ("", "tk_AgQdq7mVBoFD37zQVN29RhuMzNIz2")
+        assert response["event"] == "message"
+        assert response["topic"] == topic
 
 
 def test_send_with_markdown():

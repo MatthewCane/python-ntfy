@@ -32,10 +32,15 @@ class NtfyClient:
         self._topic = topic
         self.__set_url(self._server, topic)
 
+        # If the user has set the user and password, use that
+        # If the user has set the token, use that
+        # Otherwise, use an empty user and token
         if (user := os.environ.get("NTFY_USER")) and (
             password := os.environ.get("NTFY_PASSWORD")
         ):
             self._auth = (user, password)
+        elif token := os.environ.get("NTFY_TOKEN"):
+            self._auth = ("", token)
         else:
             self._auth = ("", "")
 
