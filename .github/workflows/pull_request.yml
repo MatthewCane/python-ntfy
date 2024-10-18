@@ -1,0 +1,50 @@
+name: Pull Request
+
+on: pull_request
+
+jobs:
+  test:
+    name: Run Pytest
+    runs-on: ubuntu-latest
+    services:
+      ntfy:
+        image: binwiederhier/ntfy
+        ports:
+          - 80:80
+        options: serve --attachment-cache-dir=/cache --base-url=http://localhost
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: citizensadvice/python-poetry-setup-action@v1
+
+      - name: Install dependencies
+        run: poetry install --with dev
+      
+      - name: Write .venv
+        run: |
+          cat <<EOF >> .nvenv
+          NTFY_USER=test-user
+          NTFY_PASSWORD=test-password
+          NTFY_SERVER=http://localhost
+          EOF
+
+      - name: Run pytest
+        run: poetry run pytest --cov --cov-fail-under=95
+
+  ruff:
+    name: Ruff check and format
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: citizensadvice/python-poetry-setup-action@v1
+
+      - name: Install dependencies
+        run: poetry install --with dev
+
+      - name: Run ruff format check
+        run: poetry run ruff format --check
+
+      - name: Run ruff check
+        run: poetry run ruff check
+
