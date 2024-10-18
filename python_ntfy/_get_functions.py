@@ -5,18 +5,20 @@ import requests
 def get_cached_messages(
     self, since: str = "all", scheduled: bool = False
 ) -> list[dict]:
-    """
-    Get cached messages from the server
+    """Get cached messages from the server.
 
-    :param since: The timestamp to start from. If set to "all", will return all messages. Optional
-    :param scheduled: If true, will return scheduled messages. Optional
-    :return: A list of messages
+    Args:
+        since: The timestamp to start from. If set to "all", will return all messages.
+        scheduled: If true, will return scheduled messages.
 
-    :examples:
-    response = client.get(since="all")
-    response = client.get(since="all", scheduled=True)
-    response = client.get(since="2019-01-01")
-    response = client.get(since="2019-01-01", scheduled=True)
+    Returns:
+        A list of messages.
+
+    Examples:
+        response = client.get(since="all")
+        response = client.get(since="all", scheduled=True)
+        response = client.get(since="2019-01-01")
+        response = client.get(since="2019-01-01", scheduled=True)
     """
 
     params = {"poll": "1"}

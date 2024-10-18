@@ -1,3 +1,14 @@
+"""This module provides the NtfyClient class for interacting with the ntfy notification service.
+
+The NtfyClient class allows users to send notifications, files, and perform various actions
+through the ntfy.sh service. It also supports retrieving cached messages.
+
+Typical usage example:
+
+    client = NtfyClient(topic="my_topic")
+    client.send("Hello, World!")
+"""
+
 import os
 
 
