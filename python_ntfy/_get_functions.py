@@ -37,7 +37,6 @@ def get_cached_messages(
             timeout=timeout_seconds,
         )
         .text.strip()
-        .text.strip()
         .splitlines()
     ]
     # Reverse the list so that the most recent notification is first
