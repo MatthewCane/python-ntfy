@@ -25,3 +25,18 @@ jobs:
         uses: pypa/gh-action-pypi-publish@release/v1
         with:
           skip-existing: true
+  
+  mkdocs-publish:
+    needs: pypi-publish
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+      - name: Configure Git Credentials
+        run: |
+          git config user.name github-actions[bot]
+          git config user.email 41898282+github-actions[bot]@users.noreply.github.com
+      
+      - uses: citizensadvice/python-poetry-setup-action@v1
+      
+      - run: poetry run mkdocs gh-deploy --force

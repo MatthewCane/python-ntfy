@@ -5,3 +5,4 @@ __pytest__
 .coverage
 __pycache__
 dist/
+site/

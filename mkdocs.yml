@@ -1,0 +1,14 @@
+site_name: python-ntfy documentation
+nav:
+  - Home: index.md
+  - Quickstart: quickstart.md
+  - Examples: examples.md
+  - Reference: reference.md
+theme: material
+plugins: 
+  - search
+markdown_extensions:
+  - admonition
+  - pymdownx.details
+  - pymdownx.superfences
+  - def_list
