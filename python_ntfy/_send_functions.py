@@ -40,7 +40,7 @@ class ViewAction(Action):
         self.action = ActionType.VIEW
         super().__init__(label=label, url=url, clear=clear)
 
-    def to_dict(self):
+    def to_dict(self) -> dict:
         return {
             "action": self.action.value,
             "label": self.label,
@@ -48,7 +48,7 @@ class ViewAction(Action):
             "clear": self.clear,
         }
 
-    def to_header(self):
+    def to_header(self) -> str:
         return f"action={self.action.value}, label={self.label}, url={self.url}, clear={self.clear}"
 
 
@@ -65,7 +65,7 @@ class BroadcastAction(Action):
         self.extras = extras
         super().__init__(label, ActionType.BROADCAST, clear)
 
-    def to_dict(self):
+    def to_dict(self) -> dict:
         return {
             "action": self.action.value,
             "label": self.label,
@@ -73,7 +73,7 @@ class BroadcastAction(Action):
             "clear": self.clear,
         }
 
-    def to_header(self):
+    def to_header(self) -> str:
         extras = ""
         if self.extras is not None:
             for key, value in self.extras.items():
@@ -97,7 +97,7 @@ class HttpAction(Action):
         self.body = body
         super().__init__(label, url, clear)
 
-    def to_dict(self):
+    def to_dict(self) -> dict:
         action_dict = {
             "action": self.action.value,
             "label": self.label,
@@ -111,7 +111,7 @@ class HttpAction(Action):
             action_dict["body"] = self.body
         return action_dict
 
-    def to_header(self):
+    def to_header(self) -> str:
         header_str = f"action={self.action.value}, label={self.label}, url={self.url}, method={self.method}, clear={self.clear}"
         if self.headers is not None:
             headers = ""
@@ -132,7 +132,7 @@ def send(
     tags: list = [],
     actions: list[Union[ViewAction, BroadcastAction, HttpAction, None]] = [],
     format_as_markdown: bool = False,
-):
+) -> dict:
     """
     Send a text based message to the server
 
@@ -171,7 +171,7 @@ def send_file(
     priority: Optional[MessagePriority] = MessagePriority.DEFAULT,
     tags: list = [],
     actions: list[Union[ViewAction, BroadcastAction, HttpAction, None]] = [],
-):
+) -> dict:
     """
     Send a file to the server
 

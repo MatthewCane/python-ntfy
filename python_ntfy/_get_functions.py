@@ -2,7 +2,9 @@ import json
 import requests
 
 
-def get_cached_messages(self, since: str = "all", scheduled: bool = False):
+def get_cached_messages(
+    self, since: str = "all", scheduled: bool = False
+) -> list[dict]:
     """
     Get cached messages from the server
 

@@ -92,7 +92,7 @@ def test_send_with_view_action():
     dotenv.load_dotenv()
     ntfy = NtfyClient(topic=topic)
     response = ntfy.send(
-        message="test_send_with_actions",
+        message="test_send_with_view_action",
         actions=[
             ntfy.ViewAction(label="View", url="https://ntfy.sh"),
         ],
@@ -108,7 +108,7 @@ def test_send_with_broadcast_action():
     dotenv.load_dotenv()
     ntfy = NtfyClient(topic=topic)
     response = ntfy.send(
-        message="test_send_with_actions",
+        message="test_send_with_broadcast_action",
         actions=[
             ntfy.BroadcastAction(label="Broadcast", extras={"test": "test"}),
         ],
@@ -124,7 +124,7 @@ def test_send_with_http_action():
     dotenv.load_dotenv()
     ntfy = NtfyClient(topic=topic)
     response = ntfy.send(
-        message="test_send_with_actions",
+        message="test_send_with_http_action",
         actions=[
             ntfy.HttpAction(
                 label="HTTP",
