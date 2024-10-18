@@ -32,13 +32,13 @@ See the full documentation site at [https://matthewcane.github.io/python-ntfy/](
 - Sending Markdown formatted text messages
 - Retrieving cached messages
 - Scheduled delivery
+- Tags
+- Action buttons
 
 ## Future Features
 
 - Access token auth
 - Email notifications
-- Tags
-- Action buttons
 - Send to multiple topics at once
 
 ## Test and Development
