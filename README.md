@@ -22,6 +22,8 @@ client = NtfyClient(topic="Your topic")
 client.send("Your message here")
 ```
 
+See the full documentation site at [https://matthewcane.github.io/python-ntfy/](https://matthewcane.github.io/python-ntfy/).
+
 ## Supported Features
 
 - Username + password auth
