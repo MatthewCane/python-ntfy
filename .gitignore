@@ -4,3 +4,4 @@ __pytest__
 .env
 .coverage
 __pycache__
+dist/
