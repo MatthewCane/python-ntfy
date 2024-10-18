@@ -41,21 +41,25 @@ See the full documentation site at [https://matthewcane.github.io/python-ntfy/](
 - Email notifications
 - Send to multiple topics at once
 
-## Test and Development
+## Testing and Development
 
 This project uses:
 
 - Poetry as it's dependency manager
 - Ruff for linting and code formatting
+- MyPy for static type checking
 
 To install dev dependencies, run `poetry install --with dev`.
 
-### Linting and Formatting
+### Linting, Formatting and Type Checking
 
 These can be run with:
 
 - `poetry run ruff format`
 - `poetry run ruff check`
+- `poetry run mypy .`
+
+These tools are also run in the CI pipeline and must pass before merging.
 
 ### Tests
 
@@ -66,11 +70,11 @@ You can run the tests against a local instance of `ntfy` *or* `ntfy.sh`.
 #### Setup Steps
 
 1. To test against a *local* `ntfy` instance:
-  i. Create a container using `docker run -p 80:80 -it binwiederhier/ntfy serve --attachment-cache-dir=/cache --base-url=http://localhost`
-  ii. Set the following key in the `.env` file: `NTFY_SERVER=http://localhost`
-  iii. Add a dummy username and password to `.env` (see example.env)
-2. To test against https://ntfy.sh:
-  i. Add username and password for ntfy.sh to `.env` (see example.env)
+    i. Create a container using `docker run -p 80:80 -it binwiederhier/ntfy serve --attachment-cache-dir=/cache --base-url=http://localhost`
+    ii. Set the following key in the `.env` file: `NTFY_SERVER=http://localhost`
+    iii. Add a dummy username and password to `.env` (see example.env)
+2. To test against `https://ntfy.sh`:
+    i. Add username and password for ntfy.sh to `.env` (see example.env)
 3. Run the tests with `poetry run pytest --cov`
 
 The tests will sent messages to the `python_ntfy_testing` topic so you will need to subcribe to that topic to see the test messages.
