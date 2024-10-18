@@ -57,7 +57,7 @@ class BroadcastAction(Action):
         self,
         label: str,
         intent: str = "io.heckel.ntfy.USER_ACTION",
-        extras: Optional[dict] = None,
+        extras: Optional[dict[str, str]] = None,
         clear: bool = False,
     ):
         self.action = ActionType.BROADCAST
@@ -71,14 +71,18 @@ class BroadcastAction(Action):
             "label": self.label,
             "extras": self.extras,
             "clear": self.clear,
+            "intent": self.intent,
         }
 
     def to_header(self) -> str:
-        extras = ""
-        if self.extras is not None:
-            for key, value in self.extras.items():
-                extras += f"{key}={value},"
-        return f"action={self.action.value}, label={self.label}, url={self.url}, clear={self.clear}"
+        if self.extras:
+            extras_str = ", ".join([f"extras.{k}={v}" for k, v in self.extras.items()])
+        return (
+            f"action={self.action.value}, label={self.label}, url={self.url}, clear={self.clear}, intent={self.intent}"
+            + extras_str
+            if self.extras
+            else ""
+        )
 
 
 class HttpAction(Action):
@@ -153,7 +157,7 @@ def send(
         "Title": title,
         "Priority": priority.value,
         "Tags": ",".join(tags),
-        "Markdown": "true" if format_as_markdown else "false",
+        "Markdown": str(format_as_markdown).lower(),
     }
     if len(actions) > 0:
         headers["Actions"] = " ; ".join([action.to_header() for action in actions])
