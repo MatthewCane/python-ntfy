@@ -1,6 +1,6 @@
 from python_ntfy import NtfyClient
 import dotenv
-from .helpers import *
+from .helpers import get_topic
 
 
 def test_send_text_file():

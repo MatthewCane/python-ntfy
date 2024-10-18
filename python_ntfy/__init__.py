@@ -1,7 +1,15 @@
 import os
 
+
 class NtfyClient:
-    from ._send_functions import send, send_file, MessagePriority, ViewAction, BroadcastAction, HttpAction
+    from ._send_functions import (
+        send,
+        send_file,
+        MessagePriority,
+        ViewAction,
+        BroadcastAction,
+        HttpAction,
+    )
     from ._get_functions import get_cached_messages
 
     def __init__(

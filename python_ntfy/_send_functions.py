@@ -1,33 +1,39 @@
-import json, requests
+import json
+import requests
 from enum import Enum
 from typing import Optional, Union
+
 
 class MessagePriority(Enum):
     """
     Ntfy message priority levels.
     """
+
     MIN = "1"
     LOW = "2"
     DEFAULT = "3"
     HIGH = "4"
     MAX = "5"
     URGENT = MAX
-    
+
+
 class ActionType(Enum):
     """
     Action button types
     """
+
     VIEW = "view"
     BROADCAST = "broadcast"
     HTTP = "http"
 
-class Action():
+
+class Action:
     def __init__(self, label: str, url: str, clear: bool = False):
         self.label = label
         self.url = url
         self.actions: list = []
         self.clear = clear
-    
+
 
 class ViewAction(Action):
     def __init__(self, label: str, url: str, clear: bool = False):
@@ -39,14 +45,21 @@ class ViewAction(Action):
             "action": self.action.value,
             "label": self.label,
             "url": self.url,
-            "clear": self.clear
+            "clear": self.clear,
         }
-    
+
     def to_header(self):
         return f"action={self.action.value}, label={self.label}, url={self.url}, clear={self.clear}"
 
+
 class BroadcastAction(Action):
-    def __init__(self, label: str, intent: str = "io.heckel.ntfy.USER_ACTION", extras: Optional[dict] = None, clear: bool = False):
+    def __init__(
+        self,
+        label: str,
+        intent: str = "io.heckel.ntfy.USER_ACTION",
+        extras: Optional[dict] = None,
+        clear: bool = False,
+    ):
         self.action = ActionType.BROADCAST
         self.intent = intent
         self.extras = extras
@@ -57,26 +70,27 @@ class BroadcastAction(Action):
             "action": self.action.value,
             "label": self.label,
             "extras": self.extras,
-            "clear": self.clear
+            "clear": self.clear,
         }
-    
+
     def to_header(self):
         extras = ""
         if self.extras is not None:
             for key, value in self.extras.items():
                 extras += f"{key}={value},"
         return f"action={self.action.value}, label={self.label}, url={self.url}, clear={self.clear}"
-    
+
+
 class HttpAction(Action):
     def __init__(
-            self, 
-            label: str, 
-            url: str, 
-            method: str = "POST", 
-            headers: Optional[dict] = None, 
-            body: Optional[str] = None, 
-            clear: bool = False
-            ):
+        self,
+        label: str,
+        url: str,
+        method: str = "POST",
+        headers: Optional[dict] = None,
+        body: Optional[str] = None,
+        clear: bool = False,
+    ):
         self.action = ActionType.HTTP
         self.method = method
         self.headers = headers
@@ -89,14 +103,14 @@ class HttpAction(Action):
             "label": self.label,
             "url": self.url,
             "method": self.method,
-            "clear": self.clear
+            "clear": self.clear,
         }
         if self.headers:
             action_dict["headers"] = self.headers
         if self.body:
             action_dict["body"] = self.body
         return action_dict
-    
+
     def to_header(self):
         header_str = f"action={self.action.value}, label={self.label}, url={self.url}, method={self.method}, clear={self.clear}"
         if self.headers is not None:
@@ -111,14 +125,14 @@ class HttpAction(Action):
 
 
 def send(
-        self, 
-        message: str, 
-        title: str = None, 
-        priority: Optional[MessagePriority] = MessagePriority.DEFAULT, 
-        tags: list = [], 
-        actions: list[Union[ViewAction, BroadcastAction, HttpAction, None]] = [],
-        format_as_markdown: bool = False
-        ):
+    self,
+    message: str,
+    title: str = None,
+    priority: Optional[MessagePriority] = MessagePriority.DEFAULT,
+    tags: list = [],
+    actions: list[Union[ViewAction, BroadcastAction, HttpAction, None]] = [],
+    format_as_markdown: bool = False,
+):
     """
     Send a text based message to the server
 
@@ -142,7 +156,7 @@ def send(
         "Markdown": "true" if format_as_markdown else "false",
     }
     if len(actions) > 0:
-        headers['Actions'] = " ; ".join([action.to_header() for action in actions])
+        headers["Actions"] = " ; ".join([action.to_header() for action in actions])
 
     response = json.loads(
         requests.post(url=self.url, data=message, headers=headers, auth=self._auth).text
@@ -151,17 +165,17 @@ def send(
 
 
 def send_file(
-        self, 
-        file: str, 
-        title: str = None, 
-        priority: Optional[MessagePriority] = MessagePriority.DEFAULT, 
-        tags: list = [],
-        actions: list[Union[ViewAction, BroadcastAction, HttpAction, None]] = []
-        ):
+    self,
+    file: str,
+    title: str = None,
+    priority: Optional[MessagePriority] = MessagePriority.DEFAULT,
+    tags: list = [],
+    actions: list[Union[ViewAction, BroadcastAction, HttpAction, None]] = [],
+):
     """
     Send a file to the server
 
-    :param file_path: The path to the file to send. 
+    :param file_path: The path to the file to send.
     :param title: The title of the file. Optional
     :param priority: The priority of the message. Optional, defaults to MessagePriority.DEFAULT
     :param tags: A list of tags to attach to the message. Can be an emoji short code. Optional
@@ -172,12 +186,12 @@ def send_file(
     response = client.send_file(file_path="example.txt")
     """
     headers = {
-        "Title": title, 
+        "Title": title,
         "Filename": file.split("/")[-1],
         "Priority": priority.value,
         "Tags": ",".join(tags),
-        "Actions": " ; ".join([action.to_header() for action in actions])
-        }
+        "Actions": " ; ".join([action.to_header() for action in actions]),
+    }
 
     with open(file, "rb") as file:
         response = json.loads(
