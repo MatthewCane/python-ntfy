@@ -137,21 +137,30 @@ def send(
     actions: list[Union[ViewAction, BroadcastAction, HttpAction]] = [],
     format_as_markdown: bool = False,
 ) -> dict:
-    """
-    Send a text based message to the server
+    """Send a text-based message to the server.
 
-    :param message: The message to send
-    :param title: The title of the message. Optional
-    :param priority: The priority of the message. Optional, defaults to MessagePriority.DEFAULT
-    :param tags: A list of tags to attach to the message. Can be an emoji short code. Optional
-    :param format_as_markdown: If true, the message will be formatted as markdown. Optional
-    :param actions: A list of Actions objects to attach to the message. Optional
-    :return: The response from the server
+    Call this function to send a message to the server. The message will be sent
+    to the server and then broadcast to all clients subscribed to the topic.
 
-    :examples:
-    response = client.send(message="Example message")
-    response = client.send(message="Example message", title="Example title", priority=MessagePriority.HIGH, tags=["fire", "warning"])
-    response = client.send(message="*Example markdown*", format_as_markdown=True)
+    Args:
+        message: The message to send.
+        title: The title of the message.
+        priority: The priority of the message.
+        tags: A list of tags to attach to the message. Can be an emoji short code.
+        actions: A list of Actions objects to attach to the message.
+        format_as_markdown: If true, the message will be formatted as markdown.
+        additional_topics: A list of additional topics to send the message to.
+
+    Returns:
+        dict: The response from the server.
+
+    Raises:
+        ToDo
+
+    Examples:
+        response = client.send(message="Example message")
+        response = client.send(message="Example message", title="Example title", priority=MessagePriority.HIGH, tags=["fire", "warning"])
+        response = client.send(message="*Example markdown*", format_as_markdown=True)
     """
     headers = {
         "Title": title,
@@ -176,18 +185,23 @@ def send_file(
     tags: list = [],
     actions: list[Union[ViewAction, BroadcastAction, HttpAction]] = [],
 ) -> dict:
-    """
-    Send a file to the server
+    """Sends a file to the server.
 
-    :param file_path: The path to the file to send.
-    :param title: The title of the file. Optional
-    :param priority: The priority of the message. Optional, defaults to MessagePriority.DEFAULT
-    :param tags: A list of tags to attach to the message. Can be an emoji short code. Optional
-    :param actions: A list of ActionButton objects to attach to the message. Optional
-    :return: The response from the server
+    Args:
+        file: The path to the file to send.
+        title: The title of the file.
+        priority: The priority of the message. Optional, defaults to MessagePriority.
+        tags: A list of tags to attach to the message. Can be an emoji short code.
+        actions: A list of ActionButton objects to attach to the message.
 
-    :examples:
-    response = client.send_file(file_path="example.txt")
+    Returns:
+        dict: The response from the server.
+
+    Raises:
+        ToDo
+
+    Examples:
+        response = client.send_file(file="example.txt")
     """
     headers = {
         "Title": str(title),
