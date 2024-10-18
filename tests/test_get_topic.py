@@ -1,8 +1,11 @@
-from python_ntfy import NtfyClient
-import pytest
-import dotenv
-import json
 import asyncio
+import json
+
+import dotenv
+import pytest
+
+from python_ntfy import NtfyClient
+
 from .helpers import get_topic, random_string
 
 

@@ -18,15 +18,15 @@ class NtfyClient:
     # 2. Keep the docstrings working in the IDE
     # 3. Allow the functions to be called with self
     # MyPy does not like this, but it works
+    from ._get_functions import get_cached_messages  # type: ignore
     from ._send_functions import (  # type: ignore
-        send,
-        send_file,
-        MessagePriority,
-        ViewAction,
         BroadcastAction,
         HttpAction,
+        MessagePriority,
+        ViewAction,
+        send,
+        send_file,
     )
-    from ._get_functions import get_cached_messages  # type: ignore
 
     def __init__(
         self,

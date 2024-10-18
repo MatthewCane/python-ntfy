@@ -1,7 +1,9 @@
-from python_ntfy import NtfyClient
 import dotenv
-from .helpers import clear_env, get_topic
 from pytest import MonkeyPatch
+
+from python_ntfy import NtfyClient
+
+from .helpers import clear_env, get_topic
 
 
 def test_send_without_auth_ntfysh():

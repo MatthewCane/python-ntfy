@@ -1,5 +1,7 @@
-from python_ntfy import NtfyClient
 import dotenv
+
+from python_ntfy import NtfyClient
+
 from .helpers import get_topic
 
 

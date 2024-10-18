@@ -1,6 +1,9 @@
-from python_ntfy import NtfyClient
 import os
+
 import dotenv
+
+from python_ntfy import NtfyClient
+
 from .helpers import clear_env
 
 
