@@ -5,7 +5,7 @@ from python_ntfy import NtfyClient
 from .helpers import get_topic
 
 
-def test_send_text_file():
+def test_send_text_file() -> None:
     topic = get_topic()
     dotenv.load_dotenv()
     ntfy = NtfyClient(topic=topic)
@@ -14,7 +14,7 @@ def test_send_text_file():
     assert response["attachment"]["type"] == "text/plain; charset=utf-8"
 
 
-def test_send_image_file():
+def test_send_image_file() -> None:
     topic = get_topic()
     dotenv.load_dotenv()
     ntfy = NtfyClient(topic=topic)

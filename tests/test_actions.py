@@ -5,7 +5,7 @@ from python_ntfy import NtfyClient
 from .helpers import get_topic
 
 
-def test_view_action():
+def test_view_action() -> None:
     topic = get_topic()
     dotenv.load_dotenv()
     ntfy = NtfyClient(topic=topic)
@@ -15,7 +15,7 @@ def test_view_action():
     assert action["url"] == "https://ntfy.sh"
 
 
-def test_broadcast_action():
+def test_broadcast_action() -> None:
     topic = get_topic()
     dotenv.load_dotenv()
     ntfy = NtfyClient(topic=topic)
@@ -27,7 +27,7 @@ def test_broadcast_action():
     assert action["intent"] == "com.example.broadcast"
 
 
-def test_http_action():
+def test_http_action() -> None:
     topic = get_topic()
     dotenv.load_dotenv()
     ntfy = NtfyClient(topic=topic)

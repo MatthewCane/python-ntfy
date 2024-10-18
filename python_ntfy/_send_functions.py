@@ -25,7 +25,7 @@ class ActionType(Enum):
 
 
 class Action:
-    def __init__(self, label: str, url: str, clear: bool = False):
+    def __init__(self, label: str, url: str, clear: bool = False) -> None:
         self.label = label
         self.url = url
         self.actions: list = []
@@ -33,7 +33,7 @@ class Action:
 
 
 class ViewAction(Action):
-    def __init__(self, label: str, url: str, clear: bool = False):
+    def __init__(self, label: str, url: str, clear: bool = False) -> None:
         self.action = ActionType.VIEW
         super().__init__(label=label, url=url, clear=clear)
 
@@ -56,7 +56,7 @@ class BroadcastAction(Action):
         intent: str = "io.heckel.ntfy.USER_ACTION",
         extras: Optional[dict[str, str]] = None,
         clear: bool = False,
-    ):
+    ) -> None:
         self.action = ActionType.BROADCAST
         self.intent = intent
         self.extras = extras
@@ -91,7 +91,7 @@ class HttpAction(Action):
         headers: Optional[dict[str, str]] = None,
         body: Optional[str] = None,
         clear: bool = False,
-    ):
+    ) -> None:
         self.action = ActionType.HTTP
         self.method = method
         self.headers = headers

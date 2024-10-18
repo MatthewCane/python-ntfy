@@ -66,10 +66,10 @@ class NtfyClient:
         else:
             self._auth = ("", "")
 
-    def __set_url(self, server, topic):
+    def __set_url(self, server, topic) -> None:
         self.url = server.strip("/") + "/" + topic
 
-    def set_topic(self, topic: str):
+    def set_topic(self, topic: str) -> None:
         """Set a new topic for the client.
 
         Args:
@@ -81,7 +81,7 @@ class NtfyClient:
         self._topic = topic
         self.__set_url(self._server, self._topic)
 
-    def get_topic(self):
+    def get_topic(self) -> str:
         """Get the current topic.
 
         Returns:

@@ -7,7 +7,7 @@ from python_ntfy import NtfyClient
 from .helpers import clear_env
 
 
-def test_init_no_auth():
+def test_init_no_auth() -> None:
     clear_env()
     ntfy = NtfyClient(topic="test")
     assert ntfy._server == os.environ.get("NTFY_SERVER") or "https://ntfy.sh"
@@ -15,7 +15,7 @@ def test_init_no_auth():
     assert ntfy._topic == "test"
 
 
-def test_init_with_auth_env():
+def test_init_with_auth_env() -> None:
     dotenv.load_dotenv()
     ntfy = NtfyClient(topic="test")
     assert ntfy._server == os.environ.get("NTFY_SERVER") or "https://ntfy.sh"
@@ -23,7 +23,7 @@ def test_init_with_auth_env():
     assert ntfy._topic == "test"
 
 
-def test_init_set_topic():
+def test_init_set_topic() -> None:
     ntfy = NtfyClient(topic="test")
     assert ntfy._topic == "test"
     assert (
