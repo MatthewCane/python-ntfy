@@ -35,8 +35,9 @@ requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.ruff.lint]
-select = ["E", "F", "I", "W", "C", "D", "UP", "ANN"]
-ignore = ["E501", "D103","D417","D104","D100", "ANN001", "ANN101"]
+select = ["E", "F", "I", "W", "C", "D", "UP", "ANN", "S"]
+ignore = ["E501", "D103","D417","D104","D100", "ANN001", "ANN101", "S101"]
 
 [tool.ruff.lint.pydocstyle]
 convention = "google"
+

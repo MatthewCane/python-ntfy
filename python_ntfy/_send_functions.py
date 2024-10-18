@@ -133,6 +133,7 @@ def send(
     tags: list = [],
     actions: list[Union[ViewAction, BroadcastAction, HttpAction]] = [],
     format_as_markdown: bool = False,
+    timeout_seconds: int = 5,
 ) -> dict:
     """Send a text-based message to the server.
 
@@ -147,6 +148,7 @@ def send(
         actions: A list of Actions objects to attach to the message.
         format_as_markdown: If true, the message will be formatted as markdown.
         additional_topics: A list of additional topics to send the message to.
+        timeout_seconds: The number of seconds to wait before timing out.
 
     Returns:
         dict: The response from the server.
@@ -169,7 +171,13 @@ def send(
         headers["Actions"] = " ; ".join([action.to_header() for action in actions])
 
     response = json.loads(
-        requests.post(url=self.url, data=message, headers=headers, auth=self._auth).text
+        requests.post(
+            url=self.url,
+            data=message,
+            headers=headers,
+            auth=self._auth,
+            timeout=timeout_seconds,
+        ).text
     )
     return response
 
@@ -181,6 +189,7 @@ def send_file(
     priority: MessagePriority = MessagePriority.DEFAULT,
     tags: list = [],
     actions: list[Union[ViewAction, BroadcastAction, HttpAction]] = [],
+    timeout_seconds: int = 30,
 ) -> dict:
     """Sends a file to the server.
 
@@ -190,6 +199,7 @@ def send_file(
         priority: The priority of the message. Optional, defaults to MessagePriority.
         tags: A list of tags to attach to the message. Can be an emoji short code.
         actions: A list of ActionButton objects to attach to the message.
+        timeout_seconds: The number of seconds to wait before timing out.
 
     Returns:
         dict: The response from the server.
@@ -210,6 +220,12 @@ def send_file(
 
     with open(file, "rb") as f:
         response = json.loads(
-            requests.post(url=self.url, data=f, headers=headers, auth=self._auth).text
+            requests.post(
+                url=self.url,
+                data=f,
+                headers=headers,
+                auth=self._auth,
+                timeout=timeout_seconds,
+            ).text
         )
     return response

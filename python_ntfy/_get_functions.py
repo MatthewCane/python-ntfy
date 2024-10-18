@@ -4,13 +4,14 @@ import requests
 
 
 def get_cached_messages(
-    self, since: str = "all", scheduled: bool = False
+    self, since: str = "all", scheduled: bool = False, timeout_seconds: int = 10
 ) -> list[dict]:
     """Get cached messages from the server.
 
     Args:
         since: The timestamp to start from. If set to "all", will return all messages.
         scheduled: If true, will return scheduled messages.
+        timeout_seconds: The number of seconds to wait for the response.
 
     Returns:
         A list of messages.
@@ -29,7 +30,13 @@ def get_cached_messages(
 
     response = [
         json.loads(line)
-        for line in requests.get(url=self.url + "/json", params=params, auth=self._auth)
+        for line in requests.get(
+            url=self.url + "/json",
+            params=params,
+            auth=self._auth,
+            timeout=timeout_seconds,
+        )
+        .text.strip()
         .text.strip()
         .splitlines()
     ]

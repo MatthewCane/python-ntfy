@@ -16,4 +16,4 @@ def get_topic() -> str:
 
 
 def random_string(length: int = 10) -> str:
-    return "".join([random.choice(string.ascii_lowercase) for _ in range(length)])
+    return "".join([random.choice(string.ascii_lowercase) for _ in range(length)])  # noqa: S311
