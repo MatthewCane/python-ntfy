@@ -1,13 +1,16 @@
-from python_ntfy import NtfyClient
-import pytest
-import dotenv
-import json
 import asyncio
+import json
+
+import dotenv
+import pytest
+
+from python_ntfy import NtfyClient
+
 from .helpers import get_topic, random_string
 
 
 @pytest.mark.asyncio
-async def test_get_topic():
+async def test_get_topic() -> None:
     topic = get_topic()
     message = random_string()
     dotenv.load_dotenv()
@@ -22,7 +25,7 @@ async def test_get_topic():
 
 
 @pytest.mark.asyncio
-async def test_get_topic_with_limit():
+async def test_get_topic_with_limit() -> None:
     topic = get_topic()
     message = random_string()
     dotenv.load_dotenv()

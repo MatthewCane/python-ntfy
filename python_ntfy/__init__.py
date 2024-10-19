@@ -13,32 +13,43 @@ import os
 
 
 class NtfyClient:
+    """A class for interacting with the ntfy notification service."""
+
     # The functions need to be imported here to:
     # 1. Keep the functions in a separate file
     # 2. Keep the docstrings working in the IDE
     # 3. Allow the functions to be called with self
     # MyPy does not like this, but it works
+    from ._get_functions import get_cached_messages  # type: ignore
     from ._send_functions import (  # type: ignore
-        send,
-        send_file,
-        MessagePriority,
-        ViewAction,
         BroadcastAction,
         HttpAction,
+        MessagePriority,
+        ViewAction,
+        send,
+        send_file,
     )
-    from ._get_functions import get_cached_messages  # type: ignore
 
     def __init__(
         self,
         topic: str,
         server: str = "https://ntfy.sh",
     ) -> None:
-        """
-        :param topic: The topic to use for this client
-        :param server: The server to connect to. Must include the protocol (http/https)
-        :return None:
-        """
+        """Itinialize the NtfyClient.
 
+        Args:
+            topic: The topic to use for this client
+            server: The server to connect to. Must include the protocol (http/https)
+
+        Returns:
+            None
+
+        Exceptions:
+            ToDo
+
+        Examples:
+            client = NtfyClient(topic="my_topic")
+        """
         self._server = os.environ.get("NTFY_SERVER") or server
         self._topic = topic
         self.__set_url(self._server, topic)
@@ -55,23 +66,25 @@ class NtfyClient:
         else:
             self._auth = ("", "")
 
-    def __set_url(self, server, topic):
+    def __set_url(self, server, topic) -> None:
         self.url = server.strip("/") + "/" + topic
 
-    def set_topic(self, topic: str):
-        """
-        Set a new topic for the client
+    def set_topic(self, topic: str) -> None:
+        """Set a new topic for the client.
 
-        :param topic: The topic to use for this client
-        :return: None
+        Args:
+            topic: The topic to set for this client.
+
+        Returns:
+            None
         """
         self._topic = topic
         self.__set_url(self._server, self._topic)
 
-    def get_topic(self):
-        """
-        Get the current topic
+    def get_topic(self) -> str:
+        """Get the current topic.
 
-        :return: str
+        Returns:
+            str: The current topic.
         """
         return self._topic

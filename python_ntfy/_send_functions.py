@@ -1,13 +1,13 @@
 import json
-import requests
 from enum import Enum
+from pathlib import Path
 from typing import Optional, Union
+
+import requests
 
 
 class MessagePriority(Enum):
-    """
-    Ntfy message priority levels.
-    """
+    """Ntfy message priority levels."""
 
     MIN = "1"
     LOW = "2"
@@ -18,9 +18,7 @@ class MessagePriority(Enum):
 
 
 class ActionType(Enum):
-    """
-    Action button types
-    """
+    """Action button types."""
 
     VIEW = "view"
     BROADCAST = "broadcast"
@@ -28,7 +26,7 @@ class ActionType(Enum):
 
 
 class Action:
-    def __init__(self, label: str, url: str, clear: bool = False):
+    def __init__(self, label: str, url: str, clear: bool = False) -> None:
         self.label = label
         self.url = url
         self.actions: list = []
@@ -36,7 +34,7 @@ class Action:
 
 
 class ViewAction(Action):
-    def __init__(self, label: str, url: str, clear: bool = False):
+    def __init__(self, label: str, url: str, clear: bool = False) -> None:
         self.action = ActionType.VIEW
         super().__init__(label=label, url=url, clear=clear)
 
@@ -59,7 +57,7 @@ class BroadcastAction(Action):
         intent: str = "io.heckel.ntfy.USER_ACTION",
         extras: Optional[dict[str, str]] = None,
         clear: bool = False,
-    ):
+    ) -> None:
         self.action = ActionType.BROADCAST
         self.intent = intent
         self.extras = extras
@@ -94,7 +92,7 @@ class HttpAction(Action):
         headers: Optional[dict[str, str]] = None,
         body: Optional[str] = None,
         clear: bool = False,
-    ):
+    ) -> None:
         self.action = ActionType.HTTP
         self.method = method
         self.headers = headers
@@ -133,9 +131,10 @@ def send(
     message: str,
     title: Optional[str] = None,
     priority: MessagePriority = MessagePriority.DEFAULT,
-    tags: list = [],
-    actions: list[Union[ViewAction, BroadcastAction, HttpAction]] = [],
+    tags: Optional[list] = None,
+    actions: Optional[list[Union[ViewAction, BroadcastAction, HttpAction]]] = None,
     format_as_markdown: bool = False,
+    timeout_seconds: int = 5,
 ) -> dict:
     """Send a text-based message to the server.
 
@@ -150,6 +149,7 @@ def send(
         actions: A list of Actions objects to attach to the message.
         format_as_markdown: If true, the message will be formatted as markdown.
         additional_topics: A list of additional topics to send the message to.
+        timeout_seconds: The number of seconds to wait before timing out.
 
     Returns:
         dict: The response from the server.
@@ -162,6 +162,11 @@ def send(
         response = client.send(message="Example message", title="Example title", priority=MessagePriority.HIGH, tags=["fire", "warning"])
         response = client.send(message="*Example markdown*", format_as_markdown=True)
     """
+    if tags is None:
+        tags = []
+    if actions is None:
+        actions = []
+
     headers = {
         "Title": title,
         "Priority": priority.value,
@@ -171,10 +176,15 @@ def send(
     if len(actions) > 0:
         headers["Actions"] = " ; ".join([action.to_header() for action in actions])
 
-    response = json.loads(
-        requests.post(url=self.url, data=message, headers=headers, auth=self._auth).text
+    return json.loads(
+        requests.post(
+            url=self.url,
+            data=message,
+            headers=headers,
+            auth=self._auth,
+            timeout=timeout_seconds,
+        ).text,
     )
-    return response
 
 
 def send_file(
@@ -182,8 +192,9 @@ def send_file(
     file: str,
     title: Optional[str] = None,
     priority: MessagePriority = MessagePriority.DEFAULT,
-    tags: list = [],
-    actions: list[Union[ViewAction, BroadcastAction, HttpAction]] = [],
+    tags: Optional[list] = None,
+    actions: Optional[list[Union[ViewAction, BroadcastAction, HttpAction]]] = None,
+    timeout_seconds: int = 30,
 ) -> dict:
     """Sends a file to the server.
 
@@ -193,6 +204,7 @@ def send_file(
         priority: The priority of the message. Optional, defaults to MessagePriority.
         tags: A list of tags to attach to the message. Can be an emoji short code.
         actions: A list of ActionButton objects to attach to the message.
+        timeout_seconds: The number of seconds to wait before timing out.
 
     Returns:
         dict: The response from the server.
@@ -203,6 +215,11 @@ def send_file(
     Examples:
         response = client.send_file(file="example.txt")
     """
+    if actions is None:
+        actions = []
+    if tags is None:
+        tags = []
+
     headers = {
         "Title": str(title),
         "Filename": file.split("/")[-1],
@@ -211,8 +228,13 @@ def send_file(
         "Actions": " ; ".join([action.to_header() for action in actions]),
     }
 
-    with open(file, "rb") as f:
-        response = json.loads(
-            requests.post(url=self.url, data=f, headers=headers, auth=self._auth).text
+    with Path(file).open("rb") as f:
+        return json.loads(
+            requests.post(
+                url=self.url,
+                data=f,
+                headers=headers,
+                auth=self._auth,
+                timeout=timeout_seconds,
+            ).text,
         )
-    return response

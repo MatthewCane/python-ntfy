@@ -42,7 +42,7 @@ See the full documentation site at [https://matthewcane.github.io/python-ntfy/](
 
 ## Future Features
 
-- Email notifications
+- [Email notifications](https://docs.ntfy.sh/publish/#e-mail-notifications)
 - Send to multiple topics at once
 
 ## Testing and Development

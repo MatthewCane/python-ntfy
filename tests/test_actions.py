@@ -1,9 +1,11 @@
-from python_ntfy import NtfyClient
 import dotenv
+
+from python_ntfy import NtfyClient
+
 from .helpers import get_topic
 
 
-def test_view_action():
+def test_view_action() -> None:
     topic = get_topic()
     dotenv.load_dotenv()
     ntfy = NtfyClient(topic=topic)
@@ -13,24 +15,27 @@ def test_view_action():
     assert action["url"] == "https://ntfy.sh"
 
 
-def test_broadcast_action():
+def test_broadcast_action() -> None:
     topic = get_topic()
     dotenv.load_dotenv()
     ntfy = NtfyClient(topic=topic)
     action = ntfy.BroadcastAction(
-        label="Broadcast", intent="com.example.broadcast"
+        label="Broadcast",
+        intent="com.example.broadcast",
     ).to_dict()
     assert action["action"] == "broadcast"
     assert action["label"] == "Broadcast"
     assert action["intent"] == "com.example.broadcast"
 
 
-def test_http_action():
+def test_http_action() -> None:
     topic = get_topic()
     dotenv.load_dotenv()
     ntfy = NtfyClient(topic=topic)
     action = ntfy.HttpAction(
-        label="HTTP", url="https://ntfy.sh", method="POST"
+        label="HTTP",
+        url="https://ntfy.sh",
+        method="POST",
     ).to_dict()
     assert action["action"] == "http"
     assert action["label"] == "HTTP"
