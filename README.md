@@ -49,11 +49,14 @@ See the full documentation site at [https://matthewcane.github.io/python-ntfy/](
 
 This project uses:
 
-- Poetry as it's dependency manager
-- Ruff for linting and code formatting
-- MyPy for static type checking
+- [Poetry](https://python-poetry.org/) as it's dependency manager
+- [Ruff](https://docs.astral.sh/ruff/) for linting and code formatting
+- [MyPy](https://mypy-lang.org/) for static type checking
+- [Pre-Commit](https://pre-commit.com/) for running the above tools before committing
 
 To install dev dependencies, run `poetry install --with dev`.
+
+To install pre-commit hooks, run `pre-commit install`.
 
 ### Linting, Formatting and Type Checking
 

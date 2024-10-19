@@ -1,41 +1,28 @@
 from pathlib import Path
 
-import dotenv
-from pytest import MonkeyPatch
-
 from python_ntfy import NtfyClient
 
-from .helpers import clear_env, get_topic
+from .helpers import topic
 
 
-def test_send_without_auth_ntfysh() -> None:
-    clear_env()
-    topic = get_topic()
+def test_send_without_auth_ntfysh(ntfy_sh_server, no_auth) -> None:
     ntfy = NtfyClient(
         topic=topic,
     )
     response = ntfy.send(message="test_send_without_auth")
+    print(response)
     assert response["error"] == "unauthorized"
 
 
-def test_send_without_auth_selfhosted_no_auth() -> None:
-    dotenv.load_dotenv()
-    clear_env(server=False)
-    topic = get_topic()
+def test_send_without_auth_localhost_no_auth(localhost_server, no_auth) -> None:
     ntfy = NtfyClient(topic=topic)
-    # Skip this test if testing against ntfy.sh
-    # as it requires auth
-    if ntfy._server == "https://ntfy.sh":
-        return
     response = ntfy.send(message="test_send_without_auth")
     print(response)
     assert response["event"] == "message"
     assert response["topic"] == topic
 
 
-def test_send_with_auth_env() -> None:
-    topic = get_topic()
-    dotenv.load_dotenv()
+def test_send_with_auth_env(localhost_server, user_pass_auth) -> None:
     ntfy = NtfyClient(topic=topic)
     response = ntfy.send(message="test_send_with_auth_env")
     print(response)
@@ -43,25 +30,16 @@ def test_send_with_auth_env() -> None:
     assert response["topic"] == topic
 
 
-def test_send_with_auth_token() -> None:
-    topic = get_topic()
-    dotenv.load_dotenv()
-    with MonkeyPatch().context() as m:
-        m.delenv("NTFY_USER", raising=False)
-        m.delenv("NTFY_PASSWORD", raising=False)
-        # This is a dummy token, not valid
-        m.setenv("NTFY_TOKEN", "tk_AgQdq7mVBoFD37zQVN29RhuMzNIz2")
-        ntfy = NtfyClient(topic=topic)
-        response = ntfy.send(message="test_send_with_auth_token")
-        print(response)
-        assert ntfy._auth == ("", "tk_AgQdq7mVBoFD37zQVN29RhuMzNIz2")
-        assert response["event"] == "message"
-        assert response["topic"] == topic
+def test_send_with_auth_token(localhost_server, token_auth) -> None:
+    ntfy = NtfyClient(topic=topic)
+    response = ntfy.send(message="test_send_with_auth_token")
+    print(response)
+    assert ntfy._auth == ("", "tk_AgQdq7mVBoFD37zQVN29RhuMzNIz2")
+    assert response["event"] == "message"
+    assert response["topic"] == topic
 
 
-def test_send_with_markdown() -> None:
-    topic = get_topic()
-    dotenv.load_dotenv()
+def test_send_with_markdown(localhost_server, no_auth) -> None:
     with Path("tests/assets/test_markdown.md").open() as f:
         message = f.read()
     ntfy = NtfyClient(topic=topic)
@@ -72,9 +50,7 @@ def test_send_with_markdown() -> None:
     assert response["content_type"] == "text/markdown"
 
 
-def test_send_with_title() -> None:
-    topic = get_topic()
-    dotenv.load_dotenv()
+def test_send_with_title(localhost_server, no_auth) -> None:
     ntfy = NtfyClient(topic=topic)
     response = ntfy.send(message="test_send_with_title", title="Test Title")
     print(response)
@@ -83,9 +59,7 @@ def test_send_with_title() -> None:
     assert response["title"] == "Test Title"
 
 
-def test_send_with_tags() -> None:
-    topic = get_topic()
-    dotenv.load_dotenv()
+def test_send_with_tags(localhost_server, no_auth) -> None:
     ntfy = NtfyClient(topic=topic)
     response = ntfy.send(message="test_send_with_tags", tags=["fire", "warning"])
     print(response)
@@ -94,9 +68,7 @@ def test_send_with_tags() -> None:
     assert response["tags"] == ["fire", "warning"]
 
 
-def test_send_with_priority() -> None:
-    topic = get_topic()
-    dotenv.load_dotenv()
+def test_send_with_priority(localhost_server, no_auth) -> None:
     ntfy = NtfyClient(topic=topic)
     response = ntfy.send(
         message="test_send_with_priority",
@@ -108,9 +80,7 @@ def test_send_with_priority() -> None:
     assert response["priority"] == 4
 
 
-def test_send_with_view_action() -> None:
-    topic = get_topic()
-    dotenv.load_dotenv()
+def test_send_with_view_action(localhost_server, no_auth) -> None:
     ntfy = NtfyClient(topic=topic)
     response = ntfy.send(
         message="test_send_with_view_action",
@@ -124,9 +94,7 @@ def test_send_with_view_action() -> None:
     assert response["actions"] is not None
 
 
-def test_send_with_broadcast_action() -> None:
-    topic = get_topic()
-    dotenv.load_dotenv()
+def test_send_with_broadcast_action(localhost_server, no_auth) -> None:
     ntfy = NtfyClient(topic=topic)
     response = ntfy.send(
         message="test_send_with_broadcast_action",
@@ -140,9 +108,7 @@ def test_send_with_broadcast_action() -> None:
     assert response["actions"] is not None
 
 
-def test_send_with_http_action() -> None:
-    topic = get_topic()
-    dotenv.load_dotenv()
+def test_send_with_http_action(localhost_server, no_auth) -> None:
     ntfy = NtfyClient(topic=topic)
     response = ntfy.send(
         message="test_send_with_http_action",
