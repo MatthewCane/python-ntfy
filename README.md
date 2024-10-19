@@ -1,6 +1,10 @@
-# A Python Library For ntfy.sh
+# A Python Library For ntfy
 
-An easy-to-use ntfy python library. Aiming for full feature support.
+![PyPI - Version](https://img.shields.io/pypi/v/python-ntfy?link=https%3A%2F%2Fpypi.org%2Fproject%2Fpython-ntfy%2F)
+![PyPI - Downloads](https://img.shields.io/pypi/dm/python-ntfy?link=https%3A%2F%2Fpypistats.org%2Fpackages%2Fpython-ntfy)
+![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/MatthewCane/python-ntfy/publish.yml?link=https%3A%2F%2Fgithub.com%2FMatthewCane%2Fpython-ntfy%2Factions%2Fworkflows%2Fpublish.yml)
+
+An easy-to-use python library for the [ntfy notification service](https://ntfy.sh/). Aiming for full feature support and a super easy to use interface.
 
 ## Quickstart
 
