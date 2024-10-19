@@ -10,6 +10,10 @@ documentation = "https://matthewcane.github.io/python-ntfy/"
 classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+
+
 ]
 
 [tool.poetry.dependencies]
