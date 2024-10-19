@@ -1,5 +1,6 @@
 import json
 from enum import Enum
+from pathlib import Path
 from typing import Optional, Union
 
 import requests
@@ -131,7 +132,7 @@ def send(
     title: Optional[str] = None,
     priority: MessagePriority = MessagePriority.DEFAULT,
     tags: Optional[list] = None,
-    actions: list[Union[ViewAction, BroadcastAction, HttpAction]] = None,
+    actions: Optional[list[Union[ViewAction, BroadcastAction, HttpAction]]] = None,
     format_as_markdown: bool = False,
     timeout_seconds: int = 5,
 ) -> dict:
@@ -175,16 +176,15 @@ def send(
     if len(actions) > 0:
         headers["Actions"] = " ; ".join([action.to_header() for action in actions])
 
-    response = json.loads(
+    return json.loads(
         requests.post(
             url=self.url,
             data=message,
             headers=headers,
             auth=self._auth,
             timeout=timeout_seconds,
-        ).text
+        ).text,
     )
-    return response
 
 
 def send_file(
@@ -192,8 +192,8 @@ def send_file(
     file: str,
     title: Optional[str] = None,
     priority: MessagePriority = MessagePriority.DEFAULT,
-    tags: list = None,
-    actions: list[Union[ViewAction, BroadcastAction, HttpAction]] = None,
+    tags: Optional[list] = None,
+    actions: Optional[list[Union[ViewAction, BroadcastAction, HttpAction]]] = None,
     timeout_seconds: int = 30,
 ) -> dict:
     """Sends a file to the server.
@@ -228,14 +228,13 @@ def send_file(
         "Actions": " ; ".join([action.to_header() for action in actions]),
     }
 
-    with open(file, "rb") as f:
-        response = json.loads(
+    with Path(file).open("rb") as f:
+        return json.loads(
             requests.post(
                 url=self.url,
                 data=f,
                 headers=headers,
                 auth=self._auth,
                 timeout=timeout_seconds,
-            ).text
+            ).text,
         )
-    return response

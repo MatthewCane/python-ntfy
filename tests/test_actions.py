@@ -20,7 +20,8 @@ def test_broadcast_action() -> None:
     dotenv.load_dotenv()
     ntfy = NtfyClient(topic=topic)
     action = ntfy.BroadcastAction(
-        label="Broadcast", intent="com.example.broadcast"
+        label="Broadcast",
+        intent="com.example.broadcast",
     ).to_dict()
     assert action["action"] == "broadcast"
     assert action["label"] == "Broadcast"
@@ -32,7 +33,9 @@ def test_http_action() -> None:
     dotenv.load_dotenv()
     ntfy = NtfyClient(topic=topic)
     action = ntfy.HttpAction(
-        label="HTTP", url="https://ntfy.sh", method="POST"
+        label="HTTP",
+        url="https://ntfy.sh",
+        method="POST",
     ).to_dict()
     assert action["action"] == "http"
     assert action["label"] == "HTTP"

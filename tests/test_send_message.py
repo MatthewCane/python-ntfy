@@ -1,3 +1,5 @@
+from pathlib import Path
+
 import dotenv
 from pytest import MonkeyPatch
 
@@ -13,7 +15,6 @@ def test_send_without_auth_ntfysh() -> None:
         topic=topic,
     )
     response = ntfy.send(message="test_send_without_auth")
-    print(response)
     assert response["error"] == "unauthorized"
 
 
@@ -61,7 +62,7 @@ def test_send_with_auth_token() -> None:
 def test_send_with_markdown() -> None:
     topic = get_topic()
     dotenv.load_dotenv()
-    with open("tests/assets/test_markdown.md") as f:
+    with Path("tests/assets/test_markdown.md").open() as f:
         message = f.read()
     ntfy = NtfyClient(topic=topic)
     response = ntfy.send(format_as_markdown=True, message=message)
@@ -98,7 +99,8 @@ def test_send_with_priority() -> None:
     dotenv.load_dotenv()
     ntfy = NtfyClient(topic=topic)
     response = ntfy.send(
-        message="test_send_with_priority", priority=ntfy.MessagePriority.HIGH
+        message="test_send_with_priority",
+        priority=ntfy.MessagePriority.HIGH,
     )
     print(response)
     assert response["event"] == "message"
@@ -150,7 +152,7 @@ def test_send_with_http_action() -> None:
                 url="https://posttestserver.dev/p/pythonntfy/post",
                 headers={"Content-Type": "application/json"},
                 body='{"test": "test"}',
-            )
+            ),
         ],
     )
     print(response)

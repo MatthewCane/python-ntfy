@@ -4,7 +4,10 @@ import requests
 
 
 def get_cached_messages(
-    self, since: str = "all", scheduled: bool = False, timeout_seconds: int = 10
+    self,
+    since: str = "all",
+    scheduled: bool = False,
+    timeout_seconds: int = 10,
 ) -> list[dict]:
     """Get cached messages from the server.
 
