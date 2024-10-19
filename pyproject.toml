@@ -36,37 +36,37 @@ build-backend = "poetry.core.masonry.api"
 
 [tool.ruff.lint]
 select = [
-    "E", # PycodeStyle errors
-    "W", # PycodeStyle warnings
-    "F", # PyFlakes
-    "I", # Isort
-    "N", # pep8-naming
-    "D", # Pydocstyle
-    "UP", # PyUpgrade
-    "ANN", # Flake8-annotations
-    "S", # Flake8-bandit
-    "BLE", # Flake8-blind-except
-    "B", # Flake8-bugbear
-    "A", # Flake8-builtins
-    "C4", # Flake8-comprehensions
-    "T10", # Flake8-debugger
-    "EM", # Flake8-errmessages
-    "Q", # Flake8-quotes
-    "RET", # Flake8-return
-    "TRY", # Triceratops
+    "E",    # PycodeStyle errors
+    "W",    # PycodeStyle warnings
+    "F",    # PyFlakes
+    "I",    # Isort
+    "N",    # pep8-naming
+    "D",    # Pydocstyle
+    "UP",   # PyUpgrade
+    "ANN",  # Flake8-annotations
+    "S",    # Flake8-bandit
+    "BLE",  # Flake8-blind-except
+    "B",    # Flake8-bugbear
+    "A",    # Flake8-builtins
+    "C4",   # Flake8-comprehensions
+    "T10",  # Flake8-debugger
+    "EM",   # Flake8-errmessages
+    "Q",    # Flake8-quotes
+    "RET",  # Flake8-return
+    "TRY",  # Triceratops
     "FURB", # Refurb
-    "RUF", # Ruff
-    "PERF" # Perflint
+    "RUF",  # Ruff
+    "PERF", # Perflint
 ]
 ignore = [
-    "E501", # Line too long
-    "D103", # Missing docstring in public function
-    "D417", # Undocumented parameters
-    "D104", # First line of docstring should be in imperative moof
-    "D100", # Missing docstring in public module
+    "E501",   # Line too long
+    "D103",   # Missing docstring in public function
+    "D417",   # Undocumented parameters
+    "D104",   # First line of docstring should be in imperative moof
+    "D100",   # Missing docstring in public module
     "ANN001", # Missing type annotation for function argument
     "ANN101", # Missing type annotation for self in method
-    "S101" # Use of assert detected
+    "S101",   # Use of assert detected
 ]
 
 
