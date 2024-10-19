@@ -130,8 +130,8 @@ def send(
     message: str,
     title: Optional[str] = None,
     priority: MessagePriority = MessagePriority.DEFAULT,
-    tags: list = [],
-    actions: list[Union[ViewAction, BroadcastAction, HttpAction]] = [],
+    tags: Optional[list] = None,
+    actions: list[Union[ViewAction, BroadcastAction, HttpAction]] = None,
     format_as_markdown: bool = False,
     timeout_seconds: int = 5,
 ) -> dict:
@@ -161,6 +161,11 @@ def send(
         response = client.send(message="Example message", title="Example title", priority=MessagePriority.HIGH, tags=["fire", "warning"])
         response = client.send(message="*Example markdown*", format_as_markdown=True)
     """
+    if tags is None:
+        tags = []
+    if actions is None:
+        actions = []
+
     headers = {
         "Title": title,
         "Priority": priority.value,
@@ -187,8 +192,8 @@ def send_file(
     file: str,
     title: Optional[str] = None,
     priority: MessagePriority = MessagePriority.DEFAULT,
-    tags: list = [],
-    actions: list[Union[ViewAction, BroadcastAction, HttpAction]] = [],
+    tags: list = None,
+    actions: list[Union[ViewAction, BroadcastAction, HttpAction]] = None,
     timeout_seconds: int = 30,
 ) -> dict:
     """Sends a file to the server.
@@ -210,6 +215,11 @@ def send_file(
     Examples:
         response = client.send_file(file="example.txt")
     """
+    if actions is None:
+        actions = []
+    if tags is None:
+        tags = []
+
     headers = {
         "Title": str(title),
         "Filename": file.split("/")[-1],
