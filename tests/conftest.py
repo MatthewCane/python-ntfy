@@ -1,4 +1,9 @@
-from pytest import fixture
+import subprocess
+from pathlib import Path
+from time import sleep
+from typing import Generator
+
+from pytest import fixture, mark
 
 
 @fixture
@@ -30,3 +35,36 @@ def no_auth(monkeypatch) -> None:
     monkeypatch.delenv("NTFY_USER", raising=False)
     monkeypatch.delenv("NTFY_PASSWORD", raising=False)
     monkeypatch.delenv("NTFY_USER", raising=False)
+
+
+@fixture(scope="session", autouse=True)
+def docker_compose_up() -> Generator:
+    """Fixture to start up docker compose before tests and tear it down after."""
+    compose_file = Path("tests/assets/test_containers.yml").resolve()
+
+    # Start up docker compose
+    subprocess.run(  # noqa: S603
+        ["docker-compose", "-f", str(compose_file), "up", "-d"],  # noqa: S607
+        check=True,
+        capture_output=True,
+    )
+
+    sleep(0.5)
+
+    # Run the tests
+    yield
+
+    # Tear down the containers
+    subprocess.run(["docker-compose", "-f", str(compose_file), "down"], check=True)  # noqa: S607, S603
+
+
+def pytest_configure(config) -> None:
+    config.addinivalue_line(
+        "markers", "requires_docker: mark test as requiring docker services"
+    )
+
+
+def pytest_collection_modifyitems(session, config, items) -> None:
+    """Automatically mark all test items as requiring docker."""
+    for item in items:
+        item.add_marker(mark.requires_docker)

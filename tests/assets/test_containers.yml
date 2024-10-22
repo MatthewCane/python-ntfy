@@ -1,9 +1,11 @@
-version: '3.8'
-
 services:
   ntfy-without-auth:
     image: binwiederhier/ntfy:latest
     command: serve
+    healthcheck:
+      test: ["CMD-SHELL", "curl", "-f", "http://localhost/v1/health"]
+      interval: 1s
+      retries: 3
     ports:
       - "8080:80"
     environment:
@@ -13,6 +15,10 @@ services:
   ntfy-with-auth:
     image: binwiederhier/ntfy:latest
     command: serve
+    healthcheck:
+      test: ["CMD-SHELL", "curl", "-f", "http://localhost/v1/health"]
+      interval: 1s
+      retries: 3
     ports:
       - "8081:80"
     environment:

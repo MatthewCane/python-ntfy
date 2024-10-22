@@ -10,17 +10,6 @@ jobs:
   test:
     name: Pytest
     runs-on: ubuntu-latest
-    # This does not work because you can't pass
-    # commands into the container to start the
-    # server! Massive limitation in Actions.
-    # services:
-    #   ntfy:
-    #     image: binwiederhier/ntfy
-    #     ports:
-    #       - 80:80
-    #     env:
-    #       NTFY_ATTACHMENT_CACHE_DIR: /cache
-    #       NTFY_BASE_URL: http://localhost
     steps:
       - uses: actions/checkout@v4
 
@@ -28,7 +17,12 @@ jobs:
 
       - name: Install dependencies
         run: poetry install --with dev
-      
+
+      - name: Setup Docker Compose
+        uses: KengoTODA/actions-setup-docker-compose@main
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
       - name: Start test containers
         uses: hoverkraft-tech/compose-action@v2.0.2
         with:
