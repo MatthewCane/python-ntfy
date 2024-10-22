@@ -30,7 +30,9 @@ jobs:
         run: poetry install --with dev
       
       - name: Start test containers
-        run: docker-compose -f tests/assets/test_containers.yml up
+        uses: hoverkraft-tech/compose-action@v2.0.2
+        with:
+          compose-file: tests/assets/test_containers.yml
 
       - name: Run pytest
         run: poetry run pytest -v --cov --cov-fail-under=95
