@@ -6,3 +6,4 @@ __pytest__
 __pycache__
 dist/
 site/
+.DS_Store

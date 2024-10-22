@@ -72,9 +72,7 @@ These tools are also run in the CI pipeline and must pass before merging.
 
 This project is aiming for 95% code coverage. Any added features must include comprihensive tests.
 
-#### Setup Steps
+#### Testing Steps
 
-1. Start the test docker container with `docker-compose -f tests/assets/test_containers.yml up`
-2. Run the tests with `poetry run pytest --cov`
-
-The tests will sent messages to the `python_ntfy_testing` topic so you will need to view the web interface and subcribe to that topic to see the test messages.
+1. Make sure you have `docker` and `docker-compose` installed
+2. Run the tests with `poetry run pytest --cov` or use the VSCode testing extension
