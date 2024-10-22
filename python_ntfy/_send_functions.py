@@ -1,4 +1,5 @@
 import json
+from datetime import datetime
 from enum import Enum
 from pathlib import Path
 from typing import Optional, Union
@@ -133,6 +134,7 @@ def send(
     priority: MessagePriority = MessagePriority.DEFAULT,
     tags: Optional[list] = None,
     actions: Optional[list[Union[ViewAction, BroadcastAction, HttpAction]]] = None,
+    schedule: Optional[datetime] = None,
     format_as_markdown: bool = False,
     timeout_seconds: int = 5,
 ) -> dict:
@@ -147,9 +149,10 @@ def send(
         priority: The priority of the message.
         tags: A list of tags to attach to the message. Can be an emoji short code.
         actions: A list of Actions objects to attach to the message.
+        schedule: The time to schedule the message to be sent.
         format_as_markdown: If true, the message will be formatted as markdown.
         additional_topics: A list of additional topics to send the message to.
-        timeout_seconds: The number of seconds to wait before timing out.
+        timeout_seconds: The number of seconds to wait before timing out the reqest to the server.
 
     Returns:
         dict: The response from the server.
@@ -176,6 +179,9 @@ def send(
     if len(actions) > 0:
         headers["Actions"] = " ; ".join([action.to_header() for action in actions])
 
+    if schedule:
+        headers["Delay"] = str(int(schedule.timestamp()))
+
     return json.loads(
         requests.post(
             url=self.url,
@@ -194,6 +200,7 @@ def send_file(
     priority: MessagePriority = MessagePriority.DEFAULT,
     tags: Optional[list] = None,
     actions: Optional[list[Union[ViewAction, BroadcastAction, HttpAction]]] = None,
+    schedule: Optional[datetime] = None,
     timeout_seconds: int = 30,
 ) -> dict:
     """Sends a file to the server.
@@ -204,6 +211,7 @@ def send_file(
         priority: The priority of the message. Optional, defaults to MessagePriority.
         tags: A list of tags to attach to the message. Can be an emoji short code.
         actions: A list of ActionButton objects to attach to the message.
+        schedule: The time to schedule the message to be sent. Must be more than 10 seconds away and less than 3 days in the future.
         timeout_seconds: The number of seconds to wait before timing out.
 
     Returns:
@@ -227,6 +235,9 @@ def send_file(
         "Tags": ",".join(tags),
         "Actions": " ; ".join([action.to_header() for action in actions]),
     }
+
+    if schedule:
+        headers["Delay"] = str(int(schedule.timestamp()))
 
     with Path(file).open("rb") as f:
         return json.loads(

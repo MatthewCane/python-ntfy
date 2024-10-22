@@ -35,6 +35,7 @@ See the full documentation site at [https://matthewcane.github.io/python-ntfy/](
 - Custom servers
 - Sending plaintext messages
 - Sending Markdown formatted text messages
+- Scheduling messages
 - Retrieving cached messages
 - Scheduled delivery
 - Tags
