@@ -15,7 +15,7 @@ from .helpers import random_string, topic
 
 
 @pytest.mark.asyncio
-async def test_get_topic(localhost_server, no_auth) -> None:
+async def test_get_topic(localhost_server_no_auth, no_auth) -> None:
     message = random_string()
     ntfy = NtfyClient(topic=topic)
     ntfy.send(message=message)
@@ -28,7 +28,7 @@ async def test_get_topic(localhost_server, no_auth) -> None:
 
 
 @pytest.mark.asyncio
-async def test_get_topic_with_limit(localhost_server, no_auth) -> None:
+async def test_get_topic_with_limit(localhost_server_no_auth, no_auth) -> None:
     message = random_string()
     ntfy = NtfyClient(topic=topic)
     ntfy.send(message=message)

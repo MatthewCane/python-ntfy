@@ -1,0 +1,25 @@
+version: '3.8'
+
+services:
+  ntfy-without-auth:
+    image: binwiederhier/ntfy:latest
+    command: serve
+    ports:
+      - "8080:80"
+    environment:
+      NTFY_BASE_URL: 'http://localhost'
+      NTFY_ATTACHMENT_CACHE_DIR: /var/lib/ntfy/attachments
+
+  ntfy-with-auth:
+    image: binwiederhier/ntfy:latest
+    command: serve
+    ports:
+      - "8081:80"
+    environment:
+      NTFY_BASE_URL: 'http://localhost'
+      NTFY_ATTACHMENT_CACHE_DIR: /var/lib/ntfy/attachments
+      NTFY_AUTH_DEFAULT_ACCESS: deny-all
+      NTFY_AUTH_FILE: /var/lib/ntfy/auth.db
+    volumes:
+      - ./auth.db:/var/lib/ntfy/auth.db
+
