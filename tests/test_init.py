@@ -27,3 +27,4 @@ def test_init_set_topic(localhost_server_no_auth, no_auth) -> None:
     ntfy.set_topic("test2")
     assert ntfy._topic == "test2"
     assert ntfy.url == "/".join([environ["NTFY_SERVER"], "test2"])
+    assert ntfy.get_topic() == "test2"
