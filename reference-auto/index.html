@@ -1,0 +1,765 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.42">
+    
+    
+      
+        <title>NtfyClient Documentation - python-ntfy documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.0253249f.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#ntfyclient-documentation" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="python-ntfy documentation" class="md-header__button md-logo" aria-label="python-ntfy documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            python-ntfy documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              NtfyClient Documentation
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="python-ntfy documentation" class="md-nav__button md-logo" aria-label="python-ntfy documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    python-ntfy documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../quickstart/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Quickstart
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Examples
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../reference/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Reference
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#overview" class="md-nav__link">
+    <span class="md-ellipsis">
+      Overview
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#installation" class="md-nav__link">
+    <span class="md-ellipsis">
+      Installation
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#usage" class="md-nav__link">
+    <span class="md-ellipsis">
+      Usage
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Usage">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#initializing-the-client" class="md-nav__link">
+    <span class="md-ellipsis">
+      Initializing the Client
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#api-reference" class="md-nav__link">
+    <span class="md-ellipsis">
+      API Reference
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="API Reference">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#ntfyclient" class="md-nav__link">
+    <span class="md-ellipsis">
+      NtfyClient
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="NtfyClient">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#__init__topic-str-server-str-httpsntfysh" class="md-nav__link">
+    <span class="md-ellipsis">
+      __init__(topic: str, server: str = "https://ntfy.sh")
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set_topictopic-str" class="md-nav__link">
+    <span class="md-ellipsis">
+      set_topic(topic: str)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sending-messages" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sending Messages
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Sending Messages">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sendmessage-str-title-str-none-priority-optionalmessagepriority-messageprioritydefault-tags-list-actions-listunionviewaction-broadcastaction-httpaction-none-format_as_markdown-bool-false" class="md-nav__link">
+    <span class="md-ellipsis">
+      send(message: str, title: str = None, priority: Optional[MessagePriority] = MessagePriority.DEFAULT, tags: list = [], actions: list[Union[ViewAction, BroadcastAction, HttpAction, None]] = [], format_as_markdown: bool = False)
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#send_filefile-str-title-str-none-priority-optionalmessagepriority-messageprioritydefault-tags-list-actions-listunionviewaction-broadcastaction-httpaction-none" class="md-nav__link">
+    <span class="md-ellipsis">
+      send_file(file: str, title: str = None, priority: Optional[MessagePriority] = MessagePriority.DEFAULT, tags: list = [], actions: list[Union[ViewAction, BroadcastAction, HttpAction, None]] = [])
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#retrieving-messages" class="md-nav__link">
+    <span class="md-ellipsis">
+      Retrieving Messages
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Retrieving Messages">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#get_cached_messagessince-str-all-scheduled-bool-false" class="md-nav__link">
+    <span class="md-ellipsis">
+      get_cached_messages(since: str = "all", scheduled: bool = False)
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enums-and-classes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Enums and Classes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Enums and Classes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#messagepriority" class="md-nav__link">
+    <span class="md-ellipsis">
+      MessagePriority
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#actiontype" class="md-nav__link">
+    <span class="md-ellipsis">
+      ActionType
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#viewaction" class="md-nav__link">
+    <span class="md-ellipsis">
+      ViewAction
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#broadcastaction" class="md-nav__link">
+    <span class="md-ellipsis">
+      BroadcastAction
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#httpaction" class="md-nav__link">
+    <span class="md-ellipsis">
+      HttpAction
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#examples" class="md-nav__link">
+    <span class="md-ellipsis">
+      Examples
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Examples">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#sending-a-simple-message" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sending a Simple Message
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#sending-a-file" class="md-nav__link">
+    <span class="md-ellipsis">
+      Sending a File
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#retrieving-cached-messages" class="md-nav__link">
+    <span class="md-ellipsis">
+      Retrieving Cached Messages
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#using-action-buttons" class="md-nav__link">
+    <span class="md-ellipsis">
+      Using Action Buttons
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#environment-variables" class="md-nav__link">
+    <span class="md-ellipsis">
+      Environment Variables
+    </span>
+  </a>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="ntfyclient-documentation">NtfyClient Documentation</h1>
+<h2 id="overview">Overview</h2>
+<p>NtfyClient is a Python package for interacting with the ntfy.sh service or a self-hosted ntfy server. It provides functionality to send notifications and retrieve cached messages.</p>
+<h2 id="installation">Installation</h2>
+<p>You can install NtfyClient using pip:</p>
+<div class="highlight"><pre><span></span><code>pip<span class="w"> </span>install<span class="w"> </span>ntfyclient
+</code></pre></div>
+<h2 id="usage">Usage</h2>
+<h3 id="initializing-the-client">Initializing the Client</h3>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">ntfyclient</span> <span class="kn">import</span> <span class="n">NtfyClient</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">NtfyClient</span><span class="p">(</span><span class="n">topic</span><span class="o">=</span><span class="s2">&quot;your_topic&quot;</span><span class="p">,</span> <span class="n">server</span><span class="o">=</span><span class="s2">&quot;https://ntfy.sh&quot;</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="api-reference">API Reference</h2>
+<h3 id="ntfyclient">NtfyClient</h3>
+<h4 id="__init__topic-str-server-str-httpsntfysh"><code>__init__(topic: str, server: str = "https://ntfy.sh")</code></h4>
+<p>Initialize a new NtfyClient instance.</p>
+<ul>
+<li><code>topic</code>: The topic to use for this client</li>
+<li><code>server</code>: The server to connect to. Must include the protocol (http/https)</li>
+</ul>
+<h4 id="set_topictopic-str"><code>set_topic(topic: str)</code></h4>
+<p>Set a new topic for the client.</p>
+<ul>
+<li><code>topic</code>: The new topic to use for this client</li>
+</ul>
+<h3 id="sending-messages">Sending Messages</h3>
+<h4 id="sendmessage-str-title-str-none-priority-optionalmessagepriority-messageprioritydefault-tags-list-actions-listunionviewaction-broadcastaction-httpaction-none-format_as_markdown-bool-false"><code>send(message: str, title: str = None, priority: Optional[MessagePriority] = MessagePriority.DEFAULT, tags: list = [], actions: list[Union[ViewAction, BroadcastAction, HttpAction, None]] = [], format_as_markdown: bool = False)</code></h4>
+<p>Send a text-based message to the server.</p>
+<ul>
+<li><code>message</code>: The message to send</li>
+<li><code>title</code>: The title of the message (optional)</li>
+<li><code>priority</code>: The priority of the message (optional, defaults to <code>MessagePriority.DEFAULT</code>)</li>
+<li><code>tags</code>: A list of tags to attach to the message (optional)</li>
+<li><code>actions</code>: A list of Action objects to attach to the message (optional)</li>
+<li><code>format_as_markdown</code>: If true, the message will be formatted as markdown (optional)</li>
+</ul>
+<p>Returns the response from the server.</p>
+<h4 id="send_filefile-str-title-str-none-priority-optionalmessagepriority-messageprioritydefault-tags-list-actions-listunionviewaction-broadcastaction-httpaction-none"><code>send_file(file: str, title: str = None, priority: Optional[MessagePriority] = MessagePriority.DEFAULT, tags: list = [], actions: list[Union[ViewAction, BroadcastAction, HttpAction, None]] = [])</code></h4>
+<p>Send a file to the server.</p>
+<ul>
+<li><code>file</code>: The path to the file to send</li>
+<li><code>title</code>: The title of the file (optional)</li>
+<li><code>priority</code>: The priority of the message (optional, defaults to <code>MessagePriority.DEFAULT</code>)</li>
+<li><code>tags</code>: A list of tags to attach to the message (optional)</li>
+<li><code>actions</code>: A list of Action objects to attach to the message (optional)</li>
+</ul>
+<p>Returns the response from the server.</p>
+<h3 id="retrieving-messages">Retrieving Messages</h3>
+<h4 id="get_cached_messagessince-str-all-scheduled-bool-false"><code>get_cached_messages(since: str = "all", scheduled: bool = False)</code></h4>
+<p>Get cached messages from the server.</p>
+<ul>
+<li><code>since</code>: The timestamp to start from. If set to "all", will return all messages (optional)</li>
+<li><code>scheduled</code>: If true, will return scheduled messages (optional)</li>
+</ul>
+<p>Returns a list of messages.</p>
+<h3 id="enums-and-classes">Enums and Classes</h3>
+<h4 id="messagepriority">MessagePriority</h4>
+<p>An enumeration of message priority levels:</p>
+<ul>
+<li><code>MIN</code>: "1"</li>
+<li><code>LOW</code>: "2"</li>
+<li><code>DEFAULT</code>: "3"</li>
+<li><code>HIGH</code>: "4"</li>
+<li><code>MAX</code>: "5"</li>
+<li><code>URGENT</code>: Alias for MAX</li>
+</ul>
+<h4 id="actiontype">ActionType</h4>
+<p>An enumeration of action button types:</p>
+<ul>
+<li><code>VIEW</code>: "view"</li>
+<li><code>BROADCAST</code>: "broadcast"</li>
+<li><code>HTTP</code>: "http"</li>
+</ul>
+<h4 id="viewaction">ViewAction</h4>
+<p>Represents a view action button.</p>
+<ul>
+<li><code>__init__(label: str, url: str, clear: bool = False)</code></li>
+</ul>
+<h4 id="broadcastaction">BroadcastAction</h4>
+<p>Represents a broadcast action button.</p>
+<ul>
+<li><code>__init__(label: str, intent: str = "io.heckel.ntfy.USER_ACTION", extras: Optional[dict] = None, clear: bool = False)</code></li>
+</ul>
+<h4 id="httpaction">HttpAction</h4>
+<p>Represents an HTTP action button.</p>
+<ul>
+<li><code>__init__(label: str, url: str, method: str = "POST", headers: Optional[dict] = None, body: Optional[str] = None, clear: bool = False)</code></li>
+</ul>
+<h2 id="examples">Examples</h2>
+<h3 id="sending-a-simple-message">Sending a Simple Message</h3>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">ntfyclient</span> <span class="kn">import</span> <span class="n">NtfyClient</span><span class="p">,</span> <span class="n">MessagePriority</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">NtfyClient</span><span class="p">(</span><span class="s2">&quot;your_topic&quot;</span><span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">send</span><span class="p">(</span>
+    <span class="n">message</span><span class="o">=</span><span class="s2">&quot;Hello, world!&quot;</span><span class="p">,</span>
+    <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Test Message&quot;</span><span class="p">,</span>
+    <span class="n">priority</span><span class="o">=</span><span class="n">MessagePriority</span><span class="o">.</span><span class="n">HIGH</span><span class="p">,</span>
+    <span class="n">tags</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;test&quot;</span><span class="p">,</span> <span class="s2">&quot;example&quot;</span><span class="p">]</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="sending-a-file">Sending a File</h3>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">ntfyclient</span> <span class="kn">import</span> <span class="n">NtfyClient</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">NtfyClient</span><span class="p">(</span><span class="s2">&quot;your_topic&quot;</span><span class="p">)</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">send_file</span><span class="p">(</span><span class="s2">&quot;path/to/your/file.txt&quot;</span><span class="p">,</span> <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Important File&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="retrieving-cached-messages">Retrieving Cached Messages</h3>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">ntfyclient</span> <span class="kn">import</span> <span class="n">NtfyClient</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">NtfyClient</span><span class="p">(</span><span class="s2">&quot;your_topic&quot;</span><span class="p">)</span>
+<span class="n">messages</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">get_cached_messages</span><span class="p">(</span><span class="n">since</span><span class="o">=</span><span class="s2">&quot;2023-01-01&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">message</span> <span class="ow">in</span> <span class="n">messages</span><span class="p">:</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;Message: </span><span class="si">{</span><span class="n">message</span><span class="p">[</span><span class="s1">&#39;message&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">, Time: </span><span class="si">{</span><span class="n">message</span><span class="p">[</span><span class="s1">&#39;time&#39;</span><span class="p">]</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</code></pre></div>
+<h3 id="using-action-buttons">Using Action Buttons</h3>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">ntfyclient</span> <span class="kn">import</span> <span class="n">NtfyClient</span><span class="p">,</span> <span class="n">ViewAction</span><span class="p">,</span> <span class="n">BroadcastAction</span><span class="p">,</span> <span class="n">HttpAction</span>
+
+<span class="n">client</span> <span class="o">=</span> <span class="n">NtfyClient</span><span class="p">(</span><span class="s2">&quot;your_topic&quot;</span><span class="p">)</span>
+<span class="n">actions</span> <span class="o">=</span> <span class="p">[</span>
+    <span class="n">ViewAction</span><span class="p">(</span><span class="s2">&quot;Open Website&quot;</span><span class="p">,</span> <span class="s2">&quot;https://example.com&quot;</span><span class="p">),</span>
+    <span class="n">BroadcastAction</span><span class="p">(</span><span class="s2">&quot;Custom Action&quot;</span><span class="p">,</span> <span class="n">extras</span><span class="o">=</span><span class="p">{</span><span class="s2">&quot;key&quot;</span><span class="p">:</span> <span class="s2">&quot;value&quot;</span><span class="p">}),</span>
+    <span class="n">HttpAction</span><span class="p">(</span><span class="s2">&quot;API Call&quot;</span><span class="p">,</span> <span class="s2">&quot;https://api.example.com&quot;</span><span class="p">,</span> <span class="n">method</span><span class="o">=</span><span class="s2">&quot;POST&quot;</span><span class="p">,</span> <span class="n">body</span><span class="o">=</span><span class="s1">&#39;{&quot;key&quot;: &quot;value&quot;}&#39;</span><span class="p">)</span>
+<span class="p">]</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">client</span><span class="o">.</span><span class="n">send</span><span class="p">(</span>
+    <span class="n">message</span><span class="o">=</span><span class="s2">&quot;Message with actions&quot;</span><span class="p">,</span>
+    <span class="n">title</span><span class="o">=</span><span class="s2">&quot;Action Test&quot;</span><span class="p">,</span>
+    <span class="n">actions</span><span class="o">=</span><span class="n">actions</span>
+<span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">response</span><span class="p">)</span>
+</code></pre></div>
+<h2 id="environment-variables">Environment Variables</h2>
+<p>The NtfyClient supports the following environment variables:</p>
+<ul>
+<li><code>NTFY_SERVER</code>: Sets the default server URL</li>
+<li><code>NTFY_USER</code>: Sets the username for authentication</li>
+<li><code>NTFY_PASSWORD</code>: Sets the password for authentication</li>
+</ul>
+<p>If both <code>NTFY_USER</code> and <code>NTFY_PASSWORD</code> are set, the client will use them for authentication.</p>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.83f73b43.min.js"></script>
+      
+    
+  </body>
+</html>

@@ -1,0 +1,1099 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+      
+      
+      
+        <link rel="prev" href="../examples/">
+      
+      
+      
+      <link rel="icon" href="../assets/images/favicon.png">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.5.42">
+    
+    
+      
+        <title>Reference - python-ntfy documentation</title>
+      
+    
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.0253249f.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+        
+        
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,700,700i%7CRoboto+Mono:400,400i,700,700i&display=fallback">
+        <style>:root{--md-text-font:"Roboto";--md-code-font:"Roboto Mono"}</style>
+      
+    
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+    
+  </head>
+  
+  
+    <body dir="ltr">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#reference-guide" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+    </div>
+    
+    
+      
+
+  
+
+<header class="md-header md-header--shadow" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="python-ntfy documentation" class="md-header__button md-logo" aria-label="python-ntfy documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            python-ntfy documentation
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              Reference
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      <label class="md-header__button md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+      </label>
+      <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+    
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+
+<nav class="md-nav md-nav--primary" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="python-ntfy documentation" class="md-nav__button md-logo" aria-label="python-ntfy documentation" data-md-component="logo">
+      
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a3 3 0 0 0 3-3 3 3 0 0 0-3-3 3 3 0 0 0-3 3 3 3 0 0 0 3 3m0 3.54C9.64 9.35 6.5 8 3 8v11c3.5 0 6.64 1.35 9 3.54 2.36-2.19 5.5-3.54 9-3.54V8c-3.5 0-6.64 1.35-9 3.54"/></svg>
+
+    </a>
+    python-ntfy documentation
+  </label>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Home
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../quickstart/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Quickstart
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../examples/" class="md-nav__link">
+        
+  
+  <span class="md-ellipsis">
+    Examples
+  </span>
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  <span class="md-ellipsis">
+    Reference
+  </span>
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  <span class="md-ellipsis">
+    Reference
+  </span>
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#ntfyclient" class="md-nav__link">
+    <span class="md-ellipsis">
+      NtfyClient
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#initialiser" class="md-nav__link">
+    <span class="md-ellipsis">
+      Initialiser
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Initialiser">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#arguments" class="md-nav__link">
+    <span class="md-ellipsis">
+      Arguments
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      Methods
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#send" class="md-nav__link">
+    <span class="md-ellipsis">
+      send
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="send">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#arguments_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Arguments
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#send_file" class="md-nav__link">
+    <span class="md-ellipsis">
+      send_file
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set_topic" class="md-nav__link">
+    <span class="md-ellipsis">
+      set_topic
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="set_topic">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#arguments_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Arguments
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get_cached_messages" class="md-nav__link">
+    <span class="md-ellipsis">
+      get_cached_messages
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="get_cached_messages">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#arguments_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Arguments
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#returns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Returns
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#classes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Classes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Classes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#viewaction" class="md-nav__link">
+    <span class="md-ellipsis">
+      ViewAction
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="ViewAction">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#arguments_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      Arguments
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#broadcastaction" class="md-nav__link">
+    <span class="md-ellipsis">
+      BroadcastAction
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="BroadcastAction">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#arguments_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      Arguments
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#httpaction" class="md-nav__link">
+    <span class="md-ellipsis">
+      HttpAction
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="HttpAction">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#arguments_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      Arguments
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enums" class="md-nav__link">
+    <span class="md-ellipsis">
+      Enums
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Enums">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#messagepriority" class="md-nav__link">
+    <span class="md-ellipsis">
+      MessagePriority
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#actiontype" class="md-nav__link">
+    <span class="md-ellipsis">
+      ActionType
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#ntfyclient" class="md-nav__link">
+    <span class="md-ellipsis">
+      NtfyClient
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#initialiser" class="md-nav__link">
+    <span class="md-ellipsis">
+      Initialiser
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Initialiser">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#arguments" class="md-nav__link">
+    <span class="md-ellipsis">
+      Arguments
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#methods" class="md-nav__link">
+    <span class="md-ellipsis">
+      Methods
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Methods">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#send" class="md-nav__link">
+    <span class="md-ellipsis">
+      send
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="send">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#arguments_1" class="md-nav__link">
+    <span class="md-ellipsis">
+      Arguments
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#send_file" class="md-nav__link">
+    <span class="md-ellipsis">
+      send_file
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#set_topic" class="md-nav__link">
+    <span class="md-ellipsis">
+      set_topic
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="set_topic">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#arguments_2" class="md-nav__link">
+    <span class="md-ellipsis">
+      Arguments
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#get_cached_messages" class="md-nav__link">
+    <span class="md-ellipsis">
+      get_cached_messages
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="get_cached_messages">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#arguments_3" class="md-nav__link">
+    <span class="md-ellipsis">
+      Arguments
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#returns" class="md-nav__link">
+    <span class="md-ellipsis">
+      Returns
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#classes" class="md-nav__link">
+    <span class="md-ellipsis">
+      Classes
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Classes">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#viewaction" class="md-nav__link">
+    <span class="md-ellipsis">
+      ViewAction
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="ViewAction">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#arguments_4" class="md-nav__link">
+    <span class="md-ellipsis">
+      Arguments
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#broadcastaction" class="md-nav__link">
+    <span class="md-ellipsis">
+      BroadcastAction
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="BroadcastAction">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#arguments_5" class="md-nav__link">
+    <span class="md-ellipsis">
+      Arguments
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#httpaction" class="md-nav__link">
+    <span class="md-ellipsis">
+      HttpAction
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="HttpAction">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#arguments_6" class="md-nav__link">
+    <span class="md-ellipsis">
+      Arguments
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#enums" class="md-nav__link">
+    <span class="md-ellipsis">
+      Enums
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Enums">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#messagepriority" class="md-nav__link">
+    <span class="md-ellipsis">
+      MessagePriority
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#actiontype" class="md-nav__link">
+    <span class="md-ellipsis">
+      ActionType
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              <article class="md-content__inner md-typeset">
+                
+                  
+
+
+<h1 id="reference-guide">Reference Guide</h1>
+<h2 id="ntfyclient"><code>NtfyClient</code></h2>
+<h2 id="initialiser">Initialiser</h2>
+<div class="highlight"><pre><span></span><code><span class="kn">from</span> <span class="nn">python_ntfy</span> <span class="kn">import</span> <span class="n">NtfyClient</span>
+
+<span class="n">NtfyClient</span><span class="p">(</span>
+  <span class="n">topic</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+  <span class="n">server</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;https://ntfy.sh&quot;</span>
+<span class="p">)</span>
+</code></pre></div>
+<h3 id="arguments">Arguments</h3>
+<p><strong><code>topic</code> (required)</strong></p>
+<p>Type: String
+The topic to send messages to.</p>
+<p><strong><code>server</code></strong></p>
+<p>Type: String<br />
+Default: <code>https://ntfy.sh</code><br />
+The server to send messages to.</p>
+<hr />
+<h3 id="methods">Methods</h3>
+<h4 id="send"><code>send</code></h4>
+<div class="highlight"><pre><span></span><code><span class="n">NtfyClient</span><span class="o">.</span><span class="n">send</span><span class="p">(</span>
+  <span class="n">message</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+  <span class="n">title</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+  <span class="n">priority</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">MessagePriority</span><span class="p">]</span> <span class="o">=</span> <span class="n">MessagePriority</span><span class="o">.</span><span class="n">DEFAULT</span><span class="p">,</span>
+  <span class="n">tags</span><span class="p">:</span> <span class="nb">list</span> <span class="o">=</span> <span class="p">[],</span>
+  <span class="n">actions</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">ViewAction</span><span class="p">,</span> <span class="n">BroadcastAction</span><span class="p">,</span> <span class="n">HttpAction</span><span class="p">,</span> <span class="kc">None</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[],</span>
+  <span class="n">format_as_markdown</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span><span class="p">,</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span>
+</code></pre></div>
+<h5 id="arguments_1">Arguments</h5>
+<p><strong><code>message</code> (required)</strong></p>
+<p>Type: String<br />
+The message to send to the topic.</p>
+<p><strong><code>title</code></strong></p>
+<p>Type: String<br />
+Default: <code>None</code><br />
+The title of the message. If <code>None</code>, the message will have no title.</p>
+<p><strong><code>priority</code></strong></p>
+<p>Type: <code>Optional[MessagePriority]</code><br />
+Default: <code>MessagePriority.DEFAULT</code><br />
+The priority of the message. Can be one of the values from the <code>MessagePriority</code> enum.</p>
+<p><strong><code>tags</code></strong></p>
+<p>Type: <code>list</code><br />
+Default: <code>[]</code><br />
+A list of tags to associate with the message.</p>
+<p><strong><code>actions</code></strong></p>
+<p>Type: <code>list[Union[ViewAction, BroadcastAction, HttpAction, None]]</code><br />
+Default: <code>[]</code><br />
+A list of actions to include with the message. Each action can be an instance of <code>ViewAction</code>, <code>BroadcastAction</code>, <code>HttpAction</code>, or <code>None</code>.</p>
+<p><strong><code>format_as_markdown</code></strong></p>
+<p>Type: <code>bool</code><br />
+Default: <code>False</code><br />
+If <code>True</code>, the message will be formatted as Markdown.</p>
+<h4 id="send_file"><code>send_file</code></h4>
+<div class="highlight"><pre><span></span><code><span class="n">NtfyClient</span><span class="o">.</span><span class="n">send_file</span><span class="p">(</span>
+    <span class="n">file</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">title</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">priority</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="n">MessagePriority</span><span class="p">]</span> <span class="o">=</span> <span class="n">MessagePriority</span><span class="o">.</span><span class="n">DEFAULT</span><span class="p">,</span>
+    <span class="n">tags</span><span class="p">:</span> <span class="nb">list</span> <span class="o">=</span> <span class="p">[],</span>
+    <span class="n">actions</span><span class="p">:</span> <span class="nb">list</span><span class="p">[</span><span class="n">Union</span><span class="p">[</span><span class="n">ViewAction</span><span class="p">,</span> <span class="n">BroadcastAction</span><span class="p">,</span> <span class="n">HttpAction</span><span class="p">,</span> <span class="kc">None</span><span class="p">]]</span> <span class="o">=</span> <span class="p">[],</span>
+<span class="p">)</span> <span class="o">-&gt;</span> <span class="nb">dict</span>
+</code></pre></div>
+<h4 id="set_topic"><code>set_topic</code></h4>
+<div class="highlight"><pre><span></span><code><span class="n">NtfyClient</span><span class="o">.</span><span class="n">set_topic</span><span class="p">(</span><span class="n">topic</span><span class="p">:</span> <span class="nb">str</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="kc">None</span>
+</code></pre></div>
+<h5 id="arguments_2">Arguments</h5>
+<p><strong><code>topic</code> (required)</strong><br />
+Type: <code>str</code><br />
+The topic to send messages to.</p>
+<h4 id="get_cached_messages"><code>get_cached_messages</code></h4>
+<div class="highlight"><pre><span></span><code><span class="n">NtfyClient</span><span class="o">.</span><span class="n">get_cached_messages</span><span class="p">(</span>
+    <span class="n">since</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;all&quot;</span><span class="p">,</span>
+    <span class="n">scheduled</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="p">)</span>
+</code></pre></div>
+<h5 id="arguments_3">Arguments</h5>
+<p><strong><code>since</code></strong></p>
+<p>Type: <code>str</code><br />
+Default: <code>"all"</code><br />
+The timestamp to start retrieving messages from. If set to "all", will return all messages.</p>
+<p><strong><code>scheduled</code></strong></p>
+<p>Type: <code>bool</code><br />
+Default: <code>False</code><br />
+If <code>True</code>, will return scheduled messages.</p>
+<h5 id="returns">Returns</h5>
+<p>Type: <code>list</code><br />
+A list of dictionaries containing the cached messages.</p>
+<hr />
+<h3 id="classes">Classes</h3>
+<h4 id="viewaction"><code>ViewAction</code></h4>
+<div class="highlight"><pre><span></span><code><span class="n">ViewAction</span><span class="p">(</span>
+    <span class="n">label</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">clear</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="p">)</span>
+</code></pre></div>
+<h5 id="arguments_4">Arguments</h5>
+<p><strong><code>label</code> (required)</strong></p>
+<p>Type: <code>str</code><br />
+The label for the view action button.</p>
+<p><strong><code>url</code> (required)</strong></p>
+<p>Type: <code>str</code><br />
+The URL to open when the action button is clicked.</p>
+<p><strong><code>clear</code></strong></p>
+<p>Type: <code>bool</code><br />
+Default: <code>False</code><br />
+If <code>True</code>, the notification will be cleared when the action is tapped.</p>
+<h4 id="broadcastaction"><code>BroadcastAction</code></h4>
+<div class="highlight"><pre><span></span><code><span class="n">BroadcastAction</span><span class="p">(</span>
+    <span class="n">label</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">intent</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;io.heckel.ntfy.USER_ACTION&quot;</span><span class="p">,</span>
+    <span class="n">extras</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">clear</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="p">)</span>
+</code></pre></div>
+<h5 id="arguments_5">Arguments</h5>
+<p><strong><code>label</code> (required)</strong></p>
+<p>Type: <code>str</code><br />
+The label for the broadcast action button.</p>
+<p><strong><code>intent</code></strong></p>
+<p>Type: <code>str</code><br />
+Default: <code>"io.heckel.ntfy.USER_ACTION"</code><br />
+The Android intent to broadcast when the action is tapped.</p>
+<p><strong><code>extras</code></strong></p>
+<p>Type: <code>Optional[dict]</code><br />
+Default: <code>None</code><br />
+Additional key-value pairs to add to the broadcast intent.</p>
+<p><strong><code>clear</code></strong></p>
+<p>Type: <code>bool</code><br />
+Default: <code>False</code><br />
+If <code>True</code>, the notification will be cleared when the action is tapped.</p>
+<h4 id="httpaction"><code>HttpAction</code></h4>
+<div class="highlight"><pre><span></span><code><span class="n">HttpAction</span><span class="p">(</span>
+    <span class="n">label</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">url</span><span class="p">:</span> <span class="nb">str</span><span class="p">,</span>
+    <span class="n">method</span><span class="p">:</span> <span class="nb">str</span> <span class="o">=</span> <span class="s2">&quot;POST&quot;</span><span class="p">,</span>
+    <span class="n">headers</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">dict</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">body</span><span class="p">:</span> <span class="n">Optional</span><span class="p">[</span><span class="nb">str</span><span class="p">]</span> <span class="o">=</span> <span class="kc">None</span><span class="p">,</span>
+    <span class="n">clear</span><span class="p">:</span> <span class="nb">bool</span> <span class="o">=</span> <span class="kc">False</span>
+<span class="p">)</span>
+</code></pre></div>
+<h5 id="arguments_6">Arguments</h5>
+<p><strong><code>label</code> (required)</strong></p>
+<p>Type: <code>str</code><br />
+The label for the HTTP action button.</p>
+<p><strong><code>url</code> (required)</strong></p>
+<p>Type: <code>str</code><br />
+The URL to send the HTTP request to when the action is tapped.</p>
+<p><strong><code>method</code></strong></p>
+<p>Type: <code>str</code><br />
+Default: <code>"POST"</code><br />
+The HTTP method to use for the request.</p>
+<p><strong><code>headers</code></strong></p>
+<p>Type: <code>Optional[dict]</code><br />
+Default: <code>None</code><br />
+Additional headers to include in the HTTP request.</p>
+<p><strong><code>body</code></strong></p>
+<p>Type: <code>Optional[str]</code><br />
+Default: <code>None</code><br />
+The body of the HTTP request.</p>
+<p><strong><code>clear</code></strong></p>
+<p>Type: <code>bool</code><br />
+Default: <code>False</code><br />
+If <code>True</code>, the notification will be cleared when the action is tapped.</p>
+<hr />
+<h3 id="enums">Enums</h3>
+<h4 id="messagepriority"><code>MessagePriority</code></h4>
+<p>An enumeration of message priority levels.</p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">MessagePriority</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">MIN</span> <span class="o">=</span> <span class="s2">&quot;1&quot;</span>
+    <span class="n">LOW</span> <span class="o">=</span> <span class="s2">&quot;2&quot;</span>
+    <span class="n">DEFAULT</span> <span class="o">=</span> <span class="s2">&quot;3&quot;</span>
+    <span class="n">HIGH</span> <span class="o">=</span> <span class="s2">&quot;4&quot;</span>
+    <span class="n">MAX</span> <span class="o">=</span> <span class="s2">&quot;5&quot;</span>
+    <span class="n">URGENT</span> <span class="o">=</span> <span class="n">MAX</span>
+</code></pre></div>
+<h4 id="actiontype"><code>ActionType</code></h4>
+<p>An enumeration of action button types.</p>
+<div class="highlight"><pre><span></span><code><span class="k">class</span> <span class="nc">ActionType</span><span class="p">(</span><span class="n">Enum</span><span class="p">):</span>
+    <span class="n">VIEW</span> <span class="o">=</span> <span class="s2">&quot;view&quot;</span>
+    <span class="n">BROADCAST</span> <span class="o">=</span> <span class="s2">&quot;broadcast&quot;</span>
+    <span class="n">HTTP</span> <span class="o">=</span> <span class="s2">&quot;http&quot;</span>
+</code></pre></div>
+
+
+
+
+
+
+
+
+
+
+
+
+                
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    <script id="__config" type="application/json">{"base": "..", "features": [], "search": "../assets/javascripts/workers/search.6ce7567c.min.js", "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.83f73b43.min.js"></script>
+      
+    
+  </body>
+</html>
