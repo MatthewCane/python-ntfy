@@ -72,16 +72,9 @@ These tools are also run in the CI pipeline and must pass before merging.
 
 This project is aiming for 95% code coverage. Any added features must include comprihensive tests.
 
-You can run the tests against a local instance of `ntfy` *or* `ntfy.sh`.
-
 #### Setup Steps
 
-1. To test against a *local* `ntfy` instance:
-    i. Create a container using `docker run -p 80:80 -it binwiederhier/ntfy serve --attachment-cache-dir=/cache --base-url=http://localhost`
-    ii. Set the following key in the `.env` file: `NTFY_SERVER=http://localhost`
-    iii. Add a dummy username and password to `.env` (see example.env)
-2. To test against `https://ntfy.sh`:
-    i. Add username and password for ntfy.sh to `.env` (see example.env)
-3. Run the tests with `poetry run pytest --cov`
+1. Start the test docker container with `docker-compose -f tests/assets/test_containers.yml up`
+2. Run the tests with `poetry run pytest --cov`
 
-The tests will sent messages to the `python_ntfy_testing` topic so you will need to subcribe to that topic to see the test messages.
+The tests will sent messages to the `python_ntfy_testing` topic so you will need to view the web interface and subcribe to that topic to see the test messages.

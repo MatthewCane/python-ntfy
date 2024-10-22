@@ -29,21 +29,10 @@ jobs:
       - name: Install dependencies
         run: poetry install --with dev
       
-      - name: Start ntfy container
-        run: |
-          docker run -d \
-          -p 80:80 \
-          -e NTFY_ATTACHMENT_CACHE_DIR=/cache \
-          -e NTFY_BASE_URL=http://localhost \
-          binwiederhier/ntfy serve
-      
-      - name: Write .env
-        run: |
-          cat <<EOF >> .env
-          NTFY_USER=test-user
-          NTFY_PASSWORD=test-password
-          NTFY_SERVER=http://localhost
-          EOF
+      - name: Start test containers
+        uses: hoverkraft-tech/compose-action@v2.0.2
+        with:
+          compose-file: tests/assets/test_containers.yml
 
       - name: Run pytest
         run: poetry run pytest -v --cov --cov-fail-under=95
