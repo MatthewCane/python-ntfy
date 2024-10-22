@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "python-ntfy"
-version = "0.3.8"
+version = "0.4.0"
 description = "An ntfy library aiming for feature completeness"
 authors = ["Matthew Cane <matthew.cane0@gmail.com>"]
 readme = "README.md"
@@ -74,3 +74,6 @@ ignore = [
 
 [tool.ruff.lint.pydocstyle]
 convention = "google"
+
+[tool.pytest.ini_options]
+asyncio_default_fixture_loop_scope = "function"

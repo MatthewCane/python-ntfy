@@ -1,3 +1,4 @@
+from datetime import datetime
 from os import environ
 from pathlib import Path
 
@@ -127,3 +128,13 @@ def test_send_with_http_action(localhost_server_no_auth, no_auth) -> None:
     assert response["event"] == "message"
     assert response["topic"] == topic
     assert response["actions"] is not None
+
+
+def test_send_scheduled_message(localhost_server_no_auth, no_auth) -> None:
+    ntfy = NtfyClient(topic=topic)
+    ts = datetime.fromtimestamp(int(datetime.now().timestamp()) + 10)
+    response = ntfy.send(message="test_send_scheduled_message", schedule=ts)
+    print(ts, response)
+    assert response["event"] == "message"
+    assert response["topic"] == topic
+    assert response["time"] == int(ts.timestamp())

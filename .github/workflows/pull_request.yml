@@ -23,11 +23,6 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Start test containers
-        uses: hoverkraft-tech/compose-action@v2.0.2
-        with:
-          compose-file: tests/assets/test_containers.yml
-
       - name: Run pytest
         run: poetry run pytest -v --cov --cov-fail-under=95
 
