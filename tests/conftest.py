@@ -1,9 +1,11 @@
 import subprocess
+from json import loads
 from pathlib import Path
 from time import sleep
 from typing import Generator
 
 from pytest import fixture, mark
+from requests import get
 
 
 @fixture
@@ -14,6 +16,11 @@ def localhost_server_no_auth(monkeypatch) -> None:
 @fixture
 def localhost_server_auth(monkeypatch) -> None:
     monkeypatch.setenv("NTFY_SERVER", "http://localhost:8081")
+
+
+@fixture
+def no_server(monkeypatch) -> None:
+    monkeypatch.delenv("NTFY_SERVER", raising=False)
 
 
 @fixture
@@ -37,6 +44,12 @@ def no_auth(monkeypatch) -> None:
     monkeypatch.delenv("NTFY_USER", raising=False)
 
 
+def get_container_status(port: int) -> bool:
+    return loads(get(f"http://localhost:{port}/v1/health", timeout=1).content)[
+        "healthy"
+    ]
+
+
 @fixture(scope="session", autouse=True)
 def docker_compose_up() -> Generator:
     """Fixture to start up docker compose before tests and tear it down after."""
@@ -49,7 +62,13 @@ def docker_compose_up() -> Generator:
         capture_output=True,
     )
 
-    sleep(0.5)
+    # Check that the containers are ready
+    for _ in range(10):
+        if status := (get_container_status(8080) and get_container_status(8081)):
+            break
+        sleep(0.5)
+    else:
+        raise TimeoutError(status, "Containers did not start in time.")
 
     # Run the tests
     yield
@@ -59,6 +78,7 @@ def docker_compose_up() -> Generator:
 
 
 def pytest_configure(config) -> None:
+    """Add the requires_docker marker to pytest."""
     config.addinivalue_line(
         "markers", "requires_docker: mark test as requiring docker services"
     )

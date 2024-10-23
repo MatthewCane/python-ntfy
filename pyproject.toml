@@ -69,6 +69,7 @@ ignore = [
     "ANN001", # Missing type annotation for function argument
     "ANN101", # Missing type annotation for self in method
     "S101",   # Use of assert detected
+    "TRY003", # Use of vanilla exception messages
 ]
 
 
