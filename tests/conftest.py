@@ -5,7 +5,7 @@ from time import sleep
 from typing import Generator
 
 from pytest import fixture, mark
-from requests import get
+from requests import ConnectionError, get
 
 
 @fixture
@@ -45,9 +45,12 @@ def no_auth(monkeypatch) -> None:
 
 
 def get_container_status(port: int) -> bool:
-    return loads(get(f"http://localhost:{port}/v1/health", timeout=1).content)[
-        "healthy"
-    ]
+    try:
+        return loads(get(f"http://localhost:{port}/v1/health", timeout=1).content)[
+            "healthy"
+        ]
+    except ConnectionError:
+        return False
 
 
 @fixture(scope="session", autouse=True)
@@ -63,12 +66,15 @@ def docker_compose_up() -> Generator:
     )
 
     # Check that the containers are ready
-    for _ in range(10):
-        if status := (get_container_status(8080) and get_container_status(8081)):
+    max_retries = 10
+    sleep_time = 0.5
+    for _ in range(max_retries):
+        if get_container_status(8080) and get_container_status(8081):
             break
-        sleep(0.5)
+        sleep(sleep_time)
     else:
-        raise TimeoutError(status, "Containers did not start in time.")
+        msg = f"Test containers did not start after {int(max_retries*sleep_time)} seconds."
+        raise TimeoutError(msg)
 
     # Run the tests
     yield
