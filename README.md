@@ -73,7 +73,7 @@ These tools are also run in the CI pipeline and must pass before merging.
 
 ### Tests
 
-This project is aiming for 95% code coverage. Any added features must include comprihensive tests.
+This project is aiming for 95% code coverage. Any added features must include comprehensive tests.
 
 #### Testing Steps
 
