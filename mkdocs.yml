@@ -1,14 +1,42 @@
 site_name: python-ntfy documentation
+site_url: https://matthewcane.github.io/python-ntfy/
+site_description: Documentation for python-ntfy, a Python client for ntfy.sh
+site_author: Matthew Cane
+repo_url: https://github.com/matthewcane/python-ntfy
+
 nav:
   - Home: index.md
   - Quickstart: quickstart.md
   - Examples: examples.md
-  - Reference: reference.md
+  - API Reference: reference.md
+
 theme: material
+
 plugins: 
   - search
+  - mkdocstrings:
+      default_handler: python
+      handlers:
+        python:
+          options:
+            show_source: false
+            show_bases: true
+            show_labels: false
+            show_symbol_type_toc: true
+            show_signature_annotations: true
+            separate_signature: true
+            group_by_category: true
+            merge_init_into_class: true
+            inherited_members: true
+            docstring_style: google
+            heading_level: 2
+
 markdown_extensions:
   - admonition
   - pymdownx.details
   - pymdownx.superfences
   - def_list
+  - toc:
+      permalink: true
+      toc_depth: 3
+      title: On this page

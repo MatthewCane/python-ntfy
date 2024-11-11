@@ -20,10 +20,13 @@ def get_cached_messages(
         A list of messages.
 
     Examples:
-        response = client.get(since="all")
-        response = client.get(since="all", scheduled=True)
-        response = client.get(since="2019-01-01")
-        response = client.get(since="2019-01-01", scheduled=True)
+        >>> response = client.get(since="all")
+
+        >>> response = client.get(since="all", scheduled=True)
+
+        >>> response = client.get(since="2019-01-01")
+
+        >>> response = client.get(since="2019-01-01", scheduled=True)
     """
     params = {"poll": "1"}
     if scheduled:

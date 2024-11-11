@@ -8,7 +8,16 @@ import requests
 
 
 class MessagePriority(Enum):
-    """Ntfy message priority levels."""
+    """Ntfy message priority levels.
+
+    Attributes:
+        MIN: The minimum priority.
+        LOW: A low priority.
+        DEFAULT: The default priority.
+        HIGH: A high priority.
+        MAX: The maximum priority.
+        URGENT: The maximum priority.
+    """
 
     MIN = "1"
     LOW = "2"
@@ -19,7 +28,13 @@ class MessagePriority(Enum):
 
 
 class ActionType(Enum):
-    """Action button types."""
+    """Action button types.
+
+    Attributes:
+        VIEW: A view action button.
+        BROADCAST: A broadcast action button.
+        HTTP: An HTTP action button.
+    """
 
     VIEW = "view"
     BROADCAST = "broadcast"
@@ -35,7 +50,19 @@ class Action:
 
 
 class ViewAction(Action):
+    """A view action button.
+
+    The view action opens a website or app when the action button is tapped.
+    """
+
     def __init__(self, label: str, url: str, clear: bool = False) -> None:
+        """Initialize a ViewAction.
+
+        Args:
+            label: Label of the action button in the notification.
+            url: URL to open when action is tapped.
+            clear: Clear notification after action button is tapped.
+        """
         self.action = ActionType.VIEW
         super().__init__(label=label, url=url, clear=clear)
 
@@ -52,6 +79,11 @@ class ViewAction(Action):
 
 
 class BroadcastAction(Action):
+    """A broadcast action button.
+
+    The broadcast action sends an Android broadcast intent when the action button is tapped.
+    """
+
     def __init__(
         self,
         label: str,
@@ -59,6 +91,14 @@ class BroadcastAction(Action):
         extras: Optional[dict[str, str]] = None,
         clear: bool = False,
     ) -> None:
+        """Initialize a BroadcastAction.
+
+        Args:
+            label: Label of the action button in the notification.
+            intent: Android intent name.
+            extras: Android intent extras.
+            clear: Clear notification after action button is tapped.
+        """
         self.action = ActionType.BROADCAST
         self.intent = intent
         self.extras = extras
@@ -85,6 +125,11 @@ class BroadcastAction(Action):
 
 
 class HttpAction(Action):
+    """An HTTP action button.
+
+    The http action sends a HTTP request when the action button is tapped.
+    """
+
     def __init__(
         self,
         label: str,
@@ -94,6 +139,16 @@ class HttpAction(Action):
         body: Optional[str] = None,
         clear: bool = False,
     ) -> None:
+        """Initialize an HttpAction.
+
+        Args:
+            label: Label of the action button in the notification.
+            url: URL to open when action is tapped.
+            method: HTTP method to use for request.
+            headers: HTTP headers to send with the request.
+            body: HTTP body to send with the request.
+            clear: Clear notification after HTTP request succeeds. If the request fails, the notification is not cleared.
+        """
         self.action = ActionType.HTTP
         self.method = method
         self.headers = headers
@@ -161,9 +216,11 @@ def send(
         ToDo
 
     Examples:
-        response = client.send(message="Example message")
-        response = client.send(message="Example message", title="Example title", priority=MessagePriority.HIGH, tags=["fire", "warning"])
-        response = client.send(message="*Example markdown*", format_as_markdown=True)
+        >>> response = client.send(message="Example message")
+
+        >>> response = client.send(message="Example message", title="Example title", priority=MessagePriority.HIGH, tags=["fire", "warning"])
+
+        >>> response = client.send(message="*Example markdown*", format_as_markdown=True)
     """
     if tags is None:
         tags = []
@@ -221,7 +278,7 @@ def send_file(
         ToDo
 
     Examples:
-        response = client.send_file(file="example.txt")
+        >>> response = client.send_file(file="example.txt")
     """
     if actions is None:
         actions = []
