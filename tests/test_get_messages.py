@@ -52,7 +52,7 @@ async def test_get_topic_with_scheduled(localhost_server_no_auth, no_auth) -> No
     topic = random_string(5)
     ts = datetime.fromtimestamp(int(datetime.now().timestamp()) + 10)
     ntfy = NtfyClient(topic=topic)
-    response = ntfy.send(message=message, schedule=ts)
+    ntfy.send(message=message, schedule=ts)
     await asyncio.sleep(1)
 
     response = ntfy.get_cached_messages(scheduled=True)
