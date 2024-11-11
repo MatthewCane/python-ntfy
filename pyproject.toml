@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "python-ntfy"
-version = "0.4.2"
+version = "0.4.3"
 description = "An ntfy library aiming for feature completeness"
 authors = ["Matthew Cane <matthew.cane0@gmail.com>"]
 readme = "README.md"
@@ -17,6 +17,7 @@ classifiers = [
 [tool.poetry.dependencies]
 python = ">=3.12, <=3.13"
 requests = "^2.31.0"
+mkdocstrings = {extras = ["python"], version = "^0.26.2"}
 
 [tool.poetry.group.dev.dependencies]
 mypy = "^1.12.0"
@@ -31,6 +32,7 @@ types-pygments = "^2.18.0.20240506"
 types-colorama = "^0.4.15.20240311"
 types-requests = "^2.32.0.20241016"
 types-setuptools = "^75.2.0.20241018"
+black = "^24.10.0"
 
 [build-system]
 requires = ["poetry-core"]

@@ -11,6 +11,11 @@
 # Import the ntfy client
 from python_ntfy import NtfyClient
 
+# Optionally set your environment variables
+from os import environ
+environ["NTFY_USER"] = "your_username"
+environ["NTFY_PASSWORD"] = "your_password"
+
 # Create an `NtfyClient` instance with a topic
 client = NtfyClient(topic="Your topic")
 
