@@ -1,11 +1,11 @@
 import subprocess
+from collections.abc import Generator
 from json import loads
 from pathlib import Path
 from time import sleep
-from typing import Generator
 
 from pytest import fixture, mark
-from requests import ConnectionError, get
+from requests import get
 
 
 @fixture
