@@ -73,7 +73,7 @@ def docker_compose_up() -> Generator:
             break
         sleep(sleep_time)
     else:
-        msg = f"Test containers did not start after {int(max_retries*sleep_time)} seconds."
+        msg = f"Test containers did not start after {int(max_retries * sleep_time)} seconds."
         raise TimeoutError(msg)
 
     # Run the tests
