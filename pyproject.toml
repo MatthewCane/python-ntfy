@@ -69,7 +69,6 @@ ignore = [
     "D104",   # First line of docstring should be in imperative moof
     "D100",   # Missing docstring in public module
     "ANN001", # Missing type annotation for function argument
-    "ANN101", # Missing type annotation for self in method
     "S101",   # Use of assert detected
     "TRY003", # Use of vanilla exception messages
 ]
