@@ -5,6 +5,7 @@ from pathlib import Path
 from time import sleep
 
 from pytest import fixture, mark
+from requests import ConnectionError as RequestsConnectionError
 from requests import get
 
 
@@ -49,7 +50,7 @@ def get_container_status(port: int) -> bool:
         return loads(get(f"http://localhost:{port}/v1/health", timeout=1).content)[
             "healthy"
         ]
-    except ConnectionError:
+    except RequestsConnectionError:
         return False
 
 
