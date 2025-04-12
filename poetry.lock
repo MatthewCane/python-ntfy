@@ -849,14 +849,14 @@ testing = ["coverage (>=6.2)", "hypothesis (>=5.7.1)"]
 
 [[package]]
 name = "pytest-codecov"
-version = "0.6.1"
+version = "0.7.0"
 description = "Pytest plugin for uploading pytest-cov results to codecov.io"
 optional = false
 python-versions = ">=3.8"
 groups = ["dev"]
 files = [
-    {file = "pytest_codecov-0.6.1-py3-none-any.whl", hash = "sha256:f876b294ac0fac136b3e96c6ae87f6405ac004eda5b4509a6fc8125aaae640b9"},
-    {file = "pytest_codecov-0.6.1.tar.gz", hash = "sha256:352c28d25d1c47b11c62628f85e184cc1ccdecac562102c35c968a1867c1e19c"},
+    {file = "pytest_codecov-0.7.0-py3-none-any.whl", hash = "sha256:213be0b112a4c0065c1601e12d3959352ac239be2a9b8e93edf814d6e7ac37b6"},
+    {file = "pytest_codecov-0.7.0.tar.gz", hash = "sha256:2fc60c9dbaa986f39517cd811f3094376dff82b048fae13a1eed51bace1da83a"},
 ]
 
 [package.dependencies]
@@ -1223,4 +1223,4 @@ watchmedo = ["PyYAML (>=3.10)"]
 [metadata]
 lock-version = "2.1"
 python-versions = ">=3.12, <3.14"
-content-hash = "328e423a2657ddbcedd3df45dc23c3236316f9cbfcb67348b64acfb96ab75d24"
+content-hash = "16ca874c5d5941a69aaab2ec25f6131cfa5eaa649fe1aa8060a244f0ff4e6b01"
