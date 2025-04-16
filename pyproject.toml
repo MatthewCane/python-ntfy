@@ -31,7 +31,7 @@ mkdocstrings-python = "^1.12.1"
 types-pygments = "^2.18.0.20240506"
 types-colorama = "^0.4.15.20240311"
 types-requests = "^2.32.0.20241016"
-types-setuptools = ">=75.2.0.20241018,<77.0.0.0"
+types-setuptools = ">=75.2.0.20241018,<79.0.0.0"
 black = ">=24.10,<26.0"
 
 [build-system]
