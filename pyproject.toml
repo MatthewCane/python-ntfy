@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "python-ntfy"
-version = "0.4.7"
+version = "0.4.8"
 description = "An ntfy library aiming for feature completeness"
 authors = ["Matthew Cane <matthew.cane0@gmail.com>"]
 readme = "README.md"
