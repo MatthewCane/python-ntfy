@@ -43,7 +43,7 @@ class NtfyClient(GetFunctionsMixin, SendFunctionsMixin):
     """A class for interacting with the ntfy notification service."""
 
     def __init__(
-        self,  # noqa: ANN101
+        self,
         topic: str,
         server: str = "https://ntfy.sh",
     ) -> None:
@@ -79,14 +79,14 @@ class NtfyClient(GetFunctionsMixin, SendFunctionsMixin):
             self._auth = ("", token)
 
     def __set_url(
-        self,  # noqa: ANN101
+        self,
         server,
         topic,
     ) -> None:
         self.url = server.strip("/") + "/" + topic
 
     def set_topic(
-        self,  # noqa: ANN101
+        self,
         topic: str,
     ) -> None:
         """Set a new topic for the client.
@@ -101,7 +101,7 @@ class NtfyClient(GetFunctionsMixin, SendFunctionsMixin):
         self.__set_url(self._server, self._topic)
 
     def get_topic(
-        self,  # noqa: ANN101
+        self,
     ) -> str:
         """Get the current topic.
 
