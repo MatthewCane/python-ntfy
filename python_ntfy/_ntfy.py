@@ -43,7 +43,7 @@ class NtfyClient(GetFunctionsMixin, SendFunctionsMixin):
     """A class for interacting with the ntfy notification service."""
 
     def __init__(
-        self,
+        self,  # noqa: ANN101
         topic: str,
         server: str = "https://ntfy.sh",
     ) -> None:
@@ -68,20 +68,27 @@ class NtfyClient(GetFunctionsMixin, SendFunctionsMixin):
 
         # If the user has set the user and password, use that
         # If the user has set the token, use that
-        # Otherwise, use an empty user and token
+        # Otherwise, use None
+
+        self._auth: tuple[str, str] | None = None
         if (user := os.environ.get("NTFY_USER")) and (
             password := os.environ.get("NTFY_PASSWORD")
         ):
             self._auth = (user, password)
         elif token := os.environ.get("NTFY_TOKEN"):
             self._auth = ("", token)
-        else:
-            self._auth = ("", "")
 
-    def __set_url(self, server, topic) -> None:
+    def __set_url(
+        self,  # noqa: ANN101
+        server,
+        topic,
+    ) -> None:
         self.url = server.strip("/") + "/" + topic
 
-    def set_topic(self, topic: str) -> None:
+    def set_topic(
+        self,  # noqa: ANN101
+        topic: str,
+    ) -> None:
         """Set a new topic for the client.
 
         Args:
@@ -93,7 +100,9 @@ class NtfyClient(GetFunctionsMixin, SendFunctionsMixin):
         self._topic = topic
         self.__set_url(self._server, self._topic)
 
-    def get_topic(self) -> str:
+    def get_topic(
+        self,  # noqa: ANN101
+    ) -> str:
         """Get the current topic.
 
         Returns:

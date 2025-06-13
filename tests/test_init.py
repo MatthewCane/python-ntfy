@@ -8,7 +8,7 @@ from .helpers import topic
 def test_init_no_auth(localhost_server_no_auth, no_auth) -> None:
     ntfy = NtfyClient(topic=topic)
     assert ntfy._server == environ["NTFY_SERVER"]
-    assert ntfy._auth == ("", "")
+    assert ntfy._auth is None
     assert ntfy._topic == topic
 
 

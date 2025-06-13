@@ -14,7 +14,7 @@ def test_send_without_auth_error(localhost_server_auth, no_auth) -> None:
     )
     response = ntfy.send(message="test_send_without_auth")
     print(response)
-    assert response["error"] == "unauthorized"
+    assert response["error"] == "forbidden"
 
 
 def test_send_without_auth(localhost_server_no_auth, no_auth) -> None:
@@ -138,3 +138,11 @@ def test_send_scheduled_message(localhost_server_no_auth, no_auth) -> None:
     assert response["event"] == "message"
     assert response["topic"] == topic
     assert response["time"] == int(ts.timestamp())
+
+
+def test_send_message_without_auth(no_server, no_auth) -> None:
+    ntfy = NtfyClient(topic=topic)
+    response = ntfy.send(message="test_send_message_without_auth")
+    print(response)
+    assert response["event"] == "message"
+    assert response["topic"] == topic
