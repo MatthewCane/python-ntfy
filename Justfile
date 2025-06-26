@@ -19,7 +19,7 @@ check:
 # Run mypy type checks
 mypy:
   echo "> Running mypy checks..."
-  poetry run mypy .
+  poetry run mypy python_ntfy
 
 # Run all tests
 test: check mypy pytest
