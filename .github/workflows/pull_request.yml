@@ -12,11 +12,11 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
+      - uses: extractions/setup-just@v3
       - uses: citizensadvice/python-poetry-setup-action@v1
 
       - name: Install dependencies
-        run: poetry install --with dev
+        run: just install
 
       - name: Setup Docker Compose
         uses: KengoTODA/actions-setup-docker-compose@main
@@ -24,25 +24,21 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Run pytest
-        run: poetry run pytest -v --cov --cov-fail-under=95
+        run: just pytest
 
   ruff:
     name: Ruff and MyPy
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
-
+      - uses: extractions/setup-just@v3
       - uses: citizensadvice/python-poetry-setup-action@v1
 
       - name: Install dependencies
-        run: poetry install --with dev
+        run: just install
 
-      - name: Run ruff format check
-        run: poetry run ruff format --check
+      - name: Run ruff checks
+        run: just check
 
-      - name: Run ruff check
-        run: poetry run ruff check
-
-      - name: Run MyPy
-        run: poetry run mypy .
-
+      - name: Run mypy checks
+        run: just mypy

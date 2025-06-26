@@ -1,18 +1,9 @@
-# To use pre-commit:
-# 1. Install pre-commit with `brew install pre-commit`
-# 2. Run `pre-commit install` in the root of your repository
-# 3. Run `pre-commit run --all-files` to test the hooks on all files
-# `pre-commit` will now run the hooks automatically on every commit
-#  and refuse to commit if any of the hooks fail.
-
 repos:
-  - repo: https://github.com/astral-sh/ruff-pre-commit
-    rev: v0.11.13
+  - repo: local
     hooks:
-      - id: ruff
-      - id: ruff-format
-  - repo: https://github.com/pre-commit/mirrors-mypy
-    rev: v1.16.0
-    hooks:
-      - id: mypy
-        additional_dependencies: [types-requests]
+      - id: run-just-test
+        name: All tests and checks
+        entry: just test
+        language: system
+        always_run: true
+        pass_filenames: false
