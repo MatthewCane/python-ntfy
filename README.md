@@ -48,34 +48,25 @@ See the full documentation at [https://matthewcane.github.io/python-ntfy/](https
 - [Email notifications](https://docs.ntfy.sh/publish/#e-mail-notifications)
 - Send to multiple topics at once
 
-## Testing and Development
+## Contributing
 
 This project uses:
 
 - [Poetry](https://python-poetry.org/) as it's dependency manager
-- [Ruff](https://docs.astral.sh/ruff/) for linting and code formatting
-- [MyPy](https://mypy-lang.org/) for static type checking
-- [Pre-Commit](https://pre-commit.com/) for running the above tools before committing
+- [Just](https://github.com/casey/just) as a task runner
+- [Pre-commit](https://pre-commit.com/) for running checks before each commit
+- [Docker](https://www.docker.com/) and [Docker Compose](https://docs.docker.com/compose/) for running tests
 
-To install dev dependencies, run `poetry install --with dev`.
+These need to be installed separately to run the tasks.
 
-To install pre-commit hooks, run `pre-commit install`.
+To see all available tasks, run `just`.
 
-### Linting, Formatting and Type Checking
+Some useful tasks are:
 
-These can be run with:
-
-- `poetry run ruff format`
-- `poetry run ruff check`
-- `poetry run mypy .`
-
-These tools are also run in the CI pipeline and must pass before merging.
+- `just install` - Install dependencies (including dev dependencies)
+- `just test` - Run all tests and checks
+- `just serve-docs` - Build and serve the docs locally
 
 ### Tests
 
 This project is aiming for 95% code coverage. Any added features must include comprehensive tests.
-
-#### Testing Steps
-
-1. Make sure you have `docker` and `docker-compose` installed
-2. Run the tests with `poetry run pytest --cov` or use the VSCode testing extension
