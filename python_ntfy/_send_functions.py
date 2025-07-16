@@ -231,7 +231,7 @@ def send(
         "Title": title,
         "Priority": priority.value,
         "Tags": ",".join(tags),
-        "Markdown": str(format_as_markdown).lower(),
+        "Markdown": "yes" if format_as_markdown else "no",
     }
     if len(actions) > 0:
         headers["Actions"] = " ; ".join([action.to_header() for action in actions])
