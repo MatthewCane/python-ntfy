@@ -42,11 +42,7 @@ See the full documentation at [https://matthewcane.github.io/python-ntfy/](https
 - Scheduled delivery
 - Tags
 - Action buttons
-
-## Future Features
-
-- [Email notifications](https://docs.ntfy.sh/publish/#e-mail-notifications)
-- Send to multiple topics at once
+- Email notifications
 
 ## Contributing
 

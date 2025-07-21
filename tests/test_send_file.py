@@ -26,3 +26,11 @@ def test_send_scheduled_file(localhost_server_no_auth, no_auth) -> None:
     assert response["attachment"]["name"] == "test_text.txt"
     assert response["attachment"]["type"] == "text/plain; charset=utf-8"
     assert response["time"] == int(ts.timestamp())
+
+
+def test_send_file_with_email(localhost_server_no_auth, no_auth) -> None:
+    ntfy = NtfyClient(topic=topic)
+    response = ntfy.send_file("tests/assets/test_text.txt", email="test@test.com")
+    print(response)
+    assert response["attachment"]["name"] == "test_text.txt"
+    assert response["attachment"]["type"] == "text/plain; charset=utf-8"

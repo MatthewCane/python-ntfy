@@ -164,3 +164,11 @@ def test_send_message_without_auth(no_server, no_auth) -> None:
     print(response)
     assert response["event"] == "message"
     assert response["topic"] == topic
+
+
+def test_send_message_with_email(localhost_server_no_auth, no_auth) -> None:
+    ntfy = NtfyClient(topic=topic)
+    response = ntfy.send(message="test_send_message_with_email", email="test@test.com")
+    print(response)
+    assert response["event"] == "message"
+    assert response["topic"] == topic

@@ -1,9 +1,15 @@
 repos:
   - repo: local
     hooks:
-      - id: run-just-test
-        name: All tests and checks
-        entry: just test
+      - id: mypy
+        name: Type checking
+        entry: just mypy
+        language: system
+        always_run: true
+        pass_filenames: false
+      - id: check
+        name: Formatting and linting
+        entry: just check
         language: system
         always_run: true
         pass_filenames: false

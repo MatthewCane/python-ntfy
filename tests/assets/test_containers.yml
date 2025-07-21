@@ -3,24 +3,28 @@ services:
     image: binwiederhier/ntfy:latest
     command: serve
     healthcheck:
-      test: ["CMD-SHELL", "curl", "-f", "http://localhost/v1/health"]
+      test: ['CMD-SHELL', 'curl', '-f', 'http://localhost/v1/health']
       interval: 1s
       retries: 3
     ports:
-      - "8080:80"
+      - '8080:80'
     environment:
       NTFY_BASE_URL: 'http://localhost'
       NTFY_ATTACHMENT_CACHE_DIR: /var/lib/ntfy/attachments
+      NTFY_SMTP_SENDER_ADDR: 'localhost:1025'
+      NTFY_SMTP_SENDER_USER: 'test'
+      NTFY_SMTP_SENDER_PASS: 'test'
+      NTFY_SMTP_SENDER_FROM: 'test@test.com'
 
   ntfy-with-auth:
     image: binwiederhier/ntfy:latest
     command: serve
     healthcheck:
-      test: ["CMD-SHELL", "curl", "-f", "http://localhost/v1/health"]
+      test: ['CMD-SHELL', 'curl', '-f', 'http://localhost/v1/health']
       interval: 1s
       retries: 3
     ports:
-      - "8081:80"
+      - '8081:80'
     environment:
       NTFY_BASE_URL: 'http://localhost'
       NTFY_ATTACHMENT_CACHE_DIR: /var/lib/ntfy/attachments
@@ -29,3 +33,9 @@ services:
     volumes:
       - ./auth.db:/var/lib/ntfy/auth.db
 
+  mailpit:
+    image: axllent/mailpit
+    ports:
+      - '1025:1025'
+    environment:
+      MP_SMTP_AUTH_ACCEPT_ANY: 'true'
