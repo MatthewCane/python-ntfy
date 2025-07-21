@@ -25,7 +25,7 @@ def test_send_without_auth(localhost_server_no_auth, no_auth) -> None:
     assert response["topic"] == topic
 
 
-def test_send_with_auth(localhost_server_auth, user_pass_auth) -> None:
+def test_send_with_auth_env(localhost_server_auth, user_pass_auth) -> None:
     ntfy = NtfyClient(topic=topic)
     response = ntfy.send(message="test_send_with_auth_env")
     print(response)
@@ -33,11 +33,29 @@ def test_send_with_auth(localhost_server_auth, user_pass_auth) -> None:
     assert response["topic"] == topic
 
 
-def test_send_with_auth_token(localhost_server_auth, token_auth) -> None:
+def test_send_with_auth_token_env(localhost_server_auth, token_auth) -> None:
     ntfy = NtfyClient(topic=topic)
     response = ntfy.send(message="test_send_with_auth_token")
     print(response)
     assert ntfy._auth == ("", environ["NTFY_TOKEN"])
+    assert response["event"] == "message"
+    assert response["topic"] == topic
+
+
+def test_send_with_auth_args(localhost_server_auth, user_pass_auth) -> None:
+    auth = (environ["NTFY_USER"], environ["NTFY_PASSWORD"])
+    ntfy = NtfyClient(topic=topic, auth=auth)
+    response = ntfy.send(message="test_send_with_auth_args")
+    print(response)
+    assert response["event"] == "message"
+    assert response["topic"] == topic
+
+
+def test_send_with_auth_token_args(localhost_server_auth, token_auth) -> None:
+    auth = environ["NTFY_TOKEN"]
+    ntfy = NtfyClient(topic=topic, auth=auth)
+    response = ntfy.send(message="test_send_with_auth_token_args")
+    print(response)
     assert response["event"] == "message"
     assert response["topic"] == topic
 

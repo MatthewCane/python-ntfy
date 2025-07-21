@@ -46,12 +46,14 @@ class NtfyClient(GetFunctionsMixin, SendFunctionsMixin):
         self,
         topic: str,
         server: str = "https://ntfy.sh",
+        auth: tuple[str, str] | str | None = None,
     ) -> None:
         """Itinialize the NtfyClient.
 
         Args:
             topic: The topic to use for this client
             server: The server to connect to. Must include the protocol (http/https)
+            auth: The authentication credentials to use for this client. Takes precedence over environment variables. Can be a tuple of (user, password) or a token.
 
         Returns:
             None
@@ -65,18 +67,39 @@ class NtfyClient(GetFunctionsMixin, SendFunctionsMixin):
         self._server = os.environ.get("NTFY_SERVER") or server
         self._topic = topic
         self.__set_url(self._server, topic)
+        self._auth: tuple[str, str] | None = self._resolve_auth(auth)
 
-        # If the user has set the user and password, use that
-        # If the user has set the token, use that
-        # Otherwise, use None
+    def _resolve_auth(
+        self, auth: tuple[str, str] | str | None
+    ) -> tuple[str, str] | None:
+        """Resolve the authentication credentials.
 
-        self._auth: tuple[str, str] | None = None
-        if (user := os.environ.get("NTFY_USER")) and (
-            password := os.environ.get("NTFY_PASSWORD")
-        ):
-            self._auth = (user, password)
-        elif token := os.environ.get("NTFY_TOKEN"):
-            self._auth = ("", token)
+        Args:
+            auth: The authentication credentials to use for this client. Takes precedence over environment variables. Can be a tuple of (user, password) or a token string.
+
+        Returns:
+            tuple[str, str] | None: The authentication credentials.
+        """
+        # If the user has supplied credentials, use them (including empty string)
+        if auth is not None:
+            if isinstance(auth, tuple):
+                return auth
+            if isinstance(auth, str):
+                return ("", auth)
+
+        # Otherwise, check environment variables
+        user = os.environ.get("NTFY_USER")
+        password = os.environ.get("NTFY_PASSWORD")
+        token = os.environ.get("NTFY_TOKEN")
+
+        if user and password:
+            return (user, password)
+
+        if token:
+            return ("", token)
+
+        # If no credentials are found, return None
+        return None
 
     def __set_url(
         self,
