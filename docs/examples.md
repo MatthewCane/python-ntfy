@@ -1,5 +1,39 @@
 # Example Usage
 
+## Set up the client with no credentials
+
+```python
+client = NtfyClient(topic="Your topic")
+```
+
+
+## Set up the client with username and password credentials passed to the `NtfyClient` constructor
+
+```python
+client = NtfyClient(topic="Your topic", auth=("your_username", "your_password"))
+```
+
+## Set up the client with a bearer token passed to the `NtfyClient` constructor
+
+```python
+client = NtfyClient(topic="Your topic", auth="your_token")
+```
+
+## Set up the client with username and password credentials from environment variables
+
+```python
+environ["NTFY_USER"] = "your_username"
+environ["NTFY_PASSWORD"] = "your_password"
+client = NtfyClient(topic="Your topic")
+```
+
+## Set up the client with a bearer token from environment variables
+
+```python
+environ["NTFY_TOKEN"] = "your_token"
+client = NtfyClient(topic="Your topic")
+```
+
 ## Send a basic message
 
 ```python

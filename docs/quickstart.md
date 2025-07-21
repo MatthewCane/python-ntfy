@@ -1,24 +1,30 @@
 # Quickstart Guide
 
 1. Install using pip with `pip3 install python-ntfy`
-2. Configure the following environment variables:
-    - `NTFY_USER`: The username for your server (if required)
-    - `NTFY_PASSWORD`: The password for your server (if required)
-    - `NTFY_SERVER`: The server URL (defaults to `https://ntft.sh`)
-3. Setup your application to use the library:
+2. Import and instantiate the `NtfyClient`:
 
 ```python
 # Import the ntfy client
 from python_ntfy import NtfyClient
 
-# Optionally set your environment variables
+# With no credentials
+client = NtfyClient(topic="Your topic")
+
+# With credentials passed to the `NtfyClient` constructor (takes precedence over environment variables)
+client = NtfyClient(topic="Your topic", auth=("your_username", "your_password")) # Basic auth
+client = NtfyClient(topic="Your topic", auth="your_token") # Token auth
+
+# Or set credentials from environment variables
 from os import environ
 environ["NTFY_USER"] = "your_username"
 environ["NTFY_PASSWORD"] = "your_password"
-
-# Create an `NtfyClient` instance with a topic
+environ["NTFY_TOKEN"] = "your_token"
 client = NtfyClient(topic="Your topic")
+```
 
+3. Send a message:
+
+```python
 # Send a message
 client.send("Your message here")
 ```
