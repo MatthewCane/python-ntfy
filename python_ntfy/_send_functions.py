@@ -192,6 +192,7 @@ def send(
     schedule: Optional[datetime] = None,
     format_as_markdown: bool = False,
     timeout_seconds: int = 5,
+    email: Optional[str] = None,
 ) -> dict:
     """Send a text-based message to the server.
 
@@ -208,6 +209,7 @@ def send(
         format_as_markdown: If true, the message will be formatted as markdown.
         additional_topics: A list of additional topics to send the message to.
         timeout_seconds: The number of seconds to wait before timing out the reqest to the server.
+        email: Forward messages to an email address. Only one email address can be specified.
 
     Returns:
         dict: The response from the server.
@@ -236,6 +238,9 @@ def send(
     if len(actions) > 0:
         headers["Actions"] = " ; ".join([action.to_header() for action in actions])
 
+    if email:
+        headers["Email"] = email
+
     if schedule:
         headers["Delay"] = str(int(schedule.timestamp()))
 
@@ -259,6 +264,7 @@ def send_file(
     actions: Optional[list[Union[ViewAction, BroadcastAction, HttpAction]]] = None,
     schedule: Optional[datetime] = None,
     timeout_seconds: int = 30,
+    email: Optional[str] = None,
 ) -> dict:
     """Sends a file to the server.
 
@@ -270,6 +276,7 @@ def send_file(
         actions: A list of ActionButton objects to attach to the message.
         schedule: The time to schedule the message to be sent. Must be more than 10 seconds away and less than 3 days in the future.
         timeout_seconds: The number of seconds to wait before timing out.
+        email: Forward messages to an email address. Only one email address can be specified.
 
     Returns:
         dict: The response from the server.
@@ -292,6 +299,9 @@ def send_file(
         "Tags": ",".join(tags),
         "Actions": " ; ".join([action.to_header() for action in actions]),
     }
+
+    if email:
+        headers["Email"] = email
 
     if schedule:
         headers["Delay"] = str(int(schedule.timestamp()))
