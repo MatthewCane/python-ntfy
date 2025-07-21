@@ -75,13 +75,13 @@ class NtfyClient(GetFunctionsMixin, SendFunctionsMixin):
         """Resolve the authentication credentials.
 
         Args:
-            auth: The authentication credentials to use for this client. Takes precedence over environment variables. Can be a tuple of (user, password) or a stringtoken.
+            auth: The authentication credentials to use for this client. Takes precedence over environment variables. Can be a tuple of (user, password) or a token string.
 
         Returns:
             tuple[str, str] | None: The authentication credentials.
         """
-        # If the user has supplied credentials, use them
-        if auth:
+        # If the user has supplied credentials, use them (including empty string)
+        if auth is not None:
             if isinstance(auth, tuple):
                 return auth
             if isinstance(auth, str):
