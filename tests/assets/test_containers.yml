@@ -11,9 +11,7 @@ services:
     environment:
       NTFY_BASE_URL: 'http://localhost'
       NTFY_ATTACHMENT_CACHE_DIR: /var/lib/ntfy/attachments
-      NTFY_SMTP_SENDER_ADDR: 'localhost:1025'
-      NTFY_SMTP_SENDER_USER: 'test'
-      NTFY_SMTP_SENDER_PASS: 'test'
+      NTFY_SMTP_SENDER_ADDR: 'mailpit:1025'
       NTFY_SMTP_SENDER_FROM: 'test@test.com'
 
   ntfy-with-auth:
@@ -36,6 +34,8 @@ services:
   mailpit:
     image: axllent/mailpit
     ports:
-      - '1025:1025'
+      - '8082:80'
     environment:
       MP_SMTP_AUTH_ACCEPT_ANY: 'true'
+      MP_SMTP_AUTH_ALLOW_INSECURE: 'true'
+      MP_UI_BIND_ADDR: 0.0.0.0:80

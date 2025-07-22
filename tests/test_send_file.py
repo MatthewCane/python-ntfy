@@ -1,4 +1,7 @@
 from datetime import datetime
+from time import sleep
+
+import requests
 
 from python_ntfy import NtfyClient
 
@@ -34,3 +37,11 @@ def test_send_file_with_email(localhost_server_no_auth, no_auth) -> None:
     print(response)
     assert response["attachment"]["name"] == "test_text.txt"
     assert response["attachment"]["type"] == "text/plain; charset=utf-8"
+
+    sleep(1)
+
+    res = requests.get(
+        "http://localhost:8082/api/v1/messages", timeout=10
+    ).content.decode()
+    print(res)
+    assert "test_text.txt" in res

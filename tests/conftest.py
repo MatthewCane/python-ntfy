@@ -45,11 +45,21 @@ def no_auth(monkeypatch) -> None:
     monkeypatch.delenv("NTFY_USER", raising=False)
 
 
-def get_container_status(port: int) -> bool:
+def get_ntfy_container_status(port: int) -> bool:
     try:
         return loads(get(f"http://localhost:{port}/v1/health", timeout=1).content)[
             "healthy"
         ]
+    except RequestsConnectionError:
+        return False
+
+
+def get_mailpit_container_status(port: int) -> bool:
+    try:
+        return (
+            get(f"http://localhost:{port}/api/v1/messages/", timeout=1).status_code
+            == 200
+        )
     except RequestsConnectionError:
         return False
 
@@ -70,7 +80,10 @@ def docker_compose_up() -> Generator:
     max_retries = 10
     sleep_time = 0.5
     for _ in range(max_retries):
-        if get_container_status(8080) and get_container_status(8081):
+        if (
+            get_ntfy_container_status(8080) and get_ntfy_container_status(8081)
+            # and get_mailpit_container_status(8082)
+        ):
             break
         sleep(sleep_time)
     else:

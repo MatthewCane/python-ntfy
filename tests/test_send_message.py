@@ -1,6 +1,9 @@
 from datetime import datetime
 from os import environ
 from pathlib import Path
+from time import sleep
+
+import requests
 
 from python_ntfy import NtfyClient
 
@@ -168,7 +171,17 @@ def test_send_message_without_auth(no_server, no_auth) -> None:
 
 def test_send_message_with_email(localhost_server_no_auth, no_auth) -> None:
     ntfy = NtfyClient(topic=topic)
-    response = ntfy.send(message="test_send_message_with_email", email="test@test.com")
+    message = "test_send_message_with_email"
+    response = ntfy.send(message=message, email="test@test.com")
     print(response)
     assert response["event"] == "message"
     assert response["topic"] == topic
+
+    sleep(1)
+
+    res = requests.get(
+        "http://localhost:8082/api/v1/messages",
+        timeout=10,
+    ).content.decode()
+    print(res)
+    assert res.index(message)
