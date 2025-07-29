@@ -1,42 +1,80 @@
-[tool.poetry]
+[project]
 name = "python-ntfy"
 version = "0.6.1"
 description = "An ntfy library aiming for feature completeness"
-authors = ["Matthew Cane <matthew.cane0@gmail.com>"]
 readme = "README.md"
 license = "MIT"
-repository = "https://github.com/MatthewCane/python-ntfy"
-documentation = "https://matthewcane.github.io/python-ntfy/"
+requires-python = ">=3.12, <3.14"
+dependencies = ["requests>=2.31.0"]
 classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+    "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3 :: Only",
+    "Topic :: Communications",
+    "Topic :: Internet :: WWW/HTTP",
+    "Topic :: Software Development :: Libraries :: Python Modules",
+]
+keywords = ["ntfy", "notifications", "push", "http", "api"]
+authors = [
+    {name = "Matthew Cane", email = "matthew.cane0@gmail.com"}
 ]
 
-[tool.poetry.dependencies]
-python = ">=3.12, <3.14"
-requests = "^2.31.0"
-
-
-[tool.poetry.group.dev.dependencies]
-mkdocstrings = {extras = ["python"], version = ">=0.26.2,<0.30.0"}
-mypy = "^1.12.0"
-pytest = ">=7.4.1,<9.0.0"
-python-dotenv = "^1.0.0"
-pytest-asyncio = ">=0.21.1,<1.2.0"
-pytest-codecov = ">=0.5.1,<0.8.0"
-ruff = ">=0.7,<0.13"
-mkdocs-material = "^9.5.41"
-mkdocstrings-python = "^1.12.1"
-types-pygments = "^2.18.0.20240506"
-types-colorama = "^0.4.15.20240311"
-types-requests = "^2.32.0.20241016"
-types-setuptools = ">=75.2.0.20241018,<81.0.0.0"
+[project.urls]
+Homepage = "https://github.com/matthewcane/python-ntfy"
+Documentation = "https://python-ntfy.readthedocs.io/"
+Repository = "https://github.com/matthewcane/python-ntfy"
+Issues = "https://github.com/matthewcane/python-ntfy/issues"
+Changelog = "https://github.com/matthewcane/python-ntfy/releases"
 
 [build-system]
-requires = ["poetry-core"]
-build-backend = "poetry.core.masonry.api"
+requires = ["uv_build"]
+build-backend = "uv_build"
+
+[tool.uv.build-backend]
+module-name = "python_ntfy"
+module-root = ""
+
+[tool.uv]
+dev-dependencies = [
+    "mkdocstrings[python]>=0.26.2,<0.30.0",
+    "mypy>=1.12.0,<2.0.0",
+    "pytest>=7.4.1,<9.0.0",
+    "python-dotenv>=1.0.0,<2.0.0",
+    "pytest-asyncio>=0.21.1,<1.2.0",
+    "pytest-codecov>=0.5.1,<0.8.0", 
+    "ruff>=0.7,<0.13",
+    "mkdocs-material>=9.5.41,<10.0.0",
+    "mkdocstrings-python>=1.12.1,<2.0.0",
+    "types-pygments>=2.18.0.20240506",
+    "types-colorama>=0.4.15.20240311",
+    "types-requests>=2.32.0.20241016",
+    "types-setuptools>=75.2.0.20241018,<81.0.0.0"
+]
+
+[project.optional-dependencies]
+dev = [
+    "mkdocstrings[python]>=0.26.2,<0.30.0",
+    "mypy>=1.12.0,<2.0.0",
+    "pytest>=7.4.1,<9.0.0",
+    "python-dotenv>=1.0.0,<2.0.0",
+    "pytest-asyncio>=0.21.1,<1.2.0",
+    "pytest-codecov>=0.5.1,<0.8.0", 
+    "ruff>=0.7,<0.13",
+    "mkdocs-material>=9.5.41,<10.0.0",
+    "mkdocstrings-python>=1.12.1,<2.0.0",
+    "types-pygments>=2.18.0.20240506",
+    "types-colorama>=0.4.15.20240311",
+    "types-requests>=2.32.0.20241016",
+    "types-setuptools>=75.2.0.20241018,<81.0.0.0"
+]
+
+[tool.ruff]
+target-version = "py312"
 
 [tool.ruff.lint]
 select = [
@@ -73,9 +111,19 @@ ignore = [
     "TRY003", # Use of vanilla exception messages
 ]
 
-
 [tool.ruff.lint.pydocstyle]
 convention = "google"
 
 [tool.pytest.ini_options]
 asyncio_default_fixture_loop_scope = "function"
+testpaths = ["tests"]
+python_files = ["test_*.py"]
+python_classes = ["Test*"]
+python_functions = ["test_*"]
+addopts = [
+    "--strict-markers",
+    "--strict-config",
+    "--cov=python_ntfy",
+    "--cov-fail-under=95",
+    "--cov-report=term-missing",
+]

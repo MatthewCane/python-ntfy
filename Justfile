@@ -2,44 +2,73 @@ set quiet := true
 
 # Show all recipes
 help:
-  @just --list --unsorted
+    @just --list --unsorted
+
+# Clean up all untracked files (including those in .gitignore)
+[group("housekeeping")]
+clean:
+    echo "> Cleaning up all untracked files..."
+    git clean -fdx
 
 # Run python tests
+[group("tests")]
 pytest:
-  echo "> Running python tests..."
-  poetry run pytest -v --cov=python_ntfy --cov-fail-under=95
+    echo "> Running python tests..."
+    uv run pytest -v
 
 # Run ruff checks
+[group("tests")]
 check:
-  echo "> Running ruff code quality check..."
-  poetry run ruff check
-  echo "> Running ruff format check..."
-  poetry run ruff format --check
+    echo "> Running ruff code quality check..."
+    uv run ruff check
+    echo "> Running ruff format check..."
+    uv run ruff format --check
 
 # Run mypy type checks
+[group("tests")]
 mypy:
-  echo "> Running mypy checks..."
-  poetry run mypy python_ntfy
-
-# Run all tests
-test: check mypy pytest
+    echo "> Running mypy checks..."
+    uv run mypy python_ntfy
 
 # Run ruff format
+[group("tests")]
 format:
-  echo "> Running ruff format..."
-  poetry run ruff format
+    echo "> Running ruff format..."
+    uv run ruff format
+    echo "> Running just format..."
+    just --fmt --unstable
 
-# Install dependencies
-install:
-  echo "> Installing dependencies..."
-  poetry install --with dev
+# Run all tests
+[group("tests")]
+test: check mypy pytest
 
 # Build mkdocs site
+[group("docs")]
 build-docs:
-  echo "> Building docs..."
-  poetry run mkdocs build
+    echo "> Building docs..."
+    uv run mkdocs build
 
 # Serve mkdocs site and watch for changes
+[group("docs")]
 serve-docs: build-docs
-  echo "> Serving docs..."
-  poetry run mkdocs serve
+    echo "> Serving docs..."
+    uv run mkdocs serve
+
+# Build the package
+[group("release")]
+build:
+    echo "> Building package..."
+    uv build
+
+# Bump version and create draft release
+[group("release")]
+[confirm("Are you sure you want to create a draft release? [y/N]")]
+draft-release bump='patch':
+    #!/bin/bash
+    VERSION=$(uv version --bump {{ bump }} --short)
+    echo "> Bumping version to $VERSION"
+    git add pyproject.toml
+    git commit -m "Bump version to $VERSION"
+    git push origin main
+    gh release create $VERSION --draft --generate-notes
+    echo "> Follow the link to review and publish the release"

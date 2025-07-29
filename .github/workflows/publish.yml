@@ -13,17 +13,10 @@ jobs:
       id-token: write
     steps:
       - uses: actions/checkout@v4
-
-      - uses: citizensadvice/python-poetry-setup-action@v1
-
-      - name: Install dependencies
-        run: poetry install
+      - uses: astral-sh/setup-uv@v6
 
       - name: Build package
-        run: poetry build
-
-      - name: Publish package to PyPI
-        uses: pypa/gh-action-pypi-publish@release/v1
+        run: uv publish
   
   mkdocs-publish:
     name: Publish docs to GitHub Pages
@@ -33,12 +26,11 @@ jobs:
       contents: write
     steps:
       - uses: actions/checkout@v4
+      - uses: astral-sh/setup-uv@v6
       
       - name: Configure Git Credentials
         run: |
           git config user.name github-actions[bot]
           git config user.email 41898282+github-actions[bot]@users.noreply.github.com
-      
-      - uses: citizensadvice/python-poetry-setup-action@v1
-      
-      - run: poetry run mkdocs gh-deploy --force
+
+      - run: uv run mkdocs gh-deploy --force

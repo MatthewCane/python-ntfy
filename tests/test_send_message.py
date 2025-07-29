@@ -153,7 +153,9 @@ def test_send_with_http_action(localhost_server_no_auth, no_auth) -> None:
 
 def test_send_scheduled_message(localhost_server_no_auth, no_auth) -> None:
     ntfy = NtfyClient(topic=topic)
-    ts = datetime.fromtimestamp(int(datetime.now().timestamp()) + 10)
+    ts = datetime.fromtimestamp(
+        int(datetime.now().timestamp()) + 60
+    )  # 60 seconds in the future
     response = ntfy.send(message="test_send_scheduled_message", schedule=ts)
     print(ts, response)
     assert response["event"] == "message"

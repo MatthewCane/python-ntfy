@@ -2,7 +2,6 @@ import json
 from datetime import datetime
 from enum import Enum
 from pathlib import Path
-from typing import Optional, Union
 
 import requests
 
@@ -88,7 +87,7 @@ class BroadcastAction(Action):
         self,
         label: str,
         intent: str = "io.heckel.ntfy.USER_ACTION",
-        extras: Optional[dict[str, str]] = None,
+        extras: dict[str, str] | None = None,
         clear: bool = False,
     ) -> None:
         """Initialize a BroadcastAction.
@@ -135,8 +134,8 @@ class HttpAction(Action):
         label: str,
         url: str,
         method: str = "POST",
-        headers: Optional[dict[str, str]] = None,
-        body: Optional[str] = None,
+        headers: dict[str, str] | None = None,
+        body: str | None = None,
         clear: bool = False,
     ) -> None:
         """Initialize an HttpAction.
@@ -155,8 +154,8 @@ class HttpAction(Action):
         self.body = body
         super().__init__(label, url, clear)
 
-    def to_dict(self) -> dict[str, Union[str, bool, dict[str, str]]]:
-        action_dict: dict[str, Union[str, bool, dict[str, str]]] = {
+    def to_dict(self) -> dict[str, str | bool | dict[str, str]]:
+        action_dict: dict[str, str | bool | dict[str, str]] = {
             "action": self.action.value,
             "label": self.label,
             "url": self.url,
@@ -185,14 +184,14 @@ class HttpAction(Action):
 def send(
     self,
     message: str,
-    title: Optional[str] = None,
+    title: str | None = None,
     priority: MessagePriority = MessagePriority.DEFAULT,
-    tags: Optional[list] = None,
-    actions: Optional[list[Union[ViewAction, BroadcastAction, HttpAction]]] = None,
-    schedule: Optional[datetime] = None,
+    tags: list | None = None,
+    actions: list[ViewAction | BroadcastAction | HttpAction] | None = None,
+    schedule: datetime | None = None,
     format_as_markdown: bool = False,
     timeout_seconds: int = 5,
-    email: Optional[str] = None,
+    email: str | None = None,
 ) -> dict:
     """Send a text-based message to the server.
 
@@ -258,13 +257,13 @@ def send(
 def send_file(
     self,
     file: str,
-    title: Optional[str] = None,
+    title: str | None = None,
     priority: MessagePriority = MessagePriority.DEFAULT,
-    tags: Optional[list] = None,
-    actions: Optional[list[Union[ViewAction, BroadcastAction, HttpAction]]] = None,
-    schedule: Optional[datetime] = None,
+    tags: list | None = None,
+    actions: list[ViewAction | BroadcastAction | HttpAction] | None = None,
+    schedule: datetime | None = None,
     timeout_seconds: int = 30,
-    email: Optional[str] = None,
+    email: str | None = None,
 ) -> dict:
     """Sends a file to the server.
 
