@@ -67,7 +67,8 @@ draft-release bump='patch':
     #!/bin/bash
     VERSION=$(uv version --bump {{ bump }} --short)
     echo "> Bumping version to $VERSION"
-    git add pyproject.toml
+    git reset
+    git add pyproject.toml uv.lock
     git commit -m "Bump version to $VERSION"
     git push origin main
     gh release create $VERSION --draft --generate-notes
