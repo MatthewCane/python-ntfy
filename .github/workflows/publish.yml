@@ -16,8 +16,11 @@ jobs:
       - uses: astral-sh/setup-uv@v6
 
       - name: Build package
+        run: uv build
+
+      - name: Publish package
         run: uv publish
-  
+
   mkdocs-publish:
     name: Publish docs to GitHub Pages
     needs: pypi-publish
