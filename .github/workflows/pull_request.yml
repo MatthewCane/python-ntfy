@@ -13,10 +13,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: extractions/setup-just@v3
-      - uses: citizensadvice/python-poetry-setup-action@v1
-
-      - name: Install dependencies
-        run: just install
+      - uses: astral-sh/setup-uv@v6
 
       - name: Setup Docker Compose
         uses: KengoTODA/actions-setup-docker-compose@main
@@ -32,10 +29,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - uses: extractions/setup-just@v3
-      - uses: citizensadvice/python-poetry-setup-action@v1
-
-      - name: Install dependencies
-        run: just install
+      - uses: astral-sh/setup-uv@v6
 
       - name: Run ruff checks
         run: just check
