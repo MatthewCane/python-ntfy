@@ -57,6 +57,7 @@ serve-docs: build-docs
 # Build the package
 [group("release")]
 build:
+    rm -rf dist
     echo "> Building package..."
     uv build
 
@@ -65,11 +66,12 @@ build:
 [confirm("Are you sure you want to create a draft release? [y/N]")]
 draft-release bump='patch':
     #!/bin/bash
+    @just build
     VERSION=$(uv version --bump {{ bump }} --short)
     echo "> Bumping version to $VERSION"
     git reset
     git add pyproject.toml uv.lock
     git commit -m "Bump version to $VERSION"
-    git push origin main
-    gh release create $VERSION --draft --generate-notes
+    git push origin mani
+    gh release create $VERSION dist/python_ntfy* --draft --generate-notes
     echo "> Follow the link to review and publish the release"
