@@ -41,7 +41,7 @@ module-root = ""
 
 [tool.uv]
 dev-dependencies = [
-    "mkdocstrings[python]>=0.26.2,<0.30.0",
+    "mkdocstrings[python]>=0.26.2,<0.31.0",
     "mypy>=1.12.0,<2.0.0",
     "pytest>=7.4.1,<9.0.0",
     "python-dotenv>=1.0.0,<2.0.0",
@@ -58,7 +58,7 @@ dev-dependencies = [
 
 [project.optional-dependencies]
 dev = [
-    "mkdocstrings[python]>=0.26.2,<0.30.0",
+    "mkdocstrings[python]>=0.26.2,<0.31.0",
     "mypy>=1.12.0,<2.0.0",
     "pytest>=7.4.1,<9.0.0",
     "python-dotenv>=1.0.0,<2.0.0",
