@@ -16,10 +16,9 @@ setup:
     echo "> Installing pre-commit hooks..."
     pre-commit install
 
-# Run python tests
+# Run python tests. Docker is required to run the tests.
 [group("tests")]
 pytest:
-    docker info > /dev/null 2>&1 || echo "Error: Docker must be running to run pytest" && exit 1
     echo "> Running python tests..."
     uv run pytest -v
 

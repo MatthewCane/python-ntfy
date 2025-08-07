@@ -1,9 +1,10 @@
-import json
 from datetime import datetime
 from enum import Enum
 from pathlib import Path
 
 import requests
+
+from python_ntfy._exceptions import MessageSendError
 
 
 class MessagePriority(Enum):
@@ -214,7 +215,7 @@ def send(
         dict: The response from the server.
 
     Raises:
-        ToDo
+        MessageSendError: If the message fails to send.
 
     Examples:
         >>> response = client.send(message="Example message")
@@ -243,15 +244,19 @@ def send(
     if schedule:
         headers["Delay"] = str(int(schedule.timestamp()))
 
-    return json.loads(
-        requests.post(
+    try:
+        response = requests.post(
             url=self.url,
             data=message,
             headers=headers,
             auth=self._auth,
             timeout=timeout_seconds,
-        ).text,
-    )
+        )
+        response.raise_for_status()
+        return response.json()
+    except requests.exceptions.RequestException as e:
+        error_message = f"Failed to send message: {e}"
+        raise MessageSendError(error_message) from e
 
 
 def send_file(
@@ -281,7 +286,7 @@ def send_file(
         dict: The response from the server.
 
     Raises:
-        ToDo
+        MessageSendError: If the message fails to send.
 
     Examples:
         >>> response = client.send_file(file="example.txt")
@@ -305,13 +310,17 @@ def send_file(
     if schedule:
         headers["Delay"] = str(int(schedule.timestamp()))
 
-    with Path(file).open("rb") as f:
-        return json.loads(
-            requests.post(
+    try:
+        with Path(file).open("rb") as f:
+            response = requests.post(
                 url=self.url,
                 data=f,
                 headers=headers,
                 auth=self._auth,
                 timeout=timeout_seconds,
-            ).text,
-        )
+            )
+            response.raise_for_status()
+            return response.json()
+    except requests.exceptions.RequestException as e:
+        error_message = f"Failed to send file: {e}"
+        raise MessageSendError(error_message) from e
