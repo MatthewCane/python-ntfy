@@ -4,8 +4,10 @@ from pathlib import Path
 from time import sleep
 
 import requests
+from pytest import raises
 
 from python_ntfy import NtfyClient
+from python_ntfy._exceptions import MessageSendError
 
 from .helpers import topic
 
@@ -15,9 +17,8 @@ def test_send_without_auth_error(localhost_server_auth, no_auth) -> None:
     ntfy = NtfyClient(
         topic=topic,
     )
-    response = ntfy.send(message="test_send_without_auth")
-    print(response)
-    assert response["error"] == "forbidden"
+    with raises(MessageSendError):
+        ntfy.send(message="test_send_without_auth")
 
 
 def test_send_without_auth(localhost_server_no_auth, no_auth) -> None:

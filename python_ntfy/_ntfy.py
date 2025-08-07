@@ -59,7 +59,7 @@ class NtfyClient(GetFunctionsMixin, SendFunctionsMixin):
             None
 
         Exceptions:
-            ToDo
+            None
 
         Examples:
             client = NtfyClient(topic="my_topic")
