@@ -585,7 +585,7 @@ dev = [
 [package.metadata]
 requires-dist = [
     { name = "mkdocs-material", marker = "extra == 'dev'", specifier = ">=9.5.41,<10.0.0" },
-    { name = "mkdocstrings", extras = ["python"], marker = "extra == 'dev'", specifier = ">=0.26.2,<0.30.0" },
+    { name = "mkdocstrings", extras = ["python"], marker = "extra == 'dev'", specifier = ">=0.26.2,<0.31.0" },
     { name = "mkdocstrings-python", marker = "extra == 'dev'", specifier = ">=1.12.1,<2.0.0" },
     { name = "mypy", marker = "extra == 'dev'", specifier = ">=1.12.0,<2.0.0" },
     { name = "pytest", marker = "extra == 'dev'", specifier = ">=7.4.1,<9.0.0" },
@@ -604,7 +604,7 @@ provides-extras = ["dev"]
 [package.metadata.requires-dev]
 dev = [
     { name = "mkdocs-material", specifier = ">=9.5.41,<10.0.0" },
-    { name = "mkdocstrings", extras = ["python"], specifier = ">=0.26.2,<0.30.0" },
+    { name = "mkdocstrings", extras = ["python"], specifier = ">=0.26.2,<0.31.0" },
     { name = "mkdocstrings-python", specifier = ">=1.12.1,<2.0.0" },
     { name = "mypy", specifier = ">=1.12.0,<2.0.0" },
     { name = "pytest", specifier = ">=7.4.1,<9.0.0" },

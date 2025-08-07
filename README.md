@@ -44,25 +44,23 @@ See the full documentation at [https://matthewcane.github.io/python-ntfy/](https
 
 ## Contributing
 
-This project uses:
+We welcome contributions! This project aims to provide a complete and user-friendly Python library for ntfy. Here's how you can help:
 
-- [uv](https://github.com/astral-sh/uv) as its dependency manager
-- [Just](https://github.com/casey/just) as a task runner
-- [Pre-commit](https://pre-commit.com/) for running checks before each commit
-- [Docker](https://www.docker.com/) and [Docker Compose](https://docs.docker.com/compose/) for running tests
+### Prerequisites
 
-These need to be installed separately to run the tasks.
+Before contributing, you'll need to install these tools:
 
-To see all available tasks, run `just`.
+- **[uv](https://github.com/astral-sh/uv)** - Fast Python package manager and installer
+- **[Just](https://github.com/casey/just)** - Command runner for project tasks
+- **[Docker](https://www.docker.com/)** and **[Docker Compose](https://docs.docker.com/compose/)** - For running tests with ntfy servers
+- **[Pre-commit](https://pre-commit.com/)** - Git hooks for code quality (optional but recommended)
 
-Some useful tasks are:
+### Development Steps
 
-- `just install` - Install dependencies (including dev dependencies)
-- `just test` - Run all tests and checks
-- `just check` - Run code quality checks (ruff + mypy)
-- `just format` - Format code with ruff
-- `just serve-docs` - Build and serve the docs locally
+- Fork the repository and make your changes
+- Run `just setup` to install the pre-commit hooks
+- Run `just format` to format the code
+- Run `just test` to run all the tests
+- Create a pull request with detailed description of your changes
 
-### Tests
-
-This project is aiming for 95% code coverage. Any added features must include comprehensive tests.
+Thank you for contributing to python-ntfy! 🚀

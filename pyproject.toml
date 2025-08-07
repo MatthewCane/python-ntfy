@@ -20,9 +20,7 @@ classifiers = [
     "Topic :: Software Development :: Libraries :: Python Modules",
 ]
 keywords = ["ntfy", "notifications", "push", "http", "api"]
-authors = [
-    {name = "Matthew Cane", email = "matthew.cane0@gmail.com"}
-]
+authors = [{ name = "Matthew Cane", email = "matthew.cane0@gmail.com" }]
 
 [project.urls]
 Homepage = "https://github.com/matthewcane/python-ntfy"
@@ -46,14 +44,14 @@ dev-dependencies = [
     "pytest>=7.4.1,<9.0.0",
     "python-dotenv>=1.0.0,<2.0.0",
     "pytest-asyncio>=0.21.1,<1.2.0",
-    "pytest-codecov>=0.5.1,<0.8.0", 
+    "pytest-codecov>=0.5.1,<0.8.0",
     "ruff>=0.7,<0.13",
     "mkdocs-material>=9.5.41,<10.0.0",
     "mkdocstrings-python>=1.12.1,<2.0.0",
     "types-pygments>=2.18.0.20240506",
     "types-colorama>=0.4.15.20240311",
     "types-requests>=2.32.0.20241016",
-    "types-setuptools>=75.2.0.20241018,<81.0.0.0"
+    "types-setuptools>=75.2.0.20241018,<81.0.0.0",
 ]
 
 [project.optional-dependencies]
@@ -63,14 +61,14 @@ dev = [
     "pytest>=7.4.1,<9.0.0",
     "python-dotenv>=1.0.0,<2.0.0",
     "pytest-asyncio>=0.21.1,<1.2.0",
-    "pytest-codecov>=0.5.1,<0.8.0", 
+    "pytest-codecov>=0.5.1,<0.8.0",
     "ruff>=0.7,<0.13",
     "mkdocs-material>=9.5.41,<10.0.0",
     "mkdocstrings-python>=1.12.1,<2.0.0",
     "types-pygments>=2.18.0.20240506",
     "types-colorama>=0.4.15.20240311",
     "types-requests>=2.32.0.20241016",
-    "types-setuptools>=75.2.0.20241018,<81.0.0.0"
+    "types-setuptools>=75.2.0.20241018,<81.0.0.0",
 ]
 
 [tool.ruff]

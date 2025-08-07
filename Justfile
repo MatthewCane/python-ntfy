@@ -10,9 +10,16 @@ clean:
     echo "> Cleaning up all untracked files..."
     git clean -fdx
 
+# Set up and validate development dependencies
+[group("housekeeping")]
+setup:
+    echo "> Installing pre-commit hooks..."
+    pre-commit install
+
 # Run python tests
 [group("tests")]
 pytest:
+    docker info > /dev/null 2>&1 || echo "Error: Docker must be running to run pytest" && exit 1
     echo "> Running python tests..."
     uv run pytest -v
 
@@ -66,6 +73,7 @@ build:
 [group("release")]
 draft-release bump='patch':
     #!/bin/bash
+    git pull origin main
     @just build
     VERSION=$(uv version --bump {{ bump }} --short)
     echo "> Bumping version to $VERSION"
