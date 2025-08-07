@@ -1,6 +1,6 @@
 [project]
 name = "python-ntfy"
-version = "0.7.2"
+version = "0.8.0"
 description = "An ntfy library aiming for feature completeness"
 readme = "README.md"
 license = "MIT"
