@@ -261,7 +261,7 @@ def send(
 
 def send_file(
     self,
-    file: str,
+    file: str | Path,
     title: str | None = None,
     priority: MessagePriority = MessagePriority.DEFAULT,
     tags: list | None = None,
@@ -273,7 +273,7 @@ def send_file(
     """Sends a file to the server.
 
     Args:
-        file: The path to the file to send.
+        file: The file to send.
         title: The title of the file.
         priority: The priority of the message. Optional, defaults to MessagePriority.
         tags: A list of tags to attach to the message. Can be an emoji short code.
@@ -296,9 +296,17 @@ def send_file(
     if tags is None:
         tags = []
 
+    try:
+        data = Path(file).read_bytes()
+    except Exception as e:
+        error_message = f"Failed to read file: {e}"
+        raise MessageSendError(error_message) from e
+
+    filename = Path(file).name
+
     headers = {
         "Title": str(title),
-        "Filename": file.split("/")[-1],
+        "Filename": filename,
         "Priority": priority.value,
         "Tags": ",".join(tags),
         "Actions": " ; ".join([action.to_header() for action in actions]),
@@ -311,16 +319,15 @@ def send_file(
         headers["Delay"] = str(int(schedule.timestamp()))
 
     try:
-        with Path(file).open("rb") as f:
-            response = requests.post(
-                url=self.url,
-                data=f,
-                headers=headers,
-                auth=self._auth,
-                timeout=timeout_seconds,
-            )
-            response.raise_for_status()
-            return response.json()
+        response = requests.post(
+            url=self.url,
+            data=data,
+            headers=headers,
+            auth=self._auth,
+            timeout=timeout_seconds,
+        )
+        response.raise_for_status()
+        return response.json()
     except requests.exceptions.RequestException as e:
         error_message = f"Failed to send file: {e}"
         raise MessageSendError(error_message) from e
