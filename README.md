@@ -1,7 +1,7 @@
 # A Python Library For ntfy
 
 ![GitHub Release](https://img.shields.io/github/v/release/MatthewCane/python-ntfy?display_name=release&label=latest%20release&link=https%3A%2F%2Fgithub.com%2FMatthewCane%2Fpython-ntfy%2Freleases%2Flatest)
-![PyPI - Downloads](https://img.shields.io/pypi/dm/python-ntfy?logo=pypi&link=http%3A%2F%2Fpypi.org%2Fproject%2Fpython-ntfy%2F)
+[![PyPI Downloads](https://static.pepy.tech/badge/python-ntfy/month)](https://pepy.tech/projects/python-ntfy)
 ![GitHub Actions Workflow Status](https://img.shields.io/github/actions/workflow/status/MatthewCane/python-ntfy/publish.yml?logo=githubactions&link=https%3A%2F%2Fgithub.com%2FMatthewCane%2Fpython-ntfy%2Factions%2Fworkflows%2Fpublish.yml)
 
 An easy-to-use python library for the [ntfy notification service](https://ntfy.sh/). Aiming for full feature support and a super easy to use interface.
