@@ -5,8 +5,7 @@ from pathlib import Path
 from time import sleep
 
 from pytest import fixture, mark
-from requests import ConnectionError as RequestsConnectionError
-from requests import get
+from requests import ConnectionError as RequestsConnectionError, get
 
 
 @fixture

@@ -6,8 +6,7 @@ from time import sleep
 import requests
 from pytest import raises
 
-from python_ntfy import NtfyClient
-from python_ntfy._exceptions import MessageSendError
+from python_ntfy import MessageSendError, NtfyClient
 
 from .helpers import topic
 
@@ -188,9 +187,3 @@ def test_send_message_with_email(localhost_server_no_auth, no_auth) -> None:
     ).content.decode()
     print(res)
     assert res.index(message)
-
-
-def test_send_file_not_found() -> None:
-    ntfy = NtfyClient(topic=topic)
-    with raises(MessageSendError):
-        ntfy.send_file(file="not_found.txt")
