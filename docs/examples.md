@@ -56,12 +56,12 @@ message = """# My Message
 client.send(message, format_as_markdown=True)
 ```
 
-## Send a message with an attachment
+## Send a file as an attachment
 
 ```python
 client = NtfyClient(topic="Your topic")
 
-client.send("Your message here", attachment="/path/to/your/file.txt")
+client.send_file("/path/to/your/file.txt")
 ```
 
 ## Send a message with priority

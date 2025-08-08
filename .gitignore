@@ -11,3 +11,4 @@ site/
 .ruff_cache/
 .pytest_cache/
 htmlcov/
+TASKS.md

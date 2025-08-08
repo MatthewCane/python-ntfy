@@ -1,19 +1,19 @@
 # API Reference
 
-::: python_ntfy._ntfy.NtfyClient
+::: python_ntfy.client.NtfyClient
     options:
         show_root_heading: true
         show_root_toc_entry: true
         show_bases: false
 
-::: python_ntfy._send_functions
+::: python_ntfy
     options:
-        show_root_heading: false
-        show_root_toc_entry: false
-        heading_level: 3
-
-::: python_ntfy._get_functions
-    options:
-        show_root_heading: false
-        show_root_toc_entry: false
-        heading_level: 3
+        members:
+          - MessagePriority
+          - ViewAction
+          - BroadcastAction
+          - HttpAction
+          - MessageSendError
+        show_root_heading: true
+        show_root_toc_entry: true
+        heading_level: 2
