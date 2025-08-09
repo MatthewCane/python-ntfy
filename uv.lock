@@ -548,23 +548,6 @@ dependencies = [
     { name = "requests" },
 ]
 
-[package.optional-dependencies]
-dev = [
-    { name = "mkdocs-material" },
-    { name = "mkdocstrings", extra = ["python"] },
-    { name = "mkdocstrings-python" },
-    { name = "mypy" },
-    { name = "pytest" },
-    { name = "pytest-asyncio" },
-    { name = "pytest-codecov" },
-    { name = "python-dotenv" },
-    { name = "ruff" },
-    { name = "types-colorama" },
-    { name = "types-pygments" },
-    { name = "types-requests" },
-    { name = "types-setuptools" },
-]
-
 [package.dev-dependencies]
 dev = [
     { name = "mkdocs-material" },
@@ -583,23 +566,7 @@ dev = [
 ]
 
 [package.metadata]
-requires-dist = [
-    { name = "mkdocs-material", marker = "extra == 'dev'", specifier = ">=9.5.41,<10.0.0" },
-    { name = "mkdocstrings", extras = ["python"], marker = "extra == 'dev'", specifier = ">=0.26.2,<0.31.0" },
-    { name = "mkdocstrings-python", marker = "extra == 'dev'", specifier = ">=1.12.1,<2.0.0" },
-    { name = "mypy", marker = "extra == 'dev'", specifier = ">=1.12.0,<2.0.0" },
-    { name = "pytest", marker = "extra == 'dev'", specifier = ">=7.4.1,<9.0.0" },
-    { name = "pytest-asyncio", marker = "extra == 'dev'", specifier = ">=0.21.1,<1.2.0" },
-    { name = "pytest-codecov", marker = "extra == 'dev'", specifier = ">=0.5.1,<0.8.0" },
-    { name = "python-dotenv", marker = "extra == 'dev'", specifier = ">=1.0.0,<2.0.0" },
-    { name = "requests", specifier = ">=2.31.0" },
-    { name = "ruff", marker = "extra == 'dev'", specifier = ">=0.7,<0.13" },
-    { name = "types-colorama", marker = "extra == 'dev'", specifier = ">=0.4.15.20240311" },
-    { name = "types-pygments", marker = "extra == 'dev'", specifier = ">=2.18.0.20240506" },
-    { name = "types-requests", marker = "extra == 'dev'", specifier = ">=2.32.0.20241016" },
-    { name = "types-setuptools", marker = "extra == 'dev'", specifier = ">=75.2.0.20241018,<81.0.0.0" },
-]
-provides-extras = ["dev"]
+requires-dist = [{ name = "requests", specifier = ">=2.31.0" }]
 
 [package.metadata.requires-dev]
 dev = [
