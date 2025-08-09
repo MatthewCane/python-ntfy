@@ -78,6 +78,7 @@ draft-release bump='patch':
     @just _create_draft_release
 
 _bump_version bump:
+    git checkout main
     git pull origin main
     git reset # Unstage all files
     @just build
