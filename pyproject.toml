@@ -1,7 +1,7 @@
 [project]
 name = "python-ntfy"
 version = "0.9.0"
-description = "An ntfy library aiming for feature completeness"
+description = "An easy-to-use library for the ntfy notification service."
 readme = "README.md"
 license = "MIT"
 requires-python = ">=3.12, <3.14"
@@ -24,7 +24,7 @@ authors = [{ name = "Matthew Cane", email = "matthew.cane0@gmail.com" }]
 
 [project.urls]
 Homepage = "https://github.com/matthewcane/python-ntfy"
-Documentation = "https://python-ntfy.readthedocs.io/"
+Documentation = "https://matthewcane.github.io/python-ntfy/"
 Repository = "https://github.com/matthewcane/python-ntfy"
 Issues = "https://github.com/matthewcane/python-ntfy/issues"
 Changelog = "https://github.com/matthewcane/python-ntfy/releases"
@@ -37,24 +37,7 @@ build-backend = "uv_build"
 module-name = "python_ntfy"
 module-root = ""
 
-[tool.uv]
-dev-dependencies = [
-    "mkdocstrings[python]>=0.26.2,<0.31.0",
-    "mypy>=1.12.0,<2.0.0",
-    "pytest>=7.4.1,<9.0.0",
-    "python-dotenv>=1.0.0,<2.0.0",
-    "pytest-asyncio>=0.21.1,<1.2.0",
-    "pytest-codecov>=0.5.1,<0.8.0",
-    "ruff>=0.7,<0.13",
-    "mkdocs-material>=9.5.41,<10.0.0",
-    "mkdocstrings-python>=1.12.1,<2.0.0",
-    "types-pygments>=2.18.0.20240506",
-    "types-colorama>=0.4.15.20240311",
-    "types-requests>=2.32.0.20241016",
-    "types-setuptools>=75.2.0.20241018,<81.0.0.0",
-]
-
-[project.optional-dependencies]
+[dependency-groups]
 dev = [
     "mkdocstrings[python]>=0.26.2,<0.31.0",
     "mypy>=1.12.0,<2.0.0",
@@ -142,9 +125,6 @@ disallow_incomplete_defs = false
 disallow_untyped_defs = false
 
 [[tool.mypy.overrides]]
-module = [
-  "python_ntfy.client",
-  "python_ntfy.__init__",
-]
+module = ["python_ntfy.client", "python_ntfy.__init__"]
 disallow_incomplete_defs = true
 disallow_untyped_defs = true

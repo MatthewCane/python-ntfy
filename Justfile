@@ -15,6 +15,7 @@ clean:
 setup:
     echo "> Installing pre-commit hooks..."
     pre-commit install
+    uv sync --dev
 
 # Run python tests. Docker is required to run the tests.
 [group("tests")]
@@ -39,8 +40,9 @@ mypy:
 # Run ruff format
 [group("tests")]
 format:
-    echo "> Running ruff format..."
+    echo "> Running ruff formater and fixer..."
     uv run ruff format
+    uv run ruff check --fix
     echo "> Running just format..."
     just --fmt --unstable
 
