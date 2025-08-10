@@ -44,23 +44,4 @@ See the full documentation at [https://matthewcane.github.io/python-ntfy/](https
 
 ## Contributing
 
-We welcome contributions! This project aims to provide a complete and user-friendly Python library for ntfy. Here's how you can help:
-
-### Prerequisites
-
-Before contributing, you'll need to install these tools:
-
-- **[uv](https://github.com/astral-sh/uv)** - Fast Python package manager and installer
-- **[Just](https://github.com/casey/just)** - Command runner for project tasks
-- **[Docker](https://www.docker.com/)** and **[Docker Compose](https://docs.docker.com/compose/)** - For running tests with ntfy servers
-- **[Pre-commit](https://pre-commit.com/)** - Git hooks for code quality (optional but recommended)
-
-### Development Steps
-
-- Fork the repository and make your changes
-- Run `just setup` to install the pre-commit hooks
-- Run `just format` to format the code
-- Run `just test` to run all the tests
-- Create a pull request with detailed description of your changes
-
-Thank you for contributing to python-ntfy! 🚀
+We welcome contributions. Please see the full guidelines in [`CONTRIBUTING.md`](./CONTRIBUTING.md).
