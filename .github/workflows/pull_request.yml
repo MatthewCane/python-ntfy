@@ -8,12 +8,17 @@ concurrency:
 
 jobs:
   test:
-    name: Pytest
+    name: Run Tests
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: ["3.12", "3.13", "3.14"]
     steps:
       - uses: actions/checkout@v4
       - uses: extractions/setup-just@v3
       - uses: astral-sh/setup-uv@v6
+        with:
+          python-version: ${{ matrix.python-version }}
 
       - name: Setup Docker Compose
         uses: KengoTODA/actions-setup-docker-compose@main
@@ -22,14 +27,6 @@ jobs:
 
       - name: Run pytest
         run: just pytest
-
-  ruff:
-    name: Ruff and MyPy
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: extractions/setup-just@v3
-      - uses: astral-sh/setup-uv@v6
 
       - name: Run ruff checks
         run: just check
