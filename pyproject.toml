@@ -1,6 +1,6 @@
 [project]
 name = "python-ntfy"
-version = "0.9.1"
+version = "0.10.0"
 description = "An easy-to-use library for the ntfy notification service."
 readme = "README.md"
 license = "MIT"
