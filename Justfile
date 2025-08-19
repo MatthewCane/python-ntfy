@@ -21,21 +21,21 @@ setup:
 [group("tests")]
 pytest:
     echo "> Running python tests..."
-    uv run pytest -v
+    uv run --frozen pytest -v
 
 # Run ruff checks
 [group("tests")]
 check:
     echo "> Running ruff code quality check..."
-    uv run ruff check
+    uv run --frozen ruff check
     echo "> Running ruff format check..."
-    uv run ruff format --check
+    uv run --frozen ruff format --check
 
 # Run mypy type checks
 [group("tests")]
 mypy:
     echo "> Running mypy checks..."
-    uv run mypy python_ntfy
+    uv run --frozen mypy python_ntfy
 
 # Run ruff format
 [group("tests")]

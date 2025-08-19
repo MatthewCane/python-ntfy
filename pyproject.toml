@@ -4,7 +4,7 @@ version = "0.9.1"
 description = "An easy-to-use library for the ntfy notification service."
 readme = "README.md"
 license = "MIT"
-requires-python = ">=3.12, <3.14"
+requires-python = ">=3.10"
 dependencies = ["requests>=2.31.0"]
 classifiers = [
     "Development Status :: 4 - Beta",
@@ -12,9 +12,11 @@ classifiers = [
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
     "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
     "Programming Language :: Python :: 3.12",
     "Programming Language :: Python :: 3.13",
-    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.14",
     "Topic :: Communications",
     "Topic :: Internet :: WWW/HTTP",
     "Topic :: Software Development :: Libraries :: Python Modules",
@@ -53,9 +55,6 @@ dev = [
     "types-requests>=2.32.0.20241016",
     "types-setuptools>=75.2.0.20241018,<81.0.0.0",
 ]
-
-[tool.ruff]
-target-version = "py312"
 
 [tool.ruff.lint.isort]
 combine-as-imports = true
