@@ -33,3 +33,13 @@ jobs:
 
       - name: Run mypy checks
         run: just mypy
+
+  checks-successful:
+    name: All Checks Passed
+    runs-on: ubuntu-latest
+    if: always()
+    needs: [test]
+    steps:
+      - uses: re-actors/alls-green@v1.2.2
+        with:
+          jobs: ${{ toJSON(needs) }}
