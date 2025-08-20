@@ -23,9 +23,9 @@ pytest:
     echo "> Running python tests..."
     uv run --frozen pytest -v
 
-# Run ruff checks
+# Lint and check the codebase
 [group("tests")]
-check:
+lint:
     echo "> Running ruff code quality check..."
     uv run --frozen ruff check
     echo "> Running ruff format check..."
@@ -48,7 +48,7 @@ format:
 
 # Run all tests
 [group("tests")]
-test: check mypy pytest
+test: lint mypy pytest
 
 # Build mkdocs site
 [group("docs")]
@@ -60,7 +60,7 @@ build-docs:
 [group("docs")]
 serve-docs: build-docs
     echo "> Serving docs..."
-    uv run mkdocs serve
+    uv run mkdocs serve --open -w docs -w python_ntfy
 
 # Build the package
 [group("release")]
@@ -72,10 +72,7 @@ build:
 # Bump version, push and create draft release
 [confirm("Are you sure you want to draft a release? [y/N]")]
 [group("release")]
-draft-release bump='patch':
-    @just _bump_version {{ bump }}
-    @just _push_version
-    @just _create_draft_release
+draft-release bump='patch': (_bump_version bump) _push_version _create_draft_release
 
 _bump_version bump:
     git checkout main

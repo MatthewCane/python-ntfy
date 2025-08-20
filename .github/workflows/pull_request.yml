@@ -28,8 +28,8 @@ jobs:
       - name: Run pytest
         run: just pytest
 
-      - name: Run ruff checks
-        run: just check
+      - name: Run ruff lint and checks
+        run: just lint
 
       - name: Run mypy checks
         run: just mypy
