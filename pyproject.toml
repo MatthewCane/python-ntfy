@@ -1,6 +1,6 @@
 [project]
 name = "python-ntfy"
-version = "0.10.0"
+version = "0.10.1"
 description = "An easy-to-use library for the ntfy notification service."
 readme = "README.md"
 license = "MIT"
@@ -127,3 +127,7 @@ disallow_untyped_defs = false
 module = ["python_ntfy.client", "python_ntfy.__init__"]
 disallow_incomplete_defs = true
 disallow_untyped_defs = true
+
+[tool.ty.environment]
+root = ["."]
+python = "./.venv"
