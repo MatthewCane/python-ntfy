@@ -1,9 +1,19 @@
 version: 2
 updates:
-  - package-ecosystem: "uv"
-    directory: "/"
+  - package-ecosystem: 'github-actions'
+    rebase-strategy: disabled
+    directory: '/'
     schedule:
-      interval: "weekly"
-      day: "monday"
-      time: "09:00"
-      timezone: "Europe/London"
+      interval: weekly
+
+  - package-ecosystem: 'uv'
+    directory: '/'
+    rebase-strategy: disabled
+    schedule:
+      interval: weekly
+    groups:
+      # Group minor and patchs into a single PR
+      regular-updates:
+        update-types:
+          - 'minor'
+          - 'patch'
