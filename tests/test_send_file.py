@@ -24,7 +24,7 @@ def test_send_image_file(localhost_server_no_auth, no_auth) -> None:
 
 
 def test_send_scheduled_file(localhost_server_no_auth, no_auth) -> None:
-    ts = datetime.fromtimestamp(int(datetime.now().timestamp()) + 10)
+    ts = datetime.fromtimestamp(int(datetime.now().timestamp()) + 30)
     ntfy = NtfyClient(topic=topic)
     response = ntfy.send_file("tests/assets/test_text.txt", schedule=ts)
     assert response["attachment"]["name"] == "test_text.txt"

@@ -50,7 +50,7 @@ async def test_get_topic_with_limit(localhost_server_no_auth, no_auth) -> None:
 async def test_get_topic_with_scheduled(localhost_server_no_auth, no_auth) -> None:
     message = random_string()
     topic = random_string(5)
-    ts = datetime.fromtimestamp(int(datetime.now().timestamp()) + 10)
+    ts = datetime.fromtimestamp(int(datetime.now().timestamp()) + 30)
     ntfy = NtfyClient(topic=topic)
     ntfy.send(message=message, schedule=ts)
     await asyncio.sleep(1)
