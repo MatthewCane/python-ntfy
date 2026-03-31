@@ -1,5 +1,5 @@
-class MessageSendError(Exception):
-    """Exception raised when a message fails to send."""
+class NtfyMessageError(Exception):
+    """Base exception for ntfy message errors."""
 
     def __init__(self, message: str) -> None:
         """Initialize the exception.
@@ -9,3 +9,11 @@ class MessageSendError(Exception):
         """
         self.message = message
         super().__init__(self.message)
+
+
+class MessageSendError(NtfyMessageError):
+    """Exception raised when a message fails to send."""
+
+
+class MessageReceiveError(NtfyMessageError):
+    """Exception raised when a message fails to retrieved."""
