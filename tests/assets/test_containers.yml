@@ -1,6 +1,6 @@
 services:
   ntfy-without-auth:
-    image: binwiederhier/ntfy:latest
+    image: binwiederhier/ntfy:v2
     command: serve
     healthcheck:
       test: ['CMD-SHELL', 'curl', '-f', 'http://localhost/v1/health']
@@ -15,7 +15,7 @@ services:
       NTFY_SMTP_SENDER_FROM: 'test@test.com'
 
   ntfy-with-auth:
-    image: binwiederhier/ntfy:latest
+    image: binwiederhier/ntfy:v2
     command: serve
     healthcheck:
       test: ['CMD-SHELL', 'curl', '-f', 'http://localhost/v1/health']
