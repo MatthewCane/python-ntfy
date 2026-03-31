@@ -1,6 +1,6 @@
 [project]
 name = "python-ntfy"
-version = "0.10.1"
+version = "0.10.2"
 description = "An easy-to-use library for the ntfy notification service."
 readme = "README.md"
 license = "MIT"
@@ -9,7 +9,6 @@ dependencies = ["requests>=2.31.0"]
 classifiers = [
     "Development Status :: 4 - Beta",
     "Intended Audience :: Developers",
-    "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
     "Programming Language :: Python :: 3",
     "Programming Language :: Python :: 3.10",
@@ -32,7 +31,7 @@ Issues = "https://github.com/matthewcane/python-ntfy/issues"
 Changelog = "https://github.com/matthewcane/python-ntfy/releases"
 
 [build-system]
-requires = ["uv_build"]
+requires = ["uv_build<0.12.0"]
 build-backend = "uv_build"
 
 [tool.uv.build-backend]
