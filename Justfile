@@ -50,6 +50,11 @@ format:
 [group("tests")]
 test: lint mypy pytest
 
+# Audit dependencies for security vulnerabilities
+[group("Security")]
+audit:
+    uvx uv-secure uv.lock
+
 # Build mkdocs site
 [group("docs")]
 build-docs:
