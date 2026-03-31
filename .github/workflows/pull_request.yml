@@ -16,7 +16,7 @@ jobs:
     steps:
       - uses: actions/checkout@v6
       - uses: extractions/setup-just@v3
-      - uses: astral-sh/setup-uv@v7
+      - uses: astral-sh/setup-uv@v8.0.0
         with:
           python-version: ${{ matrix.python-version }}
 
@@ -34,11 +34,25 @@ jobs:
       - name: Run mypy checks
         run: just mypy
 
+  audit:
+    name: Audit Dependencies
+    runs-on: ubuntu-slim
+    steps:
+      - uses: actions/checkout@v6.0.1
+        with:
+          sparse-checkout: |
+            uv.lock
+            justfile
+            pyproject.toml
+      - uses: astral-sh/setup-uv@v8.0.0
+      - uses: extractions/setup-just@v3
+      - run: just audit
+
   checks-successful:
     name: All Checks Passed
     runs-on: ubuntu-latest
     if: always()
-    needs: [test]
+    needs: [test, audit]
     steps:
       - uses: re-actors/alls-green@v1.2.2
         with:

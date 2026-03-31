@@ -1,6 +1,6 @@
 [project]
 name = "python-ntfy"
-version = "0.10.3"
+version = "0.10.4"
 description = "An easy-to-use library for the ntfy notification service."
 readme = "README.md"
 license = "MIT"
@@ -130,3 +130,13 @@ disallow_untyped_defs = true
 [tool.ty.environment]
 root = ["."]
 python = "./.venv"
+
+[tool.uv-secure.vulnerability_criteria]
+show_severity = true
+ignore_unfixed = true
+
+[tool.uv-secure.maintainability_criteria]
+forbid_yanked = true
+forbid_archived = true
+forbid_deprecated = true
+forbid_quarantined = true
