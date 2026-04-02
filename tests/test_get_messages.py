@@ -15,6 +15,7 @@ from datetime import datetime
 import pytest
 
 from python_ntfy import NtfyClient
+from python_ntfy._exceptions import MessageReceiveError
 
 from .helpers import random_string
 
@@ -60,3 +61,11 @@ async def test_get_topic_with_scheduled(localhost_server_no_auth, no_auth) -> No
     assert response[0]["topic"] == topic
     assert response[0]["message"] == message
     assert response[0]["time"] == int(ts.timestamp())
+
+
+@pytest.mark.asyncio
+async def test_authentication_error(localhost_server_auth, no_auth) -> None:
+    topic = random_string(5)
+    ntfy = NtfyClient(topic=topic)
+    with pytest.raises(MessageReceiveError):
+        ntfy.get_cached_messages()

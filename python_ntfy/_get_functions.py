@@ -2,6 +2,8 @@ import json
 
 import requests
 
+from python_ntfy._exceptions import MessageReceiveError
+
 
 def get_cached_messages(
     self,
@@ -19,6 +21,9 @@ def get_cached_messages(
     Returns:
         A list of messages.
 
+    Raises:
+        MessageReceiveError: If the request fails or the response is invalid.
+
     Examples:
         >>> response = client.get(since="all")
 
@@ -34,16 +39,18 @@ def get_cached_messages(
     if since:
         params.update({"since": since})
 
-    response = [
-        json.loads(line)
-        for line in requests.get(
+    try:
+        response = requests.get(
             url=self.url + "/json",
             params=params,
             auth=self._auth,
             timeout=timeout_seconds,
         )
-        .text.strip()
-        .splitlines()
-    ]
+        response.raise_for_status()
+        messages = [json.loads(line) for line in response.text.strip().splitlines()]
+    except requests.exceptions.RequestException as e:
+        error_message = f"Failed to receive messages: {e}"
+        raise MessageReceiveError(error_message) from e
+
     # Reverse the list so that the most recent notification is first
-    return sorted(response, key=lambda x: x["time"], reverse=True)
+    return sorted(messages, key=lambda x: x["time"], reverse=True)

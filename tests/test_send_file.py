@@ -52,3 +52,9 @@ def test_send_file_not_found() -> None:
     ntfy = NtfyClient(topic=topic)
     with raises(MessageSendError):
         ntfy.send_file(file="not_found.txt")
+
+
+def test_send_file_auth_error(localhost_server_auth, no_auth) -> None:
+    ntfy = NtfyClient(topic=topic)
+    with raises(MessageSendError):
+        ntfy.send_file("tests/assets/test_text.txt", email="test@test.com")
