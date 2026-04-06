@@ -15,7 +15,7 @@ jobs:
         python-version: ["3.10", "3.11", "3.12", "3.13", "3.14"]
     steps:
       - uses: actions/checkout@v6
-      - uses: extractions/setup-just@v3
+      - uses: extractions/setup-just@v4
       - uses: astral-sh/setup-uv@v8.0.0
         with:
           python-version: ${{ matrix.python-version }}
@@ -45,7 +45,7 @@ jobs:
             justfile
             pyproject.toml
       - uses: astral-sh/setup-uv@v8.0.0
-      - uses: extractions/setup-just@v3
+      - uses: extractions/setup-just@v4
       - run: just audit
 
   checks-successful:
