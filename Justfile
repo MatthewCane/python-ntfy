@@ -53,7 +53,7 @@ test: lint mypy pytest
 # Audit dependencies for security vulnerabilities
 [group("Security")]
 audit:
-    uvx uv-secure uv.lock
+    uv audit --frozen --preview-features audit
 
 # Build mkdocs site
 [group("docs")]
