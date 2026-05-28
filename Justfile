@@ -83,8 +83,8 @@ _bump_version bump:
     git checkout main
     git pull origin main
     git reset # Unstage all files
-    @just build
     uv version --bump {{ bump }}
+    @just build
     git add pyproject.toml uv.lock
 
 [confirm("Are you sure you want to push the version change? [y/N]")]
