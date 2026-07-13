@@ -16,7 +16,7 @@ jobs:
     steps:
       - uses: actions/checkout@v7.0.0
       - uses: extractions/setup-just@v4
-      - uses: astral-sh/setup-uv@v8.3.0
+      - uses: astral-sh/setup-uv@v8.3.2
         with:
           python-version: ${{ matrix.python-version }}
 
@@ -44,7 +44,7 @@ jobs:
             uv.lock
             justfile
             pyproject.toml
-      - uses: astral-sh/setup-uv@v8.3.0
+      - uses: astral-sh/setup-uv@v8.3.2
       - uses: extractions/setup-just@v4
       - run: just audit
 
