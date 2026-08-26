@@ -85,5 +85,10 @@ client.send("Your message here", tags=["tag1", "tag2"])
 ```python
 client = NtfyClient(topic="Your topic")
 
-client.send("Your message here", actions=[client.ViewAction(label="Open Website", url="https://ntfy.sh"),])
+client.send(
+    "Your message here",
+    actions=[
+        client.ViewAction(label="Open Website", url="https://ntfy.sh"),
+    ],
+)
 ```
