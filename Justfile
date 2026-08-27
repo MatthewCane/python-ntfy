@@ -1,4 +1,4 @@
-set quiet := true
+set quiet
 
 # Show all recipes
 help:

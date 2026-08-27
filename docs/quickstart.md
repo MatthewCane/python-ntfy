@@ -11,11 +11,14 @@ from python_ntfy import NtfyClient
 client = NtfyClient(topic="Your topic")
 
 # With credentials passed to the `NtfyClient` constructor (takes precedence over environment variables)
-client = NtfyClient(topic="Your topic", auth=("your_username", "your_password")) # Basic auth
-client = NtfyClient(topic="Your topic", auth="your_token") # Token auth
+client = NtfyClient(
+    topic="Your topic", auth=("your_username", "your_password")
+)  # Basic auth
+client = NtfyClient(topic="Your topic", auth="your_token")  # Token auth
 
 # Or set credentials from environment variables
 from os import environ
+
 environ["NTFY_USER"] = "your_username"
 environ["NTFY_PASSWORD"] = "your_password"
 environ["NTFY_TOKEN"] = "your_token"
