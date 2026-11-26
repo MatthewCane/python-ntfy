@@ -15,7 +15,7 @@ jobs:
         python-version: ["3.10", "3.11", "3.12", "3.13", "3.14", "3.15"]
     steps:
       - uses: actions/checkout@v7.0.1
-      - uses: extractions/setup-just@v4
+      - uses: extractions/setup-just@v4.0.0
       - uses: astral-sh/setup-uv@v10.4.0
         with:
           python-version: ${{ matrix.python-version }}
@@ -45,14 +45,27 @@ jobs:
             justfile
             pyproject.toml
       - uses: astral-sh/setup-uv@v10.4.0
-      - uses: extractions/setup-just@v4
+      - uses: extractions/setup-just@v4.0.0
       - run: just audit
+
+  actions-lock-validation:
+    name: Validate Actions Lockfile
+    runs-on: ubuntu-slim
+    env:
+      GH_TOKEN: ${{ github.token }}
+    steps:
+      - uses: actions/checkout@v7.0.1
+        with:
+          sparse-checkout: |
+            .github/workflows
+      - uses: extractions/setup-just@v4.0.0
+      - run: just actions-lock-verify
 
   checks-successful:
     name: All Checks Passed
     runs-on: ubuntu-latest
     if: always()
-    needs: [test, audit]
+    needs: [test, audit, actions-lock-validation]
     steps:
       - uses: re-actors/alls-green@v1.3.0
         with:

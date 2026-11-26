@@ -55,6 +55,12 @@ test: lint mypy pytest
 audit:
     uv audit --frozen --preview-features audit
 
+# Run actions-lock  audit
+[group("Security")]
+actions-lock-verify:
+    gh extension install github/gh-actions-lock
+    gh actions-lock --verify
+
 # Build mkdocs site
 [group("docs")]
 build-docs:
